@@ -1,0 +1,164 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{a4wide}
+\usepackage{paralist}
+\usepackage{url}
+\usepackage{bbm}
+\usepackage{fancyvrb}
+\usepackage{xcolor}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cS}{\mathcal{S}}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\New}{New}
+\DeclareMathOperator{\area}{area}
+\newcommand{\RR}{\mathbbm{R}}
+\newcommand{\CC}{\mathbbm{C}}
+
+\newcommand{\defn}[1]{{\color{blue}#1}}
+\newcommand{\alert}[1]{\textbf{\color{red}#1}}
+
+\DefineShortVerb{\;}
+\renewcommand{\FancyVerbFormatCom}{\color{green!30!black}}
+
+\begin{document}
+\begin{center}
+\textbf{\sffamily
+   Discrete and Algorithmic Geometry }
+
+\medskip
+   Julian Pfeifle,
+   UPC, 2019
+\end{center}
+
+\bigskip
+
+\begin{center}
+  \textbf{\sffamily Sheet 0}
+
+\bigskip
+\bigskip
+ due on Tuesday, November 12, 2019
+
+\end{center}
+
+\bigskip
+
+\section*{Reading}
+
+\begin{enumerate}
+  \setcounter{enumi}{-5}
+\item
+  Learn about the versioning software ;git;, and practice until you become comfortable using it.
+  Then check out the repository of this course using
+  \begin{center}
+    ;git clone git@gitlab.mat-apl.upc.edu:julian.pfeifle/2019-dag-upc; .
+  \end{center}
+
+  \medskip
+\item
+  Create a new branch ;your-name-cv; in the repository, and edit the file ;participants.tex; to include a short cv and some information about your mathematical interests.
+  Then ;commmit; and ;push; your changes, and create a pull request at ;gitlab.mat-apl.upc.edu; so that all the different stories may be merged.
+  
+  \medskip
+\item
+  Learn about public key cryptography and the use, advantages and disadvantages of the software ;gpg;.
+
+  \medskip
+\item
+  Organize into teams of 2--3 people to work on the exercises, and
+  edit  ;participants.tex; to reflect these changes.
+  As always, ;commit; and ;push; your changes, and create a pull request at ;gitlab.mat-apl.upc.edu;.
+
+  \medskip
+\item
+  Read up on two programming languages of your choice that you and your team will use in this course.
+  One of these should be a scripting language for rapid iteration, the other a compiled language for efficiency.
+  If you have never programmed before, a good choice for a scripted language is ;python;/;sage;, and a good choice for a compiled language is ;julia;.
+  If you already know some languages, take the opportunity to learn a new one! Some suggestions are ;c++;, ;perl;/;raku;, ;rust;, ;haskell;.
+\end{enumerate}
+
+\newpage
+\begin{center}
+  \textbf{\sffamily Sheet 1}
+
+ \bigskip
+\bigskip
+\bigskip
+due on Tuesday, November 19, 2019
+\end{center}
+
+\bigskip
+
+\section*{Writing}
+
+\bigskip
+
+\begin{quote}\small
+  To submit your solutions to these exercises,
+  \begin{itemize}[$\quad\triangleright$]
+  \item create a new branch ;your-team-sheet-1;,
+  \item create a subdirectory ;exercises/sheet1/your-awesome-team-name/;,
+  \item and put your solutions to the exercises into a ;.pdf; file into that directory.
+  \item Now encrypt this ;.pdf; using ;julian.pfeifle@upc.edu.public.gpg.key;, and
+  \item ;add;, ;commit; and ;push; \alert{only this encrypted pdf, not the original} ;.tex;
+  \item and create a pull request.
+  \end{itemize}
+  You will be graded collectively on these exercises, and individually in the final exam.
+
+  \alert{Exercises not submitted via this mechanism will not be graded.}
+\end{quote}
+
+\bigskip
+
+Let $([n],\mathcal I)$ be a matroid on the ground set $[n]=\{1,2,\dots,n\}$ and whose independent sets are~$\{I:I\in\mathcal I\}$.
+Recall the following definitions:
+
+\begin{itemize}[$\triangleright$]
+\item
+  For any proper subset $S\subset[n]$, the \defn{deletion}
+  $M\setminus S$ is the matroid on the ground set $[n]\setminus S$ whose
+  independent sets are $\{I\subset[n]\setminus S : I\in\mathcal I\}$.
+
+\item
+  The \defn{dual matroid} $M^\star$ of~$M$ is the matroid on $[n]$ where $I$~is a basis iff $[n]\setminus I$ is a basis~of~$M$.
+
+\item
+  If $S\subset[n]$, then the \defn{contraction} of $M$ with respect to $S$ is $M/S = (M^\star\setminus S)^\star$.
+  
+\end{itemize}
+
+\bigskip
+\begin{enumerate}
+\item Why does this notion of contraction agree with the notion of contraction in graph theory?
+
+  \bigskip
+\item Prove that if a matroid $M$ is realizable over a ground field $\mathbbm k$, then the dual matroid~$M^\star$ is also realizable over~$\mathbbm k$.
+
+  \medskip
+  \begin{quote}\small
+  \emph{Hint.} Suppose that $M$ has rank~$d$ and $n$~elements.
+  After a change of basis, $M$~can be represented by the $d\times n$ matrix $A=[I|B]$, where $I$~is the $d\times d$ identity matrix, and $B$~has size $d\times(n-d)$.
+  Now find a matrix that represents~$M^\star$.
+\end{quote}
+
+\bigskip
+\item
+  Consider the matroid given by the columns of
+  \[
+    \begin{bmatrix}
+      0 & 1 & 1 & 0 & 1 \\
+      1 & 0 & 1 & 0 & 1 \\
+      0 & 1 & 1 & 1 & 0
+    \end{bmatrix},
+  \]
+  and compute its dual, and the contraction along some subsets of your choice.
+\end{enumerate}
+
+\bigskip
+
+\section*{Coding}
+
+
+
+\end{document}
