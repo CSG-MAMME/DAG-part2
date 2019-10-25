@@ -35,66 +35,10 @@
 \bigskip
 
 \begin{center}
-  \textbf{\sffamily Sheet 0.}
+  \textbf{\sffamily Sheet 1}
 
-  \bigskip
-  \bigskip
-  \bigskip
-  Due on Tuesday, November 12, 2019.
-
-\end{center}
-
-\bigskip
-\bigskip
-\bigskip
-
-\begin{enumerate}
-  \setcounter{enumi}{-5}
-\item
-  Learn about the versioning software ;git;, and practice until you become comfortable using it.
-  Then check out the repository of this course using
-  \begin{center}
-    ;git clone git@gitlab.mat-apl.upc.edu:julian.pfeifle/2019-dag-upc; .
-  \end{center}
-
-  \medskip
-\item
-  Create a new branch ;your-name-cv; in the repository, and edit the file ;participants.tex; to include a short cv and some information about your mathematical interests.
-  Then ;commmit; and ;push; your changes. When you feel your work is done, log in and create a pull request at ;gitlab.mat-apl.upc.edu; so that all the different stories may be merged.
-  
-  \medskip
-\item
-  Learn about public key cryptography and the use, advantages and disadvantages of the software ;gpg;.
-
-  \medskip
-\item
-  Organize into teams of 2--3 people to work on the exercises, and
-  edit  ;participants.tex; to reflect this.
-  As always, ;commit; and ;push; your changes, and create a pull request at ;gitlab.mat-apl.upc.edu;.
-
-  \medskip
-\item
-  Read up on \alert{two} programming languages of your choice that your team will use in this course.
-  One of these should be a scripting language for rapid iteration, the other a compiled language for efficiency.
-  If you have never programmed before, a good choice for a scripted language is ;python;/;sage;, and a good choice for a compiled language is ;julia;.
-  If you already know some languages, take the opportunity to learn a new one! Some suggestions are ;c++;, ;perl;/;raku;, ;rust;, ;haskell;, ;ocaml;, ;ruby;, ;lisp;/;scheme;
-  (I myself have not used all of these).
-
-  \smallskip
-  When developing your programs, bear in mind that since we all share the same repository,
-  your code is likely to be read by the members of other teams who would like to compare the language they're using to yours.
-  Therefore, please take the opportunity to document your code very well, so as to make it as easy for them as possible to understand what you're doing!
-  In return, you'll be rewarded by awesomely documented code in languages you didn't have time to learn, but where you know exactly what problems it is solving.
-
-  \smallskip
-  Use the facilities that ;git; offers to synchronize and collaborate on your code across devices and operating systems.
-\end{enumerate}
-
-\newpage
-\begin{center}
-  \textbf{\sffamily Sheet 1.}
-\qquad
-Due on Tuesday, November 19, 2019.
+  \bigskip\bigskip
+Due on Tuesday, November 19, 2019
 \end{center}
 
 \bigskip
@@ -130,13 +74,21 @@ Let $([n],\mathcal I)$ be a matroid on the ground set $[n]=\{1,2,\dots,n\}$ with
 
 \item
   If $S\subset[n]$, then the \defn{contraction} of $M$ with respect to $S$ is $M/S = (M^\star\setminus S)^\star$.
-  
+
+\item
+  Let $G$ be a graph whose edges are labeled by $[n]$.
+  The bases of the \defn{graphical matroid} $M_G$ are the sets of edges corresponding to spanning trees of~$G$.
 \end{itemize}
 
 \bigskip
 \begin{enumerate}
-\item Does this notion of contraction agree with the notion of contraction in graph theory?
-
+\item True or false?
+  \begin{enumerate}
+  \item This notion of contraction agrees with the notion of
+    contraction in graph theory.
+  \item $M_{G^\star} = (M_G)^\star$, if $G$ is a planar graph and $G^\star$ its dual planar graph.
+  \end{enumerate}
+  
   \bigskip
 \item Prove that if a matroid $M$ is realizable over a ground field $\mathbbm k$, then the dual matroid~$M^\star$ is also realizable over~$\mathbbm k$.
   {\footnotesize\color{green!30!black} [\emph{Hint.} Suppose that $M$ has rank~$d$ and $n$~elements.
@@ -155,6 +107,7 @@ Let $([n],\mathcal I)$ be a matroid on the ground set $[n]=\{1,2,\dots,n\}$ with
     \end{bmatrix}.
   \]
   Compute a realization of~$M^\star$, and some contractions of~$M$ of your choosing.
+
 \end{enumerate}
 
 \section*{Coding}
