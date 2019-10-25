@@ -1,5 +1,6 @@
 \documentclass[11pt]{amsart}
 
+\usepackage{mathptmx}
 \usepackage{a4wide}
 \usepackage{paralist}
 \usepackage{url}
@@ -34,17 +35,18 @@
 \bigskip
 
 \begin{center}
-  \textbf{\sffamily Sheet 0}
+  \textbf{\sffamily Sheet 0.}
 
-\bigskip
-\bigskip
- due on Tuesday, November 12, 2019
+  \bigskip
+  \bigskip
+  \bigskip
+  Due on Tuesday, November 12, 2019.
 
 \end{center}
 
 \bigskip
-
-\section*{Reading}
+\bigskip
+\bigskip
 
 \begin{enumerate}
   \setcounter{enumi}{-5}
@@ -58,7 +60,7 @@
   \medskip
 \item
   Create a new branch ;your-name-cv; in the repository, and edit the file ;participants.tex; to include a short cv and some information about your mathematical interests.
-  Then ;commmit; and ;push; your changes, and create a pull request at ;gitlab.mat-apl.upc.edu; so that all the different stories may be merged.
+  Then ;commmit; and ;push; your changes. When you feel your work is done, log in and create a pull request at ;gitlab.mat-apl.upc.edu; so that all the different stories may be merged.
   
   \medskip
 \item
@@ -67,37 +69,41 @@
   \medskip
 \item
   Organize into teams of 2--3 people to work on the exercises, and
-  edit  ;participants.tex; to reflect these changes.
+  edit  ;participants.tex; to reflect this.
   As always, ;commit; and ;push; your changes, and create a pull request at ;gitlab.mat-apl.upc.edu;.
 
   \medskip
 \item
-  Read up on two programming languages of your choice that you and your team will use in this course.
+  Read up on \alert{two} programming languages of your choice that your team will use in this course.
   One of these should be a scripting language for rapid iteration, the other a compiled language for efficiency.
   If you have never programmed before, a good choice for a scripted language is ;python;/;sage;, and a good choice for a compiled language is ;julia;.
-  If you already know some languages, take the opportunity to learn a new one! Some suggestions are ;c++;, ;perl;/;raku;, ;rust;, ;haskell;.
+  If you already know some languages, take the opportunity to learn a new one! Some suggestions are ;c++;, ;perl;/;raku;, ;rust;, ;haskell;, ;ocaml;, ;ruby;, ;lisp;/;scheme;
+  (I myself have not used all of these).
+
+  \smallskip
+  When developing your programs, bear in mind that since we all share the same repository,
+  your code is likely to be read by the members of other teams who would like to compare the language they're using to yours.
+  Therefore, please take the opportunity to document your code very well, so as to make it as easy for them as possible to understand what you're doing!
+  In return, you'll be rewarded by awesomely documented code in languages you didn't have time to learn, but where you know exactly what problems it is solving.
+
+  \smallskip
+  Use the facilities that ;git; offers to synchronize and collaborate on your code across devices and operating systems.
 \end{enumerate}
 
 \newpage
 \begin{center}
-  \textbf{\sffamily Sheet 1}
-
- \bigskip
-\bigskip
-\bigskip
-due on Tuesday, November 19, 2019
+  \textbf{\sffamily Sheet 1.}
+\qquad
+Due on Tuesday, November 19, 2019.
 \end{center}
 
 \bigskip
 
-\section*{Writing}
-
-\bigskip
 
 \begin{quote}\small
   To submit your solutions to these exercises,
   \begin{itemize}[$\quad\triangleright$]
-  \item create a new branch ;your-team-sheet-1;,
+  \item create a new branch ;your-awesome-team-name-sheet-1;,
   \item create a subdirectory ;exercises/sheet1/your-awesome-team-name/;,
   \item and put your solutions to the exercises into a ;.pdf; file into that directory.
   \item Now encrypt this ;.pdf; using ;julian.pfeifle@upc.edu.public.gpg.key;, and
@@ -111,8 +117,7 @@ due on Tuesday, November 19, 2019
 
 \bigskip
 
-Let $([n],\mathcal I)$ be a matroid on the ground set $[n]=\{1,2,\dots,n\}$ and whose independent sets are~$\{I:I\in\mathcal I\}$.
-Recall the following definitions:
+Let $([n],\mathcal I)$ be a matroid on the ground set $[n]=\{1,2,\dots,n\}$ with independent sets~$\{I:I\in\mathcal I\}$.
 
 \begin{itemize}[$\triangleright$]
 \item
@@ -130,35 +135,55 @@ Recall the following definitions:
 
 \bigskip
 \begin{enumerate}
-\item Why does this notion of contraction agree with the notion of contraction in graph theory?
+\item Does this notion of contraction agree with the notion of contraction in graph theory?
 
   \bigskip
 \item Prove that if a matroid $M$ is realizable over a ground field $\mathbbm k$, then the dual matroid~$M^\star$ is also realizable over~$\mathbbm k$.
-
-  \medskip
-  \begin{quote}\small
-  \emph{Hint.} Suppose that $M$ has rank~$d$ and $n$~elements.
-  After a change of basis, $M$~can be represented by the $d\times n$ matrix $A=[I|B]$, where $I$~is the $d\times d$ identity matrix, and $B$~has size $d\times(n-d)$.
-  Now find a matrix that represents~$M^\star$.
-\end{quote}
+  {\footnotesize\color{green!30!black} [\emph{Hint.} Suppose that $M$ has rank~$d$ and $n$~elements.
+  After a change of basis, $M$~can be realized by the $d\times n$ matrix $A=[I|B]$, where $I$~is the $d\times d$ identity matrix, and $B$~has size $d\times(n-d)$.
+  Now find a matrix that realizes~$M^\star$.]
+}
 
 \bigskip
 \item
-  Consider the matroid given by the columns of
+  Consider the matroid $M$ realized by the columns of the matrix
   \[
     \begin{bmatrix}
       0 & 1 & 1 & 0 & 1 \\
       1 & 0 & 1 & 0 & 1 \\
       0 & 1 & 1 & 1 & 0
-    \end{bmatrix},
+    \end{bmatrix}.
   \]
-  and compute its dual, and the contraction along some subsets of your choice.
+  Compute a realization of~$M^\star$, and some contractions of~$M$ of your choosing.
 \end{enumerate}
-
-\bigskip
 
 \section*{Coding}
 
+\begin{quote}\small
+  To submit your solutions to the next two exercises,
+  \begin{itemize}[$\quad\triangleright$]
+  \item switch to your branch ;your-awesome-team-name-sheet-1;,
+  \item create a subdirectory ;exercises/sheet1/your-awesome-team-name/coding;,
+  \item and ;add; \alert{all} files you create to your commits, \alert{without encryption}.
+  \item Record your results in ;sheet1/results.tex;, and create a pull request.
+  \end{itemize}
+  This will make it possible to have conversations about your code in your pull requests.
+\end{quote}
 
+\bigskip
+\begin{enumerate}
+  \setcounter{enumi}{3}
+\item
+  In the programming languages of your choice,
+  write code that checks whether the sets of integers contained in the directory ;exercises/sheet1/matroid-or-not; satisfy the matroid basis axioms or not.
+  What is the combinatorial complexity of your code?
+  What parameters of the data does this combinatorial complexity depend on?
+
+\item
+  Write (or use, or search for and download) code that given integers $n\ge k\ge0$ creates all $\binom{n}{k}$~combinations of an $n$-set.
+  They form the set of bases of the \defn{uniform matroid of rank~$k$ on $n$~elements}.
+  Run your code on various instances of these matroids, and plot the execution time against reasonable parameters.
+  Is your conclusion from part (4) borne out?
+\end{enumerate}
 
 \end{document}
