@@ -1,0 +1,132 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{mathptmx}
+\usepackage{a4wide}
+\usepackage{paralist}
+\usepackage{hyperref}
+\usepackage{bbm}
+\usepackage{fancyvrb}
+\usepackage{xcolor}
+\usepackage{nopageno}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cS}{\mathcal{S}}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\New}{New}
+\DeclareMathOperator{\area}{area}
+\newcommand{\RR}{\mathbbm{R}}
+\newcommand{\CC}{\mathbbm{C}}
+
+\newcommand{\defn}[1]{{\color{blue}#1}}
+\newcommand{\alert}[1]{\textbf{\color{red}#1}}
+
+\DefineShortVerb{\;}
+\renewcommand{\FancyVerbFormatCom}{\color{green!30!black}}
+
+\begin{document}
+\begin{center}
+\textbf{\sffamily
+   Discrete and Algorithmic Geometry }
+
+ \bigskip
+ Julian Pfeifle,
+   UPC, 2019
+
+   \bigskip
+   \textbf{\sffamily Sheet 0}
+ \end{center}
+
+  \bigskip\bigskip
+ \begin{center}
+  \color{blue}Due on Friday, November 7, 2019:
+\end{center}
+
+
+\begin{enumerate}
+  \setcounter{enumi}{-5}
+\item
+  Learn about the versioning software ;git;, and practice until you become comfortable using it.
+  Then check out the repository of this course using
+  \begin{center}
+    ;git clone git@gitlab.mat-apl.upc.edu:julian.pfeifle/2019-dag-upc; .
+  \end{center}
+
+  \medskip
+\item
+  Create a new branch ;your-name-cv; in the repository, and edit the file ;participants.tex; to include a short cv and some information about your mathematical interests.
+  Then ;commmit; and ;push; your changes. When you feel your work is done, log in and create a merge request at \href{https://gitlab.mat-apl.upc.edu/julian.pfeifle/2019-dag-upc/issues/1}{https://gitlab.mat-apl.upc.edu} so that all the different stories may be merged.
+  
+  \medskip
+\item
+  Learn about public key cryptography and the use and (dis-)advantages of the software ;gpg;, and record your results at the \href{https://gitlab.mat-apl.upc.edu/julian.pfeifle/2019-dag-upc/issues/2}{relevant issue page}.
+
+  \medskip
+\item
+  Organize into teams of 2--3 people to work on the exercises, and
+  edit  ;participants.tex; to reflect this.
+  As always, ;commit; and ;push; your changes, and create a merge request at \href{https://gitlab.mat-apl.upc.edu/julian.pfeifle/2019-dag-upc/issues/1}{the gitlab instance}.
+\end{enumerate}
+
+\bigskip\bigskip
+\begin{center}
+  \color{blue}Due on Tuesday, November 12, 2019:
+\end{center}
+
+\medskip
+\begin{enumerate}
+  \setcounter{enumi}{-1}
+\item
+  Read up on \alert{two} programming languages of your choice that your team will use in this course.
+  One of these should be a scripting language for rapid iteration, the other a compiled language for efficiency.
+  If you have never programmed before, a good choice for a scripted language is ;python;/;sage;, and a good choice for a compiled language is ;julia;.
+  If you already know some languages, take the opportunity to learn a new one! Some suggestions are ;c++;, ;perl;/;raku;, ;rust;, ;haskell;, ;ocaml;, ;ruby;, ;lisp;/;scheme;
+  (I myself have not used all of these).
+
+  \medskip
+  Put your results and observations into the \href{https://gitlab.mat-apl.upc.edu/julian.pfeifle/2019-dag-upc/wikis/programming-languages}{wiki} of the class.
+\end{enumerate}
+
+\vfill
+
+\begin{quotation}\small
+  To submit your solutions to the next two exercises,
+
+  \medskip
+  \begin{itemize}[$\quad\triangleright$]
+  \item create and switch to a branch ;your-awesome-team-name-sheet-0;,
+  \item create a subdirectory ;exercises/sheet0/your-awesome-team-name/coding;,
+  \item and ;add; \alert{all} files you create to your commits, \alert{without encryption}.
+  \item Record your results in ;sheet0/results.tex;, and create a merge request.
+  \end{itemize}
+
+  \medskip
+  \noindent This will make it possible to have conversations about your code in your merge requests.
+
+  \medskip
+  When developing your programs, bear in mind that since we all share the same repository,
+  your code is likely to be read by the members of other teams who would like to compare the language they're using to yours.
+  Therefore, please take the opportunity to document your code very well, so as to make it as easy for them as possible to understand what you're doing!
+  In return, you'll be rewarded by awesomely documented code in languages you didn't have time to learn, but where you know exactly what problems it is solving.
+
+  \medskip
+  Use the facilities that ;git; offers to synchronize and collaborate on your code across devices and operating systems.
+\end{quotation}
+
+\bigskip
+\begin{enumerate}
+\item
+  In the programming languages of your choice,
+  write code that checks whether the sets of integers contained in the directory ;exercises/sheet0/matroid-or-not; satisfy the matroid basis axioms or not.
+  What is the combinatorial complexity of your code?
+  What parameters of the data does this combinatorial complexity depend on?
+
+\item
+  Write (or use, or search for and download) code that given integers $n\ge k\ge0$ creates all $\binom{n}{k}$~combinations of an $n$-set.
+  They form the set of bases of the \defn{uniform matroid of rank~$k$ on $n$~elements}.
+  Run your code on various instances of these matroids, and plot the execution time against reasonable parameters.
+  Is your conclusion from part (1) borne out?
+\end{enumerate}
+
+\end{document}
+
+\end{document}
