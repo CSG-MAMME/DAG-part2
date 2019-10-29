@@ -7,7 +7,7 @@
 \usepackage{bbm}
 \usepackage{fancyvrb}
 \usepackage{xcolor}
-\usepackage{nopageno}
+%\usepackage{nopageno}
 
 \newcommand{\cA}{\mathcal{A}}
 \newcommand{\cS}{\mathcal{S}}
@@ -115,11 +115,23 @@
 \bigskip
 \begin{enumerate}
 \item
+  A set system $\mathcal B$ is the set of bases of a matroid if it satisfies the following axioms:
+  \begin{enumerate}[(i)]
+  \item $\mathcal B\ne\emptyset$
+  \item (\emph{Exchange axiom})\newline Given $B_1,B_2\in\mathcal B$ and $x\in B_1\setminus B_2$, there exists $y\in B_2\setminus B_1$ such that
+    \[
+      B_1 \setminus \{x\} \cup \{y\}
+      \ \in\
+      \mathcal B.
+    \]
+  \end{enumerate}
+
   In the programming languages of your choice,
   write code that checks whether the sets of integers contained in the directory ;exercises/sheet0/matroid-or-not; satisfy the matroid basis axioms or not.
   What is the combinatorial complexity of your code?
   What parameters of the data does this combinatorial complexity depend on?
 
+  \medskip
 \item
   Write (or use, or search for and download) code that given integers $n\ge k\ge0$ creates all $\binom{n}{k}$~combinations of an $n$-set.
   They form the set of bases of the \defn{uniform matroid of rank~$k$ on $n$~elements}.
