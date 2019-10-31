@@ -1,0 +1,7 @@
+# Lines starting with this character
+# are comments and should be disregarded.
+# The lines in this file *do not* contain the sets of bases of a matroid,
+# so your output should be 'no'.
+1 2 4
+2 4 5
+2 3 5

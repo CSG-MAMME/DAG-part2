@@ -97,7 +97,7 @@
   (I myself have not used all of these).
 
   \medskip
-  Put your results and observations into the \href{https://gitlab.mat-apl.upc.edu/julian.pfeifle/2019-dag-upc/wikis/programming-languages}{wiki} of the class.
+  Put your results and observations into the \href{https://gitlab.com/julian-upc/2019-dag-upc/-/wiki_pages/programming-languages}{wiki} of the class.
 \end{enumerate}
 
 \bigskip
@@ -129,7 +129,7 @@
 \bigskip
 \begin{enumerate}
 \item
-  A set system $\mathcal B$ is the set of bases of a matroid if it satisfies the following axioms:
+  A collection $\mathcal B$ of sets is the set of bases of a matroid if it satisfies the following axioms:
   \begin{enumerate}[(i)]
   \item $\mathcal B\ne\emptyset$
   \item (\emph{Exchange axiom})\newline Given $B_1,B_2\in\mathcal B$ and $x\in B_1\setminus B_2$, there exists $y\in B_2\setminus B_1$ such that
@@ -141,16 +141,16 @@
   \end{enumerate}
 
   In the programming languages of your choice,
-  write code that checks whether the sets of integers contained in the directory ;exercises/sheet0/matroid-or-not; satisfy the matroid basis axioms or not.
-  What is the combinatorial complexity of your code?
-  What parameters of the data does this combinatorial complexity depend on?
+  write code that checks whether the sets of integers contained in various files in the directory ;exercises/sheet0/matroid-or-not; satisfy the matroid basis axioms or not.
+  Some of the files have the extension ;.txt; and are there to help you validate your code.
+  The files with the extension ;.bases; contain as many bases as their name indicates, and some of them form bases of a matroid while others don't.
 
   \medskip
-\item
-  Write (or use, or search for and download) code that given integers $n\ge k\ge0$ creates all $\binom{n}{k}$~combinations of an $n$-set.
-  They form the set of bases of the \defn{uniform matroid of rank~$k$ on $n$~elements}.
-  Run your code on various instances of these matroids, and plot the execution time against reasonable parameters.
-  Is your conclusion from part (1) borne out?
+  \begin{enumerate}
+  \item How many of these files can your code process?
+  \item What is the combinatorial complexity of your code?
+  \item Do you see a difference between the execution of the code in the scripting language and the compiled language your team chose?
+\end{enumerate}
 \end{enumerate}
 
 \end{document}
