@@ -20,7 +20,8 @@
 typedef unsigned int Mask;
 
 // Reads the input, builds masks, and updates max_value
-void read_masks(std::set<Mask>& masks, int& max_value, const std::string& file_path) {
+void read_masks(std::set<Mask>& masks, int& max_value,
+        const std::string& file_path) {
   std::ifstream file_reader(file_path); 
   std::string line;
   // Read lines
@@ -43,27 +44,36 @@ void read_masks(std::set<Mask>& masks, int& max_value, const std::string& file_p
   }
 }
 
-// Checks if the set of masks corresponds to a matroid
+/**
+ * Checks if the set of masks corresponds to a matroid
+ *
+ * In particular, for each pair of masks we check, in this order:
+ *  - If x \in B1 and x \not\in B2
+ *  - Then we look for y \in B2 and \not\in B1
+ *  - If both exist we check if B1 \ x \cup \y \in \mathcal{B}
+*/
 bool is_matroid(const std::set<Mask>& masks, const int max_value) {
-  for (Mask mask_base1 : masks)                                       // For each base B1
-    for (Mask mask_base2 : masks)                                     // For each base B2
+  for (Mask mask_base1 : masks)
+    for (Mask mask_base2 : masks)
       for (int x = 0; x <= max_value; ++x)
-        if ((mask_base1 & (1 << x)) and !(mask_base2 & (1 << x))) {   // If x \in B1 and x \notin B2
+        if ((mask_base1 & (1 << x)) and !(mask_base2 & (1 << x))) {   
           Mask mask_base1_without_x = (mask_base1 ^ (1 << x));
-          bool exists_exchangeable_base = false;                      // Checks if exists y
+          bool exists_exchangeable_base = false;
           for (int y = 0; y <= max_value and !exists_exchangeable_base; ++y)
-            if (!(mask_base1 & (1 << y)) and (mask_base2 & (1 << y))) // If x \notin B1 and x \in B2
-              if (masks.count(mask_base1_without_x ^ (1 << y)))       // If B1 \ {x} U {y} exists
-                exists_exchangeable_base = true;                      // Then y exists
-          if (!exists_exchangeable_base)                              // Not a matroid
+            // If x \notin B1 and x \in B2
+            if (!(mask_base1 & (1 << y)) and (mask_base2 & (1 << y))) 
+              // If B1 \ {x} U {y} exists
+              if (masks.count(mask_base1_without_x ^ (1 << y)))       
+                exists_exchangeable_base = true;
+          if (!exists_exchangeable_base)
             return false;
         }
   return true;
 }
 
 bool matroid_or_not(const std::string& file_path) {
-  std::set<Mask> masks; // Set of masks
-  int max_value = -1;   // Maximum value in the input
+  std::set<Mask> masks; 
+  int max_value = -1;
   read_masks(masks, max_value, file_path);
   return is_matroid(masks, max_value);
 }
@@ -75,11 +85,10 @@ int main() {
     const std::string file_path = path + file;
     std::clog << "Opening file " << file << std::endl; 
     auto start = std::chrono::high_resolution_clock::now();
-
     std::cout << std::boolalpha << matroid_or_not(file_path) << std::endl;
-
     auto total_time = std::chrono::duration_cast<std::chrono::milliseconds>
       (std::chrono::high_resolution_clock::now() - start).count();
-    std::clog << "Checked file " << file << " in " << double(total_time)/1000 << "s." << std::endl;
+    std::clog << "Checked file " << file << " in " << double(total_time)/1000;
+    std::clog << "s." << std::endl;
   }
 }
