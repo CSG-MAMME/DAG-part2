@@ -1,5 +1,6 @@
 #include <cassert>
 #include <chrono>
+#include <cstdio>
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -80,15 +81,16 @@ bool matroid_or_not(const std::string& file_path) {
 
 int main() {
   const std::string path = "../../matroid-or-not/";
+  std::freopen("results.txt", "w", stdout);
   std::string file;
   while (std::cin >> file) {
     const std::string file_path = path + file;
-    std::clog << "Opening file " << file << std::endl; 
+    std::cout << "Opening file " << file << std::endl; 
     auto start = std::chrono::high_resolution_clock::now();
     std::cout << std::boolalpha << matroid_or_not(file_path) << std::endl;
     auto total_time = std::chrono::duration_cast<std::chrono::milliseconds>
       (std::chrono::high_resolution_clock::now() - start).count();
-    std::clog << "Checked file " << file << " in " << double(total_time)/1000;
-    std::clog << "s." << std::endl;
+    std::cout << "Checked file " << file << " in " << double(total_time)/1000;
+    std::cout << "s." << std::endl;
   }
 }
