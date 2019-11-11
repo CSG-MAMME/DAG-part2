@@ -11,4 +11,4 @@ To replicate the plots included in the report, run, in this directory:
 ```
 gnuplot exec_time.gnuplot
 ```
-and `evince exec_time.pdf` to visualize the results.
+and `evince exec_time.pdf` (or any other PDF viewer) to visualize the results.
