@@ -14,27 +14,82 @@
     & is matroid?
     & execution time
     \\\hline
-    example1.txt 
-    & your-awesome-team-name
-    & yes/no
-    & [seconds]
+    \texttt{1716.bases}
+    & Team Bearland
+    & yes
+    & 0.33 s
     \\
     & other-awesome-team-name
     & yes/no
     & [seconds]
     \\\hline
-    example2.txt
-    &
+      \texttt{252.bases}
+    & Team Bearland
+    & yes
+    & 0.007 s
     \\\hline
-    example3.txt
+      \texttt{3432.bases}
+    & Team Bearland
+    & yes
+    & 1.276 s
+    \\\hline
+      \texttt{4092.bases}
+    & Team Bearland
+    & no
+    & 0.019 s
+    \\\hline
+      \texttt{417.bases}
+    & Team Bearland
+    & no
+    & 0.002 s
+    \\\hline
+      \texttt{462.bases}
+    & Team Bearland
+    & yes
+    & 0.021 s
+    \\\hline
+      \texttt{4639.bases}
+    & Team Bearland
+    & no
+    & 0.397 s
+    \\\hline
+    \texttt{6435.bases}
+    & Team Bearland
+    & yes
+    & 4.506 s
+    \\\hline
+    \texttt{924.bases}
+    & Team Bearland
+    & yes
+    & 0.088 s
+    \\\hline
+    \texttt{definately-bases.txt}
+    & Team Bearland
+    & yes
+    & 0 s
+    \\\hline
+    \texttt{not-bases-1.txt}
+    & Team Bearland
+    & no
+    & 0 s
+    \\\hline
+    \texttt{not-bases-2.txt}
+    & Team Bearland
+    & no
+    & 0 s
+    \\\hline
   \end{tabular}
 \end{center}
 
 \section{Execution times}
 
-\subsection{your-awesome-team-name}
+\subsection{Team Bearland}
 
-your plot here
+Note that we implemented two different versions for each different programming language instead of translating a same program from one to the other.
+For the \textsc{C++} implementation, we followed a performance-oriented approach using masks and using bitwise operations to speed-up the set handling.
+On the other hand, the code implemented in \textsc{Python3}, albeit leveraging the same principle, implements the masking operations differently. 
+Figure~\ref{fig:team-bearland-times} summarizes the execution times for both programming languages.
+%Under our point of view, each programming language has it's 
 
 \subsection{other-awesome-team-name}
 

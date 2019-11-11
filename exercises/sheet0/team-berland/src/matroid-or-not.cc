@@ -82,7 +82,10 @@ bool matroid_or_not(const std::string& file_path) {
 int main() {
   const std::string path = "../../matroid-or-not/";
   std::freopen("results.txt", "w", stdout);
+  std::ofstream data_file;
+  data_file.open("cpp.dat");
   std::string file;
+  std::cout << "----------  C++  ----------" << std::endl;
   while (std::cin >> file) {
     const std::string file_path = path + file;
     std::cout << "Opening file " << file << std::endl; 
@@ -92,5 +95,7 @@ int main() {
       (std::chrono::high_resolution_clock::now() - start).count();
     std::cout << "Checked file " << file << " in " << double(total_time)/1000;
     std::cout << "s." << std::endl;
+    data_file << file << " " << double(total_time)/1000 << std::endl;
   }
+  data_file.close();
 }
