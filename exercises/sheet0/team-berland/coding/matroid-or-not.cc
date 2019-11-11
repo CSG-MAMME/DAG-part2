@@ -86,11 +86,14 @@ int main() {
   data_file.open("cpp.dat");
   std::string file;
   std::cout << "----------  C++  ----------" << std::endl;
+
   while (std::cin >> file) {
     const std::string file_path = path + file;
-    std::cout << "Opening file " << file << std::endl; 
+    std::clog << "Opening file " << file << std::endl; 
     auto start = std::chrono::high_resolution_clock::now();
+
     std::cout << std::boolalpha << matroid_or_not(file_path) << std::endl;
+
     auto total_time = std::chrono::duration_cast<std::chrono::milliseconds>
       (std::chrono::high_resolution_clock::now() - start).count();
     std::cout << "Checked file " << file << " in " << double(total_time)/1000;

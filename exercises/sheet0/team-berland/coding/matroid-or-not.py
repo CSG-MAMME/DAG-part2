@@ -29,17 +29,17 @@ def matroid_or_not(file_path):
             p += 1
         return base
 
-    for mask1 in matroid:
-        for mask2 in matroid:
-            base1 = get_base(mask1)
-            base2 = get_base(mask2)
-            for x in base1:
-                if x not in base2:
+    for mask1 in matroid: # For each B1 (in mask form) of the set of matroids
+        for mask2 in matroid: # For each B2 (in mask form) of the set of matroids
+            base1 = get_base(mask1) # Get B1 as a base
+            base2 = get_base(mask2) # Get B2 as a base
+            for x in base1: 
+                if x not in base2: # if x belongs to B1 \ B2
                     for y in base2:
-                        if y not in base1:
-                            if mask1 + 2**y - 2**x in matroid:
+                        if y not in base1: # if y belongs to B2 \ B1
+                            if mask1 + 2**y - 2**x in matroid: # Check if B1 \ {x} U {y} is a base
                                 break
-                    else:
+                    else: # If no such y exists, then we do not have a matroid
                         return False
     return True
 
@@ -55,7 +55,8 @@ if __name__ == "__main__":
     for line in sys.stdin:
         for file_name in line.split():
             file_path = path + file_name
-            out_str += "Opening file {}\n".format(file_name)
+            info_str = "Opening file {}\n".format(file_name)
+            print(info_str, "(be patient, the program might take some time)")
             start = time.time()
             out_str += "{}\n".format(matroid_or_not(file_path))
             elapsed_time = time.time() - start
