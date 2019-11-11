@@ -2,6 +2,7 @@
 
 \usepackage{mathptmx}
 \usepackage{a4wide}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -85,10 +86,22 @@
 
 \subsection{Team Bearland}
 
-Note that we implemented two different versions for each different programming language instead of translating a same program from one to the other.
-For the \textsc{C++} implementation, we followed a performance-oriented approach using masks and using bitwise operations to speed-up the set handling.
-On the other hand, the code implemented in \textsc{Python3}, albeit leveraging the same principle, implements the masking operations differently. 
+We implemented a mask-based algorithm.
+Each mask $m$ represents a set.
+The $i$-th bit of the mask is set to 1 iff $i$ belongs to the set.
+We can easily, and in a fast manner, access each position shifiting bits, and unions, intersections and complements are solved using bitwise OR, AND, and NOT operators.
+The code implemented in \textsc{Python3}, albeit leveraging the same principle, implements the masking operations differently. 
+In both cases, COMPLEXITY MISSING HERE>
 Figure~\ref{fig:team-bearland-times} summarizes the execution times for both programming languages.
+Note that we re-ordered the results to plot them in a, more or less, increasing fashion. 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.7\textwidth]{./team-berland/exec_time.pdf}
+    \caption{Execution time of the two different implementations in increasing order.\label{fig:team-bearland-times}}
+\end{figure}
+The results were to be expected, the compiled, performance-oriented, \textsc{C++} implementation outruns the \textsc{Python3} one by two orders of magnitude.
+However, we do observe that the behaviour, the pattern described by execution times as we increase the load (\textit{i.e.} the complexity) is the same for both algorithms.
+This is a great example not to underestimate the constants affecting our expected running time, usually disregarded by complexity theory and big $\mathcal{O}$ notation.
 %Under our point of view, each programming language has it's 
 
 \subsection{other-awesome-team-name}
