@@ -1,6 +1,6 @@
 ### Team Bearland - Sheet 0
 
-This repo contains the source code for both, `C++` and `Python3`, implementations of the stated problem under the `\src\` directory. To compile and run the code `cd into it` and run:
+This repo contains the source code for both, `C++` and `Python3`, implementations of the stated problem under the `\coding\` directory. To compile and run the code `cd into it` and run:
 ```
 ./matroid-or-not.sh
 ```
