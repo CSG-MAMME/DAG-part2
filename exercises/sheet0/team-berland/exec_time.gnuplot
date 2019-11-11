@@ -25,7 +25,7 @@ set title "{/bold Matroid Checking Running Time C++ vs Python3}" #offset 0.0,-0.
 #plot './src/exec_times.dat' \
 #       using 1:3 with boxes title 'C++',\
 #    '' using 1:2 with boxes title 'Python 3'
-plot './src/exec_times.dat' using 3 title 'C++' axis x1y1, \
+plot './coding/exec_times.dat' using 3 title 'C++' axis x1y1, \
     '' using 2:xticlabels(1) title 'Python 3' axis x1y2
 
 !epstopdf 'exec_time.eps'
