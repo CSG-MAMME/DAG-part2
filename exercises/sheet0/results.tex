@@ -20,6 +20,10 @@
     & yes
     & 0.33 s
     \\
+    & Terrible Island
+    & yes
+    & 121s
+    \\
     & other-awesome-team-name
     & yes/no
     & [seconds]
@@ -28,6 +32,10 @@
     & Team Bearland
     & yes
     & 0.007 s
+    \\
+    & Terrible Island
+    & yes
+    & 0.3 s
     \\\hline
       \texttt{3432.bases}
     & Team Bearland
@@ -43,11 +51,19 @@
     & Team Bearland
     & no
     & 0.002 s
+    \\
+    & Terrible Island
+    & no
+    & 0.031 s
     \\\hline
       \texttt{462.bases}
     & Team Bearland
     & yes
     & 0.021 s
+    \\
+    & Terrible Island
+    & yes
+    & 2.073 s
     \\\hline
       \texttt{4639.bases}
     & Team Bearland
@@ -63,6 +79,10 @@
     & Team Bearland
     & yes
     & 0.088 s
+    \\
+    & Terrible Island
+    & yes
+    & 18.26 s
     \\\hline
   \end{tabular}
 \end{center}
@@ -90,6 +110,18 @@ The results were to be expected, the compiled, performance-oriented, \textsc{C++
 However, we do observe that the behaviour, the pattern described by execution times as we increase the load (\textit{i.e.} the complexity) is the same for both algorithms.
 This is a great example not to underestimate the constants affecting our expected running time, usually disregarded by complexity theory and big $\mathcal{O}$ notation.
 %Under our point of view, each programming language has it's 
+
+\subsection{Terrible Island}
+
+Both codes follow the same procedure, in that they check, for every base, all other bases, and then in each of these pairs, we check the exchange axiom. If we consider a set of $n$ bases, and $m$ to be the longest check for the exchange axiom (which will be at most the size of the largest base in the set), the complexity of the algorithm is $O(n^{2}m)$.
+
+All pairs are checked twice in these algorithms, which could be optimised so the running time would be halved, though this would still keep the complexity at $O(n^{2}m)$.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.7\textwidth]{./Terrible-Island/times.jpeg}
+    \caption{Execution times of the \textsc{Python} algorithm}
+\end{figure}
 
 \subsection{other-awesome-team-name}
 
