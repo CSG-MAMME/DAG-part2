@@ -1,0 +1,30 @@
+cd("C:/Users/atoba/2019-dag-upc/exercises/sheet0/matroid-or-not")
+data=readlines("not-bases-2.txt")
+
+filter!(x->!(  "#"==split(x)[1] ), data) #remove text lines
+
+clean_data=map(x -> Set(map(y -> parse(Int,y), split(x) ) ), data )
+
+
+function is_matroid(clean_data)
+    sol=true
+    result=true
+    for b1 in clean_data  # B1
+        for b2 in clean_data #B2
+            if b1 != b2
+                for x in setdiff(b1,b2)
+                    result= false
+                    for y in setdiff(b2,b1)
+                        if union(setdiff(b1,x),y) in clean_data
+                            result= true
+                        end
+                    end
+                    if !(result)
+                        return false
+                    end
+                end
+            end
+        end
+    end
+    return true
+end
