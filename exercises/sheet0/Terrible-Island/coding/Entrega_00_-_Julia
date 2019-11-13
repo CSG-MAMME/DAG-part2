@@ -1,9 +1,9 @@
-cd("C:/Users/atoba/2019-dag-upc/exercises/sheet0/matroid-or-not")
-data=readlines("not-bases-2.txt")
+cd("C:/Users/atoba/2019-dag-upc/exercises/sheet0/matroid-or-not") #Your working directory
+data=readlines("not-bases-2.txt") #the bases
 
 filter!(x->!(  "#"==split(x)[1] ), data) #remove text lines
 
-clean_data=map(x -> Set(map(y -> parse(Int,y), split(x) ) ), data )
+clean_data=map(x -> Set(map(y -> parse(Int,y), split(x) ) ), data ) # transform data into integers
 
 
 function is_matroid(clean_data)
