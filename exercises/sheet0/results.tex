@@ -2,6 +2,7 @@
 
 \usepackage{mathptmx}
 \usepackage{a4wide}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -14,27 +15,81 @@
     & is matroid?
     & execution time
     \\\hline
-    example1.txt 
-    & your-awesome-team-name
-    & yes/no
-    & [seconds]
+    \texttt{1716.bases}
+    & Team Bearland
+    & yes
+    & 0.33 s
     \\
     & other-awesome-team-name
     & yes/no
     & [seconds]
     \\\hline
-    example2.txt
-    &
+      \texttt{252.bases}
+    & Team Bearland
+    & yes
+    & 0.007 s
     \\\hline
-    example3.txt
+      \texttt{3432.bases}
+    & Team Bearland
+    & yes
+    & 1.276 s
+    \\\hline
+      \texttt{4092.bases}
+    & Team Bearland
+    & no
+    & 0.019 s
+    \\\hline
+      \texttt{417.bases}
+    & Team Bearland
+    & no
+    & 0.002 s
+    \\\hline
+      \texttt{462.bases}
+    & Team Bearland
+    & yes
+    & 0.021 s
+    \\\hline
+      \texttt{4639.bases}
+    & Team Bearland
+    & no
+    & 0.397 s
+    \\\hline
+    \texttt{6435.bases}
+    & Team Bearland
+    & yes
+    & 4.506 s
+    \\\hline
+    \texttt{924.bases}
+    & Team Bearland
+    & yes
+    & 0.088 s
+    \\\hline
   \end{tabular}
 \end{center}
 
 \section{Execution times}
 
-\subsection{your-awesome-team-name}
+\subsection{Team Bearland}
 
-your plot here
+We implemented a mask-based algorithm.
+Each mask $m$ represents a set.
+The $i$-th bit of the mask is set to 1 iff $i$ belongs to the set.
+We can easily, and in a fast manner, access each position shifting bits, and unions, intersections and complements are solved using bitwise OR, AND, NOT, and XOR operators.
+The code implemented in \textsc{Python3}, albeit leveraging the same principle, implements the masking operations differently.
+ 
+In both cases, the complexity is the same. We take advantage of the fact that all values in all inputs are integers between $0$ and $r - 1 = 19$. In every case, we build the masks in $\mathcal{O}(\sum_{B \in \mathcal{B}} |B|) = \mathcal{O}(r|\mathcal{B}|)$ time. Then, for each pair $(B_1, B_2) \in \mathcal{B} \times \mathcal{B}$, we check that the exchange conditions by taking all $\mathcal{O}(r)$ values of $x \in B_1$, and checking if the condition holds for each of the $\mathcal{O}(r)$ possible values of $y \in B_2$, and we also check that $x \in B_1 \setminus B_2$ and $y \in B_2 \setminus B_1$ in $\mathcal{O}(r^2)$ time. Finally, we check that the mask for $B_1 \setminus \{x\} \cup \{y\}$ belongs to the set of masks in $\mathcal{O}(\log(|\mathcal{B}|))$ time. Therefore, the total complexity is $\mathcal{O}(r |\mathcal{B}|) + \mathcal{O}(r^2 |\mathcal{B}|^2| \log(|\mathcal{B}|)) =  \mathcal{O}(r^2 |\mathcal{B}|^2| \log(|\mathcal{B}|))$.
+
+Figure~\ref{fig:team-bearland-times} summarizes the execution times for both programming languages.
+Note that we re-ordered the results to plot them in a, more or less, increasing fashion. 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.7\textwidth]{./team-berland/exec_time.pdf}
+    \caption{Execution time of the two different implementations in increasing order.\label{fig:team-bearland-times}}
+\end{figure}
+The results were to be expected, the compiled, performance-oriented, \textsc{C++} implementation outruns the \textsc{Python3} one by two orders of magnitude.
+However, we do observe that the behaviour, the pattern described by execution times as we increase the load (\textit{i.e.} the complexity) is the same for both algorithms.
+This is a great example not to underestimate the constants affecting our expected running time, usually disregarded by complexity theory and big $\mathcal{O}$ notation.
+%Under our point of view, each programming language has it's 
 
 \subsection{other-awesome-team-name}
 
