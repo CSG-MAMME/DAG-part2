@@ -112,15 +112,19 @@ This is a great example not to underestimate the constants affecting our expecte
 %Under our point of view, each programming language has it's 
 
 \subsection{Terrible Island}
+\label{terribleisland}
 
 Both codes follow the same procedure, in that they check, for every base, all other bases, and then in each of these pairs, we check the exchange axiom. If we consider a set of $n$ bases, and $m$ to be the longest check for the exchange axiom (which will be at most the size of the largest base in the set), the complexity of the algorithm is $O(n^{2}m)$.
+
+As it can be seen in \ref{figureterribleisland}, the execution times increase quickly with the number of bases in the files (in the cases they are matroids). Quite unexpectedly, the \textsc{Python} execution times are a lot faster than the \textsc{Julia} ones, the earlier being capable of processing up to 1716 bases before the time limit in contrast to the 924 of the later.
 
 All pairs are checked twice in these algorithms, which could be optimised so the running time would be halved, though this would still keep the complexity at $O(n^{2}m)$.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=.7\textwidth]{./Terrible-Island/times.jpeg}
-    \caption{Terrible Island - Execution times of the algorithms}
+    \caption{Execution times of the algorithms \ref{terribleisland}}
+    \label{figureterribleisland}
 \end{figure}
 
 \subsection{other-awesome-team-name}
