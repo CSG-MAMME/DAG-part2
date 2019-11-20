@@ -8,7 +8,7 @@ Created on Mon Nov 11 11:43:47 2019
 import os
 from time import time
 
-def contained(L1,L2):#Function that checks if L1 is contained in L2
+def isContained(L1,L2):#Function that checks if L1 is contained in L2
     boolean = True
     for e in L1:
         if not boolean:
@@ -21,7 +21,7 @@ def belongs(L,LL):#Function that checks if L1 is contained in one of the sets in
     for i in LL:
         if found:
             break
-        found = contained(L,i)
+        found = isContained(L,i)
     return found
 
 def isBase(B): #Function that checks if B is a base
@@ -29,9 +29,9 @@ def isBase(B): #Function that checks if B is a base
     
     validPairs = [[] for i in range(len(B))]#list of the pairs that do not need to be checked
     tenth = len(B)//10
-    cumple = True
+    verifies = True
     for i in range(len(B)):#Loop that goes through all the sets in B
-        if not cumple:
+        if not verifies:
             continue
         if big:#This will print the the state of the process if the argument to be processed is really big
             if i%tenth == 0:
@@ -41,7 +41,7 @@ def isBase(B): #Function that checks if B is a base
         for j in range(len(B)):#Loop that check all the other sets in B
             if j == i:
                 continue
-            if not cumple:
+            if not verifies:
                 break
             already_checked = False
             for pair in validPairs[i]:#We check if we do not need to check this pair
@@ -53,7 +53,7 @@ def isBase(B): #Function that checks if B is a base
                 continue
             
             for k in range(len(B[i])): #And check if for one element in the first one the condition holds
-                if not cumple:
+                if not verifies:
                     break
                 
                 found = False
@@ -71,7 +71,7 @@ def isBase(B): #Function that checks if B is a base
                     for b in range(len(B)):#Check if B3 = B1 - {x} U {y} is in B
                         if bill_checked:
                             break
-                        if contained(Bil,B[b]):
+                        if isContained(Bil,B[b]):
                             already_added = False
                             for pair in validPairs[i]:# If it is, add the pair B3-B1 to the list
                                 if already_added:
@@ -86,10 +86,10 @@ def isBase(B): #Function that checks if B is a base
                             
                     found = bill_checked
                 
-                cumple = found#that base is ok if we find an element that verifies the condition
-                if not cumple:
+                verifies = found#that base is ok if we find an element that verifies the condition
+                if not verifies:
                     print("Elements {} and {} do not verify the condition".format(B[i],B[j]))
-    return cumple
+    return verifies
 
 #simple base to check
 B1 = [[1,2,3],[1,2,5],[1,3,4],[1,3,5],[1,4,5],[2,3,4],[2,3,5],[2,4,5]]
