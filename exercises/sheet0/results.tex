@@ -67,62 +67,62 @@
     \texttt{definetely-bases.txt}
     & A-Team-Has-No-Name
     & yes
-    & 0.17 s
+    & 0.00024 s
     \\\hline
     \texttt{not-bases-1.txt}
     & A-Team-Has-No-Name
     & no
-    & 0.00 s
+    & 0.00028 s
     \\\hline
     \texttt{not-bases-2.txt}
     & A-Team-Has-No-Name
     & no
-    & 0.00 s
+    & 0.000006 s
     \\\hline
     \texttt{252.bases}
     & A-Team-Has-No-Name
     & yes
-    & 1.84 s
+    & 0.597 s
     \\\hline
     \texttt{417.bases}
     & A-Team-Has-No-Name
     & no
-    & 2.43 s
+    & 0.219 s
     \\\hline
     \texttt{462.bases}
     & A-Team-Has-No-Name
     & yes
-    & 8.38 s
+    & 2.373 s
     \\\hline
     \texttt{924.bases}
     & A-Team-Has-No-Name
     & yes
-    & 71.50 s
+    & 11.81 s
     \\\hline
     \texttt{1716.bases}
     & A-Team-Has-No-Name
     & yes
-    & 288.23 s
+    & 46.30 s
     \\\hline
     \texttt{3432.bases}
     & A-Team-Has-No-Name
     & yes
-    & 3104.42 s
+    & 220.7 s
     \\\hline
     \texttt{4092.bases}
     & A-Team-Has-No-Name
     & no
-    & 1650.83 s
+    & 2.50 s
     \\\hline
     \texttt{4639.bases}
     & A-Team-Has-No-Name
     & no
-    & 157.71 s
+    & 57.37 s
     \\\hline
     \texttt{6435.bases}
     & A-Team-Has-No-Name
     & yes
-    & 11357.34 s
+    & 917.4 s
     \\\hline    
   \end{tabular}
 \end{center}
@@ -150,6 +150,25 @@ The results were to be expected, the compiled, performance-oriented, \textsc{C++
 However, we do observe that the behaviour, the pattern described by execution times as we increase the load (\textit{i.e.} the complexity) is the same for both algorithms.
 This is a great example not to underestimate the constants affecting our expected running time, usually disregarded by complexity theory and big $\mathcal{O}$ notation.
 %Under our point of view, each programming language has it's 
+
+\subsection{A-team-has-no-name}
+
+1)Our code can process all the files, but the Haskell version takes 11 thousand seconds for the largest file and the python best algorithm takes 917 seconds which is still a lot.
+
+2)If n is the number of elements in $\mathcal{B}$ and m the max number of elements in any of the elements of $\mathcal{B}$, our first python code runs in $\mathcal{O}(n^3)*\mathcal{O}(m^4)$.
+We could reduce the complexity concerning m, but as in almost any case we can find m is going to be a constant amount compared to n, we have not worried a lot about it as the complexity for those kinds of general examples is actually $\mathcal{O}(n^3)$.
+We tried to reduce this complexity by trying to check relations between the elements in B but at first we ended up making the complexity worse, and then when improved we returned back to $\mathcal{O}(n^3)$ but reducing the running time to a 60\%-70\% of the original one for the files we processed.
+
+Haskell code runs equally in $\mathcal{O}(n^3)$.
+
+For the second python code we thought about using a biyection between sets and integer number so that we could order the list of sets and check if $B_1$ is in the list in logarithmic time.
+This was done by assigning every set the sum of 2 powered to every of the elements in the set. 
+This assumes that we are using integers for each set in the matroid and that there are not a lot of elements in total. If there were other elements that were not integers we could do a bijection between the elements and $\mathbb{Z}$ so we could apply this method.
+This allows us to avoid the last loop by using a binary search in the ordered set of values of each element in the matroid, reducing the complexity to $\mathcal{O}(n^3)*\log(n)$. 
+If m was big we expect this algorithm to be worse than the first one, so it is input sensitive. 
+
+It is also worth mention that both of the python algorithm will stop as soon as they find a $B_1$ that does not verify the condition, and that is why 4096.bases files or similar get checked so quickly.
+
 
 \subsection{other-awesome-team-name}
 

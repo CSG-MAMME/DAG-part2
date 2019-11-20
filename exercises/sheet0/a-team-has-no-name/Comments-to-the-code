@@ -1,2 +1,12 @@
-1)Our code could eventually process all the files, but for the file with more than 3000 elements in the base it took 19 thousand seconds which are more than 5 hours.
-2)If n is the number of elements in B and m the max number of elements in any of the elements of B, our python code runs in O(n³)*O(m⁴). We could reduce the complexity concerning m, but as in almost any case we can find m is going to be a constant amount compared to n, we have not worried a lot about it as the complexity for those kinds of general examples is actually O(n³). We tried to reduce this complexity by trying to check relations between the elements in B but at first we ended up making the complexity worse, and then when improved we returned back to O(n³) but reducing the running time to a 60%-70% of the original one for the files we processed.
+1)Our code can process all the files, but the Haskell version takes 11 thousand seconds for the largest file and the python best algorithm takes 917 which is still a lot.
+
+2)If n is the number of elements in B and m the max number of elements in any of the elements of B, our first python code runs in O(n³)*O(m⁴). We could reduce the complexity concerning m, but as in almost any case we can find m is going to be a constant amount compared to n, we have not worried a lot about it as the complexity for those kinds of general examples is actually O(n³). We tried to reduce this complexity by trying to check relations between the elements in B but at first we ended up making the complexity worse, and then when improved we returned back to O(n³) but reducing the running time to a 60%-70% of the original one for the files we processed.
+
+Haskell code runs equally in O(n³).
+
+For the second python code we thought about using a biyection between sets and integer number so that we could order the list of sets and check if B_3 is in the list in logarithmic time. This was done by assigning every set the sum of 2 powered to every of the elements in the set. This assumes that we are using integers for each set in the matroid and that there are not a lot of elements in total. If there were other elements that were not integers we could do a bijection between the elements and Z so we could apply this method.
+This allows us to avoid the last loop by using a binary search in the ordered set of values of each element in the matroid, reducing the complexity to O(n²*log(n)). If m was big we expect this algorithm to be worse than the first one, so it is input sensitive. 
+
+It is also worth mention that both of the python algorithm will stop as soon as they find a B1 that does not verify the condition, and that is why 4096.bases files or similar get checked so quickly.
+
+
