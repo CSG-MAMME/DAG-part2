@@ -53,9 +53,9 @@ def isBase(B, masks): #Function that checks if B is a base
     big = len(B)>100
     
     tenth = len(B)//10
-    cumple = True
+    verifies = True
     for i in range(len(B)):#Loop that goes through all the sets in B
-        if not cumple:
+        if not verifies:
             continue
         if big:#This will print the the state of the process if the argument to be processed is really big
             if i%tenth == 0:
@@ -65,11 +65,11 @@ def isBase(B, masks): #Function that checks if B is a base
         for j in range(len(B)):#Loop that check all the other sets in B
             if j == i:
                 continue
-            if not cumple:
+            if not verifies:
                 break
             
             for k in range(len(B[i])): #And check if for one element in the first one the condition holds
-                if not cumple:
+                if not verifies:
                     break
                 
                 found = False
@@ -88,10 +88,10 @@ def isBase(B, masks): #Function that checks if B is a base
                     bill_checked = binarySearch(value,masks,0,len(masks))#Check if B3 is in B with a Binary search
                     found = bill_checked >= 0
                     
-                cumple = found#that base is ok if we find an element that verifies the condition
-                if not cumple:
+                verifies = found#that base is ok if we find an element that verifies the condition
+                if not verifies:
                     print("Elements {} and {} do not verify the condition".format(B[i],B[j]))
-    return cumple
+    return verifies
 
 
 #charge the basis from their files
