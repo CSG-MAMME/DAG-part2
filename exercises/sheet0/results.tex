@@ -16,7 +16,6 @@
     & yes
     & 0.33 s
     \\
-    \texttt{1716.bases}
     & Tresplans
     & yes
     & 5.86 s
@@ -30,7 +29,6 @@
     & yes
     & 0.007 s
     \\
-    \texttt{252.bases}
     & Tresplans
     & yes
     & 0.13 s
@@ -40,7 +38,6 @@
     & yes
     & 1.276 s
     \\
-    \texttt{3432.bases}
     & Tresplans
     & yes
     & 23.36 s
@@ -50,7 +47,6 @@
     & no
     & 0.019 s
     \\
-    \texttt{4092.bases}
     & Tresplans
     & no
     & 4.99 s
@@ -60,7 +56,6 @@
     & no
     & 0.002 s
     \\
-    \texttt{417.bases}
     & Tresplans
     & no
     & 0.12 s
@@ -70,7 +65,6 @@
     & yes
     & 0.021 s
     \\
-    \texttt{462.bases}
     & Tresplans
     & yes
     & 0.43 s
@@ -80,7 +74,6 @@
     & no
     & 0.397 s
     \\
-    \texttt{4639.bases}
     & Tresplans
     & no
     & 2.33 s
@@ -90,7 +83,6 @@
     & yes
     & 4.506 s
     \\
-    \texttt{6435.bases}
     & Tresplans
     & yes
     & 84.63 s
@@ -100,7 +92,6 @@
     & yes
     & 0.088 s
     \\
-    \texttt{417.bases}
     & Tresplans
     & yes
     & 1.74 s
@@ -134,20 +125,19 @@ This is a great example not to underestimate the constants affecting our expecte
 
 \subsection{Tresplans}
 
-The complexity of the two algorithms is not the same. In the case of the \textsc{Python} code, we have a complexity of $O(N^2)$ where $N$ is the number of bases:
-\begin{itemize}
- \item Process file: $O(N)$.
- \item Compare bases: $O(N^2)$.
- \item Compare each pair of subsets of the base: contsant time with a large constant.
-\end{itemize}
-\\
-In the case of the \textsc{C} code, we have a complexity of $O(N^3)$ where $N$ is the number of bases:
+The complexity of our code is the same in both implementations.
+It can be computed as follows, where $N$ is the number of bases:
 
 \begin{itemize}
  \item Process file: $O(N)$.
  \item Compare bases: $O(N^2)$.
- \item Compare each pair of subsets of the base: $O(N)$ with a large constant.
+ \item Compare each pair of subsets of the base:
+       contsant time with a large constant.
 \end{itemize}
+
+Thus, overall complexity is $O(N^2)$.
+It is also output-sensitive,
+as it stops if it finds a pair of bases do not satisfy the exchange axiom.
 
 \subsection{other-awesome-team-name}
 

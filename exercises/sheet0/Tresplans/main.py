@@ -83,14 +83,13 @@ def process_file(f):
 # Execute only if file is called directly
 if __name__ == "__main__":
 	if len(sys.argv) < 2:
-		print("Usage:   ", sys.argv[0], "FILE(S)")
-		print("Example: ", sys.argv[0], "../matroid-or-not/*.bases")
+		print("Usage:   " + str(sys.argv[0]) + "FILE(S)")
+		print("Example: " + str(sys.argv[0]) + "../matroid-or-not/*.bases")
 		sys.exit(1)
 
 	# Get all the supplied files.
 	files = sys.argv[1:]
 	
-	print("# Output structure:\n# FILENAME -> OUTPUT\n# ELLAPSED_SECONDS")
 	# Variable only to pretty print output.
 	file_max_length = max([len(x) for x in files])
 
@@ -101,15 +100,13 @@ if __name__ == "__main__":
 		with open(current_file) as f:
 			# Process the file and construct a dictionary.
 			bases = process_file(f)
-			# Compare bases of the dictionary.
-			out = compare_bases(bases)
 			# Print if the file contains the bases of a matroid or not.
-			if out:
-				print(current_file.rjust(file_max_length), "-> Matroid.")
+			if len(bases) and compare_bases(bases):
+				print(current_file.rjust(file_max_length) + "-> Matroid.")
 			else:
-				print(current_file.rjust(file_max_length), "-> No matroid")
+				print(current_file.rjust(file_max_length) + "-> No matroid")
 
 		t_end = time.time() # End timer
-		print(t_end - t_start)
+		print(str(t_end - t_start) + " seconds")
 
 	sys.exit(0)
