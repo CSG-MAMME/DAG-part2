@@ -1,0 +1,41 @@
+Haskell:
+-- b: True, 0.17s
+-- n1: False, 0.00s
+-- n2: False, 0.00s
+-- 252: True, 1.84s
+-- 417: False, 2.43s
+-- 462: True, 8.38s
+-- 924: True, 71.50s
+-- 1716: True, 288.23s
+-- 3432: True, 3104.42s
+-- 4092: False, 1650.83s
+-- 4639: False, 157.71s
+-- 6435: True, 11357.34s
+
+Python good:
+not-bases-1.txt: No, 0.00028s
+not-bases-2.txt: No, 6.77e-5s
+definetely-bases.txt: Yes, 0.00024s
+252.bases:  Yes, 0.597 s
+417.bases:  No,  0.219 s
+462.bases:  Yes, 2.373 s
+924.bases:  Yes, 11.81 s
+1716.bases: Yes, 46.30 s
+3432.bases: Yes, 220.7 s
+4092.bases: No,  2.500 s
+4639.bases: No,  57.37 s
+6435.bases: Yes, 917.4 s
+
+Python best in average:
+not-bases-1.txt: No, 0.00060s
+not-bases-2.txt: No, 7.62e-5s
+definetely-bases.txt: Yes, 0.00022s
+252.bases:  Yes, 0.424 s
+417.bases:  No,  0.151 s
+462.bases:  Yes, 1.535 s
+924.bases:  Yes, 7.422 s
+1716.bases: Yes, 28.97 s
+3432.bases: Yes, 131.9 s
+4092.bases: No,  23.55 s
+4639.bases: No,  3.792 s
+6435.bases: Yes, 508.5 s
