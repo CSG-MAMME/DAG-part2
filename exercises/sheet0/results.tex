@@ -67,12 +67,12 @@
     \texttt{definetely-bases.txt}
     & A-Team-Has-No-Name
     & yes
-    & 0.00024 s
+    & 0.00022 s
     \\\hline
     \texttt{not-bases-1.txt}
     & A-Team-Has-No-Name
     & no
-    & 0.00028 s
+    & 0.000282 s
     \\\hline
     \texttt{not-bases-2.txt}
     & A-Team-Has-No-Name
@@ -82,32 +82,32 @@
     \texttt{252.bases}
     & A-Team-Has-No-Name
     & yes
-    & 0.597 s
+    & 0.424 s
     \\\hline
     \texttt{417.bases}
     & A-Team-Has-No-Name
     & no
-    & 0.219 s
+    & 0.151 s
     \\\hline
     \texttt{462.bases}
     & A-Team-Has-No-Name
     & yes
-    & 2.373 s
+    & 1.535 s
     \\\hline
     \texttt{924.bases}
     & A-Team-Has-No-Name
     & yes
-    & 11.81 s
+    & 7.422 s
     \\\hline
     \texttt{1716.bases}
     & A-Team-Has-No-Name
     & yes
-    & 46.30 s
+    & 28.97 s
     \\\hline
     \texttt{3432.bases}
     & A-Team-Has-No-Name
     & yes
-    & 220.7 s
+    & 131.9 s
     \\\hline
     \texttt{4092.bases}
     & A-Team-Has-No-Name
@@ -117,12 +117,12 @@
     \texttt{4639.bases}
     & A-Team-Has-No-Name
     & no
-    & 57.37 s
+    & 3.792 s
     \\\hline
     \texttt{6435.bases}
     & A-Team-Has-No-Name
     & yes
-    & 917.4 s
+    & 508.5 s
     \\\hline    
   \end{tabular}
 \end{center}
@@ -166,6 +166,10 @@ This was done by assigning every set the sum of 2 powered to every of the elemen
 This assumes that we are using integers for each set in the matroid and that there are not a lot of elements in total. If there were other elements that were not integers we could do a bijection between the elements and $\mathbb{Z}$ so we could apply this method.
 This allows us to avoid the last loop by using a binary search in the ordered set of values of each element in the matroid, reducing the complexity to $\mathcal{O}(n^3)*\log(n)$. 
 If m was big we expect this algorithm to be worse than the first one, so it is input sensitive. 
+
+For the last python code we changed the ordered list by a hash table (sets in Python) so that the search for an element runs in average in $\mathcal{O}(1)$ time instead of $\mathcal{O}(\log(n))$ time.
+In general this version is quicker but in the worst possible case it is worse than the previous one.
+More exactle this version has an expected complexity of $\mathcal{O}(n^2)$ and a (worst-case) complexity of $\mathcal{O}(n^3)$.
 
 It is also worth mention that both of the python algorithm will stop as soon as they find a $B_1$ that does not verify the condition, and that is why 4096.bases files or similar get checked so quickly.
 
