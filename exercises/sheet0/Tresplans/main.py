@@ -102,9 +102,9 @@ if __name__ == "__main__":
 			bases = process_file(f)
 			# Print if the file contains the bases of a matroid or not.
 			if len(bases) and compare_bases(bases):
-				print(current_file.rjust(file_max_length) + "-> Matroid.")
+				print(current_file.rjust(file_max_length) + " -> Matroid.")
 			else:
-				print(current_file.rjust(file_max_length) + "-> No matroid")
+				print(current_file.rjust(file_max_length) + " -> No matroid")
 
 		t_end = time.time() # End timer
 		print(str(t_end - t_start) + " seconds")
