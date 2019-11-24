@@ -107,6 +107,6 @@ if __name__ == "__main__":
 				print(current_file.rjust(file_max_length) + " -> No matroid")
 
 		t_end = time.time() # End timer
-		print(str(t_end - t_start) + " seconds")
+		print(str(t_end - t_start) + " seconds\n")
 
 	sys.exit(0)
