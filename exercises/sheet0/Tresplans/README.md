@@ -18,6 +18,16 @@ with or without modification, are permitted just including a disclaimer (include
 
 Also, non-POSIX-compliant implementations of *C* could require further dependencies.
 
+## Plot Generation
+
+In order to replicate the plot, some applications are needed.
+The main ones are
+*[gnuplot](http://www.gnuplot.info/)*
+and
+*[pdflatex](https://www.tug.org/texlive/)*.
+Moreover, to use the automated pipeline contained in the Makefile,
+*awk*, *xargs* and *paste* commands are also needed.
+
 ## Alternative Code
 
 We also have included an alternative implementation in *C*,
