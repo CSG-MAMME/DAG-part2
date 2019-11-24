@@ -26,7 +26,7 @@ The main ones are
 and
 *[pdflatex](https://www.tug.org/texlive/)*.
 Moreover, to use the automated pipeline contained in the Makefile,
-*awk*, *xargs* and *paste* commands are also needed.
+the tools *awk*, *xargs* and *paste* are also needed.
 
 ## Alternative Code
 
