@@ -62,7 +62,7 @@ main(int argc, char* argv[])
 		 	return 1;
 		}
 
-		printf("File %s -> ", argv[i]);
+		printf("%s -> ", argv[i]);
 		
 		start = clock();
 
