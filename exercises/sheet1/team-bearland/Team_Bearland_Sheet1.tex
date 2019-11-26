@@ -18,6 +18,7 @@
 %\newtheorem{def}{Definition}
 
 \begin{document}
+\tikzstyle{vertice}=[circle, draw, fill=black!50, inner sep = 0pt, minimum width=4pt]
 
 Team Bearland: Mart\'in, V. and Oviedo, P. and Segarra, C \hfill Tuesday, November 19th
 
@@ -34,6 +35,14 @@ Team Bearland: Mart\'in, V. and Oviedo, P. and Segarra, C \hfill Tuesday, Novemb
 \hspace{5pt} \textbf{\textit{(a) This notion of contraction agrees with the notion of contraction in graph theory.}}
 
 \vspace{3pt}
+
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[thick,scale=0.8]%
+        \draw (0,0) node[style=vertice]{} -- ++ (0.5, 0.5) node[above] {e} -- (1,1) node[style=vertice]{};
+    \end{tikzpicture}
+\end{figure}
 
 \hspace{5pt} \textbf{\textit{(b) $M_{G^\star} = \left(M_G\right)^\star$, if G is a planar graph and $G^\star$ its dual planar graph.}}
 
@@ -57,47 +66,16 @@ $$
 
 \begin{figure}[h!]
     \centering
-    \resizebox{.8\linewidth}{!}{
-        \begin{tikzpicture}
-            % LHS Drawing
-            \draw (0,0) circle (3cm);
-            \node[circle, draw = black] (node-1) at (-1,-1) {};
-            \node[circle, draw = black] (node-2) at (-1,1) {};
-            \node[circle, draw = black] (node-3) at (1.5,-1) {};
-            \node[circle, draw = black] (node-4) at (-1,-2) {};
-            \node[circle, draw = black] (node-5) at (0,1.5) {};
-            \draw[dashed, blue] (node-1) -- (node-2);
-            \draw[dashed, blue] (node-1) -- (node-3);
-            \draw[dashed, blue] (node-1) -- (node-4);
-            \draw[dashed, blue] (node-2) -- (node-3);
-            \draw[dashed, blue] (node-3) -- (node-4);
-            \draw[dashed, orange] (node-3) -- (2,4.5);
-            \draw[dashed, orange] (node-5) -- (4,4.5);
-            \node at (2, 6.0) {\Huge $|C|(2k + 1) = 2$\textcolor{blue}{$|E(C,C)|$} + \textcolor{orange}{$E(C, G-C)$}};
-
-            % Separating Line
-            \draw[very thick] (10, -3) -- (10, 10);
-
-            % RHS Drawing
-            \draw (20, 0) circle (3cm) node (C) {\Huge C};
-            \draw (17, 5) circle (1cm) node {\Huge Even};
-            \draw[rounded corners] (30, -3) rectangle (33, 10);
-            \node at (31.5, 6) {\Huge S};
-            \draw(40, 0) circle (2.5cm) node (N1) {\Huge Odd};
-            \draw(37.5, 5) circle (1.5cm) node (N2) {\Huge Odd};
-            \draw[dashed, thick] (C.0) -- (31.5, 0);
-            \draw[dashed, thick] (C.10) -- (31.5, 2);
-            \draw[dashed, thick] (C.20) -- (31.5, 4);
-            \draw[dashed, thick] (C.45) -- (31.5, 8);
-            \draw[dashed, thick] (N2.200) -- (32.5, 5);
-            \draw[dashed, thick] (N2.170) -- (32.5, 7);
-            \draw[dashed, thick] (N1.200) -- (32.5, -1);
-            \draw[dashed, thick] (N1.170) -- (32.5, 1);
-            \node at (28, 4.5) {\Huge $\vdots$};
-            \node at (28, 4) {\Huge $\vdots$};
-            \draw[very thick, red, dashed] (26, -3) -- (26, 7) node[text=red,anchor=south] {\Huge $E(C, S) \geq \lambda(G)$};
-        \end{tikzpicture}
-    }
+    \begin{tikzpicture}[thick,scale=0.8]%
+        \draw \foreach \x in {18,90,...,306} {
+            (\x:4) node{} -- (\x+72:4)
+            (\x:4) -- (\x:3) node{}
+            (\x:3) -- (\x+15:2) node{}
+            (\x:3) -- (\x-15:2) node{}
+            (\x+15:2) -- (\x+144-15:2)
+            (\x-15:2) -- (\x+144+15:2)
+        };
+    \end{tikzpicture}
 \end{figure}
 
 \end{document}
