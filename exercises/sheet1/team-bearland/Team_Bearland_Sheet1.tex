@@ -54,7 +54,7 @@ Team Bearland: Mart\'in, V. and Oviedo, P. and Segarra, C \hfill Tuesday, Novemb
 
 \textbf{\textit{(3) Consider the matroid M realized by the columns of the matrix}}
 $$
-\left[
+A = \left[
     \begin{array}{ccccc}
         0 & 1 & 1 & 0 & 1 \\
         1 & 0 & 1 & 0 & 1 \\
@@ -64,18 +64,99 @@ $$
 $$
 \textbf{\textit{ Compute a realization of $M^\star$, and some contractions of M of your choosing.}}
 
-\begin{figure}[h!]
-    \centering
-    \begin{tikzpicture}[thick,scale=0.8]%
-        \draw \foreach \x in {18,90,...,306} {
-            (\x:4) node{} -- (\x+72:4)
-            (\x:4) -- (\x:3) node{}
-            (\x:3) -- (\x+15:2) node{}
-            (\x:3) -- (\x-15:2) node{}
-            (\x+15:2) -- (\x+144-15:2)
-            (\x-15:2) -- (\x+144+15:2)
-        };
-    \end{tikzpicture}
-\end{figure}
+\vspace{5pt}
+
+We will first compute a realization of matrix A.
+To do so, we will first perform a change of basis to basis $\mathcal{B} = \left\lbrace \left( \begin{array}{c} 0 \\ 1 \\ 0 \end{array} \right), \left( \begin{array}{c} 0 \\ 0 \\ 1 \end{array} \right), \left( \begin{array}{c} 1 \\ 1 \\ 1 \end{array} \right) \right\rbrace$. We then have,
+\begin{equation*}
+    \begin{split}
+        A & = \left[
+            \begin{array}{ccccc}
+                0 & 1 & 1 & 0 & 1 \\
+                1 & 0 & 1 & 0 & 1 \\
+                0 & 1 & 1 & 1 & 0
+            \end{array}
+        \right]
+        \overset{\mathcal{B}}{\longrightarrow}
+        \bar{A} = \left[
+            \begin{array}{ccccc}
+                1 & 0 & 0 & -1 & 0 \\
+                0 & 1 & 0 & 0 & -1 \\
+                0 & 0 & 1 & 1 & 1
+            \end{array}
+        \right]
+        \hspace{10pt} \text{ which also represents $M$.} \\[10pt]
+        \bar{A}B^T & = 0 \Longrightarrow 
+        B^T = \left[
+            \begin{array}{cc}
+                -1 & 0  \\
+                0  & -1 \\
+                1  & 1 \\
+                -1 & 0 \\
+                0 & -1
+            \end{array}
+        \right] \hspace{5pt} \text{ (for example) } \Longrightarrow
+        B = \left[
+            \begin{array}{ccccc}
+                -1 & 0 & 1 & -1 & 0 \\
+                0 & -1 & 1 & 0 & -1
+            \end{array} 
+        \right] \hspace{5pt} \text{ which is $M^*$.}
+    \end{split}
+\end{equation*}
+
+Now we will compute a contraction of $M$, $M / 1$, using a deletion in its dual matroid, $M^*$, $(M^* \backslash 1)^*$.
+\begin{equation*}
+    \begin{split}
+        B \backslash 1 & = \left[
+            \begin{array}{cccc}
+                0 & 1 & -1 & 0 \\
+                -1 & 1 & 0 & -1 
+            \end{array} 
+        \right] \hspace{5pt}
+        (B  \backslash 1)\cdot c^T = 0 \Rightarrow 
+        c^T = \left[
+                \begin{array}{cc}
+                    0 & 1 \\
+                    1 & 1 \\
+                    1 & 1 \\
+                    1 & 0
+                \end{array} 
+            \right] \Rightarrow
+        c = \left[
+                \begin{array}{cccc}
+                    0 & 1 & 1 & 1 \\
+                    1 & 1 & 1 & 0
+                \end{array} 
+            \right] \hspace{3pt} \text{which is $M / 1$.}
+    \end{split}
+\end{equation*}
+
+An alternative method for computing $ M / 1$ is doing the projection in the corresponding direction. In particular, to find $ M / 1$ it suffices to project $A$ in direction $\left( \begin{array}{c} 0 & 1 & 0 \end{array} \right)^T$ and get rid of loops. In particular,
+\begin{equation*}
+    \begin{split}
+        B \backslash 1 & = \left[
+            \begin{array}{cccc}
+                0 & 1 & -1 & 0 \\
+                -1 & 1 & 0 & -1 
+            \end{array} 
+        \right] \hspace{5pt}
+        (B  \backslash 1)\cdot c^T = 0 \Rightarrow 
+        c^T = \left[
+                \begin{array}{cc}
+                    0 & 1 \\
+                    1 & 1 \\
+                    1 & 1 \\
+                    1 & 0
+                \end{array} 
+            \right] \Rightarrow
+        c = \left[
+                \begin{array}{cccc}
+                    0 & 1 & 1 & 1 \\
+                    1 & 1 & 1 & 0
+                \end{array} 
+            \right] \hspace{3pt} \text{which is $M / 1$.}
+    \end{split}
+\end{equation*}
 
 \end{document}
