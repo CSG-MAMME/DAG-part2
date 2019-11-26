@@ -67,7 +67,7 @@ $$
 \vspace{5pt}
 
 We will first compute a realization of matrix A.
-To do so, we will first perform a change of basis to basis $\mathcal{B} = \left\lbrace \left( \begin{array}{c} 0 \\ 1 \\ 0 \end{array} \right), \left( \begin{array}{c} 0 \\ 0 \\ 1 \end{array} \right), \left( \begin{array}{c} 1 \\ 1 \\ 1 \end{array} \right) \right\rbrace$. We then have,
+To do so, we will swap columns two and four and perform a change of basis to basis $\mathcal{B} = \left\lbrace \left( \begin{array}{c} 0 \\ 1 \\ 0 \end{array} \right), \left( \begin{array}{c} 1 \\ 0 \\ 1 \end{array} \right), \left( \begin{array}{c} 1 \\ 1 \\ 1 \end{array} \right) \right\rbrace$. We then have,
 \begin{equation*}
     \begin{split}
         A & = \left[
@@ -77,28 +77,36 @@ To do so, we will first perform a change of basis to basis $\mathcal{B} = \left\
                 0 & 1 & 1 & 1 & 0
             \end{array}
         \right]
+        \longrightarrow
+        \left[
+            \begin{array}{ccccc}
+                0 & 0 & 1 & 1 & 1 \\
+                1 & 0 & 1 & 0 & 1 \\
+                0 & 1 & 1 & 1 & 0
+            \end{array}
+        \right]
         \overset{\mathcal{B}}{\longrightarrow}
         \bar{A} = \left[
             \begin{array}{ccccc}
-                1 & 0 & 0 & 0 & 0 \\
-                0 & 1 & 0 & 1 & -1 \\
-                0 & 0 & 1 & 0 & 1
+                1 & 0 & 0 & -1 & 0 \\
+                0 & 1 & 0 & 0 & -1 \\
+                0 & 0 & 1 & 1 & 1
             \end{array}
         \right]
         \hspace{10pt} \text{ which also represents $M$.} \\[10pt]
         \bar{A}B^T & = 0 \Longrightarrow 
         B^T = \left[
             \begin{array}{cc}
-                0 & 0  \\
-                1  & -1 \\
-                0  & 1 \\
+                -1 & 0  \\
+                0  & -1 \\
+                1  & 1 \\
                 -1 & 0 \\
                 0 & -1
             \end{array}
         \right] \hspace{5pt} \text{ (for example) } \Longrightarrow
         B = \left[
             \begin{array}{ccccc}
-                0 & 1 & 0 & -1 & 0 \\
+                -1 & 0 & 1 & -1 & 0 \\
                 0 & -1 & 1 & 0 & -1
             \end{array} 
         \right] \hspace{5pt} \text{ which is $M^*$.}
@@ -110,23 +118,23 @@ Now we will compute a contraction of $M$, $M / 1$, using a deletion in its dual 
     \begin{split}
         B \backslash 1 & = \left[
             \begin{array}{cccc}
-                1 & 0 & -1 & 0 \\
+                0 & 1 & -1 & 0 \\
                 -1 & 1 & 0 & -1 
             \end{array} 
         \right] \text{ ;} \hspace{5pt}
         (B  \backslash 1)\cdot c^T = 0 \Rightarrow 
         c^T = \left[
                 \begin{array}{cc}
-                    1 & 0 \\
+                    0 & 1 \\
                     1 & 1 \\
-                    1 & 0 \\
-                    0 & 1
+                    1 & 1 \\
+                    1 & 0
                 \end{array} 
             \right] \Rightarrow
         c = \left[
                 \begin{array}{cccc}
-                    1 & 1 & 1 & 0 \\
-                    0 & 1 & 0 & 1
+                    0 & 1 & 1 & 1 \\
+                    1 & 1 & 1 & 0
                 \end{array} 
             \right] \hspace{3pt} \text{which is $M / 1$.}
     \end{split}
@@ -137,7 +145,7 @@ An alternative method for computing $ M / 1$ is doing the projection in the corr
     \begin{split}
         A & = \left[
             \begin{array}{ccccc}
-                0 & 1 & 1 & 0 & 1 \\
+                0 & 0 & 1 & 1 & 1 \\
                 1 & 0 & 1 & 0 & 1 \\
                 0 & 1 & 1 & 1 & 0
             \end{array}
@@ -145,17 +153,17 @@ An alternative method for computing $ M / 1$ is doing the projection in the corr
         \overset{\text{\footnotesize{Project}}}{\longrightarrow}
         \left[
             \begin{array}{ccccc}
-                0 & 1 & 1 & 0 & 1 \\
+                0 & 0 & 1 & 1 & 1 \\
                 0 & 1 & 1 & 1 & 0
             \end{array}
         \right]
         \overset{\text{\footnotesize{No Loops}}}{\longrightarrow}
         \left[
             \begin{array}{ccccc}
-                1 & 1 & 0 & 1 \\
+                0 & 1 & 1 & 1 \\
                 1 & 1 & 1 & 0
             \end{array}
-        \right]
+        \right] \hspace{5pt} \text{ which again is $ M / 1$.}
     \end{split}
 \end{equation*}
 
