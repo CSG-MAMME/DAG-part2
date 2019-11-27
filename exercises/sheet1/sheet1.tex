@@ -6,23 +6,38 @@
 \usepackage{url}
 \usepackage{bbm}
 \usepackage{fancyvrb}
+\usepackage{hyperref}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+\usepackage{kbordermatrix}
+\usepackage{rank-2-roots}
 
 \newcommand{\cA}{\mathcal{A}}
 \newcommand{\cS}{\mathcal{S}}
 \DeclareMathOperator{\conv}{conv}
 \DeclareMathOperator{\New}{New}
 \DeclareMathOperator{\area}{area}
+\DeclareMathOperator{\del}{del}
+\DeclareMathOperator{\link}{link}
+\DeclareMathOperator{\thestar}{star}
+\DeclareMathOperator{\GL}{GL}
+\newcommand{\NN}{\mathbbm{N}}
 \newcommand{\RR}{\mathbbm{R}}
 \newcommand{\CC}{\mathbbm{C}}
+\newcommand{\kk}{\mathbbm{k}}
+\newcommand{\cI}{\mathcal{I}}
 
 \newcommand{\defn}[1]{{\color{blue}#1}}
 \newcommand{\alert}[1]{\textbf{\color{red}#1}}
 
-\DefineShortVerb{\;}
 \renewcommand{\FancyVerbFormatCom}{\color{green!30!black}}
 
+\newtheorem*{thmstar}{Theorem}
+
 \begin{document}
+\DefineShortVerb{\·}
+
 \begin{center}
 \textbf{\sffamily
    Discrete and Algorithmic Geometry }
@@ -32,27 +47,31 @@
    UPC, 2019
 \end{center}
 
-\bigskip
+\medskip
 
 \begin{center}
   \textbf{\sffamily Sheet 1}
 
-  \bigskip\bigskip
-Due on Tuesday, November 19, 2019
+  \bigskip
+Due on Tuesday, December 10, 2019
 \end{center}
 
 \bigskip
 
+You should work in your teams and complete half of the exercises on this sheet.
+
+\bigskip
 
 \begin{quote}\small
   To submit your solutions to these exercises,
   \begin{itemize}[$\quad\triangleright$]
-  \item create a new branch ;your-awesome-team-name-sheet-1;,
-  \item create a subdirectory ;exercises/sheet1/your-awesome-team-name/;,
-  \item and put your solutions to the exercises into a ;.pdf; file into that directory.
-  \item Now encrypt this ;.pdf; using ;julian.pfeifle@upc.edu.public.gpg.key;, and
-  \item ;add;, ;commit; and ;push; \alert{only this encrypted pdf, not the original} ;.tex;
-  \item and create a pull request.
+  \item fill out on the \href{https://gitlab.com/julian-upc/2019-dag-upc/wikis/completed-exercises}{course wiki} which exercises your team has completed. 
+  \item create a new branch "your-awesome-team-name-sheet-1",
+  \item create a subdirectory ·exercises/sheet1/your-awesome-team-name/·,
+  \item and put your solutions to the exercises into ·.tex· and ·.pdf· files into that directory.
+  \item Now encrypt these files using ·julian.pfeifle@upc.edu.public.gpg.key·, and
+  \item ·add·, ·commit· and ·push· \alert{only these encrypted files, not the original} ·.tex· and ·.pdf·
+  \item and create a merge request.
   \end{itemize}
   You will be graded collectively on these exercises, and individually in the final exam.
 
@@ -60,55 +79,608 @@ Due on Tuesday, November 19, 2019
 \end{quote}
 
 \bigskip
+\begin{enumerate}
+\item Recall the following definitions for a matroid~$M$ on the ground set $[n]=\{1,2,\dots,n\}$ with family of  independent sets $\{I:I\in\mathcal I\}$.
 
-Let $([n],\mathcal I)$ be a matroid on the ground set $[n]=\{1,2,\dots,n\}$ with independent sets~$\{I:I\in\mathcal I\}$.
-
+  \smallskip
 \begin{itemize}[$\triangleright$]
 \item
-  For any proper subset $S\subset[n]$, the \defn{deletion}
-  $M\setminus S$ is the matroid on the ground set $[n]\setminus S$ whose
-  independent sets are $\{I\subset[n]\setminus S : I\in\mathcal I\}$.
+  For any proper subset $A\subset[n]$, the \defn{deletion}
+  $M\setminus A$ is the matroid on the ground set $[n]\setminus A$ whose
+  independent sets are $\{I\subset[n]\setminus A : I\in\mathcal I\}$.
 
+\item
+  For $a\in E$, the independent sets of the \defn{contraction} $M/a$ are $\big\{I-\{a\}:a\in I\in\mathcal I\big\}$.
+  
 \item
   The \defn{dual matroid} $M^\star$ of~$M$ is the matroid on $[n]$ where $I$~is a basis iff $[n]\setminus I$ is a basis~of~$M$.
-
-\item
-  If $S\subset[n]$, then the \defn{contraction} of $M$ with respect to $S$ is $M/S = (M^\star\setminus S)^\star$.
-
-\item
-  Let $G$ be a graph whose edges are labeled by $[n]$.
-  The bases of the \defn{graphical matroid} $M_G$ are the sets of edges corresponding to spanning trees of~$G$.
 \end{itemize}
 
-\bigskip
-\begin{enumerate}
-\item True or false?
+\smallskip
+
+Now prove the following statements.
+
+\smallskip
+
   \begin{enumerate}
-  \item This notion of contraction agrees with the notion of
-    contraction in graph theory.
+  \item Contraction in $M$ as defined in class agrees with the notion of
+    contraction in graphs.
+  \item Contraction in $M$ as defined in class agrees with $M/S := (M^\star\setminus S)^\star$ for a subset $S\subset[n]$.
   \item $M_{G^\star} = (M_G)^\star$, if $G$ is a planar graph and $G^\star$ its dual planar graph.
+  \item 
+    Consider the matroid $M$ realized by the columns of the matrix
+    \[
+      \begin{bmatrix}
+        0 & 1 & 1 & 0 & 1 \\
+        1 & 0 & 1 & 0 & 1 \\
+        0 & 1 & 1 & 1 & 0
+      \end{bmatrix}.
+    \]
+    Compute a realization of~$M^\star$, and some contractions of~$M$ of your choosing.
+    Compute the set of circuits and cocircuits of~$M$ and of $M^\star$.
+  \end{enumerate}
+
+  \bigskip
+
+\item
+  Let $A\in\RR^{n \times d}$ be a matrix of full rank, and let the columns of $B\in\RR^{n\times(n-d)}$ be a basis of the row space of~$A$,
+  so that $AB=0$ and the rows of~$B$ are a Gale transform of the columns of~$A$.
+  We saw in class that $\mathsf{LinVal}(A)=\mathsf{LinDep}(B)$.
+  Show that $\mathsf{LinVal}(B) = \mathsf{LinDep}(A)$.
+
+\bigskip 
+  
+\item \emph{The greedy algorithm always works for matroids.}
+  \begin{enumerate}
+  \item
+    Show that Kruskal's greedy algorithm always finds a
+maximum weight independent set in a matroid $M=(E,\cI)$, regardless of the choice of weight
+function $\omega : E\to\RR_{>0}$.
+Recall that the \defn{greedy algorithm} starts by setting $I:=\emptyset$,
+and next repeatedly chooses $y\in E\setminus I$ with $I\cup\{y\}\in\cI$ and with $\omega(y)$ as large as possible.
+It stops if no such $y$~exists.
+
+\item
+  Show that that this property characterizes independent sets of matroids
+  among all simplicial complexes.
+  In other words, given a simplicial complex $\Sigma$ for which the greedy algorithm always works, regardless of the weight function~$\omega$,
+  show that $\Sigma = \mathcal I(M)$ for some matroid~$M$.
+  \begin{quote}
+    \footnotesize\color{green!30!black} 
+      Hint: You only need to show that the
+      exchange axiom I3 holds. To do this, given $I_1 ,I_2\in\mathcal I$ with $|I_2| = |I_1| + 1 = k + 1$,
+      consider the weight function
+      \[
+        \omega(E) :=
+        \begin{cases}
+          \frac{k+1}{k+2}
+          & \text{for } e\in I_1
+          \\
+          \frac{k}{k+1}
+          & \text{for } e\in I_2\setminus I_1
+        \end{cases}.
+      \]
+      Explain why the greedy algorithm will build up $I_1$ first, and then at the next step,
+      will exhibit an element of the form $I_1 \cup \{e\} \in \mathcal I$ with $e \in I_2 - I_1$ . In particular,
+      explain why the algorithm will not just stop after having found $I_1$!
+    \end{quote}
+  \end{enumerate}
+
+  \bigskip
+
+\item
+  A famous result by Jack Edmonds states the following:
+
+  \begin{thmstar}[Matroid Intersection Theorem]
+    Let $M_1=(E,\cI_1)$ and $M_2=(E,\cI_2)$ be two matroids on the same ground set~$E$, 
+    with rank functions
+    \[
+      r_i:
+      2^E\to\NN_{>0},
+      \quad
+      S\mapsto\max\{|I|:I\in\cI_i,\,I\subseteq S\},
+      \qquad
+      i=1,2.
+    \]
+    Then the maximum size of a common independent set in $\cI_1\cap\cI_2$ is equal to
+    \[
+      \min\{ r_1(S) + r_2(E\setminus S) : S\subseteq E\}.
+    \]
+  \end{thmstar}
+
+  \begin{enumerate}
+  \item
+    Let $G=(V,E)$ be a bipartite graph with color classes $V_1,V_2$.
+    For $i=1,2$, let $M_i$~be the matroid where $I\subseteq E$ is independent if and only if
+    each vertex in~$V_i$ is covered by at most one edge in~$I$.
+    Use the Matroid Intersection Theorem to prove
+    \begin{thmstar}[K\H onig's Matching Theorem]
+      The maximum size of a matching in a bipartite graph equals the minimum size of a vertex cover.
+    \end{thmstar}
+    (A \defn{vertex cover} of $G$ is a subset of $V$ that intersects each edge.)
+
+    \medskip
+
+  \item
+    Let $G=(V,E)$ be a graph whose edges are partitioned into $k$~colors, $E=E_1\cup E_2\cup\cdots\cup E_k$.
+    Use the Matroid Intersection Theorem to prove that there exists a \defn{rainbow spanning tree}
+    (a spanning tree all of whose edges are colored differently) if and only if
+    $G-F$ has at most $t+1$ connected components, for any union~$F$ of $t$~colors, for any $t\ge0$.
+    \begin{quote}
+    \footnotesize\color{green!30!black} 
+    Hint: Apply the Matroid Intersection Theorem to the cycle matroid of $G$ and the partition matroid induced by $E_1,\dots,E_k$.
+    Here, the \defn{cycle matroid} on~$G$ is the matroid whose independent sets are the edge sets that form a forest,
+    and the \defn{partition matroid} is just the transversal matroid; it is called that because the edges are partitioned into colors.
+    Thus, the independent sets in the partition matroid are of the form $\{i_1,\dots,i_s\}$ for $i_j\in E_j$. 
+    \end{quote}
   \end{enumerate}
   
   \bigskip
-\item Prove that if a matroid $M$ is realizable over a ground field $\mathbbm k$, then the dual matroid~$M^\star$ is also realizable over~$\mathbbm k$.
-  {\footnotesize\color{green!30!black} [\emph{Hint.} Suppose that $M$ has rank~$d$ and $n$~elements.
-  After a change of basis, $M$~can be realized by the $d\times n$ matrix $A=[I|B]$, where $I$~is the $d\times d$ identity matrix, and $B$~has size $d\times(n-d)$.
-  Now find a matrix that realizes~$M^\star$.]
+  
+\item Prove (a) and (b) of the following implications for matroids, and illustrate them with a well-chosen example.
+  Part (c) is optional and depends on your knowledge of algebra.
+\DefineShortVerb{|}
+
+\begin{center}
+\begin{tikzpicture}\small
+  \tikzset{>=stealth}
+    \node (algebraic) {Algebraic};
+    \node [left=of algebraic] (linear) {Linear}
+    edge[->] node[above] {(c)} (algebraic) ;
+    \node [above left=of linear] (graphic) {Graphic}
+     edge[->] node[auto] {(a)} (linear);
+     \node [below left=of linear] (transversal) {Transversal}
+     edge[->] node[below right] {(b)} (linear);
+  \end{tikzpicture}
+\end{center}
+
+\begin{quote}
+{\footnotesize\color{green!30!black} 
+  Hints.
+  \begin{enumerate}[(a)]
+    \item Suppose that $G=(V,E)$. In the vector space $\RR^V$ whose standard basis is indexed by the vertices of $G$,
+    represent the element $e=(v,w)$ in~$E$ by the vector $e_v-e_w$.
+    In other words, show that the linearly independent subsets of these vectors are indexed by forests of edges of~$G$.
+
+    \medskip
+  \item
+    Given a bipartite graph $G$ with vertex bipartition $E\cup F$, show that you can
+represent its transversal matroid as follows. Let $\kk(X):=\kk(x_{e,f}:e\in E,f\in F )$
+be a field extension of the field $\kk$ by transcendentals $\{x_{e,f}\}$ indexed by all edges
+$\{e,f\}$ of $G$. Then in the vector space $\kk(X)^F$ having standard basis vectors $u_f$
+indexed by the vertices $f$ in $F$, represent the element $e\in E$ by the vector
+\[
+  \sum_{f\in F: \{e,f\}\in G}
+  x_{e,f}\, u_f.
+\]
+In other words, show that the linearly independent subsets of these vectors are
+indexed by the subsets of vertices in $E$ that can be matched into $F$ along edges
+of $G$.
+
+\medskip
+\item
+  Given a matroid $M$ of rank $r$ linearly represented by a set of vectors $\{v_1,\dots,v_n\}$
+in the vector space~$\kk^r$, represent $M$ algebraically by elements of the rational
+function field $\kk(x_1,\dots, x_r)$ as follows.
+If $v_i$ has coordinates $(v_{i1},\dots,v_{ir})$ with respect to the standard basis for $\kk^r$,
+then represent~$v_i$ by $f_i := \sum_{j=1}^r v_{ij} x_j$.
+In other words, show that the algebraically independent subsets of these rational functions $f_i$ are indexed the same as the linearly independent subsets of the
+$v_i$.
+\end{enumerate}
 }
+\end{quote}
+
+\bigskip
+\item \emph{The Matroid Application Treasure Hunt.}
+  Find as many applications of matroid theory as you can, both inside and outside of mathematics.
+  One point for every application you find that has not been found by any other team; zero points for any duplicate application.
+  I will collect the unique applications and make them available to all participants.
+
+  \bigskip
+\item
+  In each of the classes or models of matroids discussed in class (linear / graphical / transversal / algebraic matroids; hyperplane / affine hyperplane arrangements, matroid polytopes),
+  \begin{enumerate}
+  \item
+    describe independent sets, bases, circuits, cocircuits, and
+    flats.
+  \item
+    For which of these entities can you rapidly see that they
+    fulfill the corresponding axiom systems?  For which does it seem
+    mysterious?
+  \item
+    Describe the dual matroid of a matroid in each of
+    these situations.
+  \end{enumerate}
+
+  \bigskip
+\item
+  We have seen that a matroid can be given by its collections of independent sets, bases, circuits, cocircuits, flats, or its rank function.
+  Find algorithms to convert between as many of these entities as you can.
+  What is their combinatorial complexity?
+ 
+  \bigskip
+
+\item
+  \emph{Independence complexes of matroids are vertex-decomposable.}
+  Let $\Delta$ be a simplicial complex on the vertex set $E$.
+  We do not assume that every $e \in E$ is actually used as a vertex of~$\Delta$.
+  The concept of vertex-decomposability for a simplicial complex~$\Delta$ on the vertex set~$E$ is defined recursively:
+  both the complex $\Delta = \emptyset$ having no faces at all (not even the empty face)
+  and any complex $\Delta$ consisting of a single vertex are defined to be \defn{vertex-decomposable},
+  and then $\Delta$~is said to be \defn{vertex-decomposable} if it is pure (all facets have the same dimension),
+  and there exists a vertex $e \in E$ for which both its deletion and link
+  \begin{align*}
+    \del \Delta (e) &:= \{F \in \Delta : e \notin F \}
+    \\
+    \link \Delta (e) &:= \{F - \{e\} : e \in F \in \Delta\}
+  \end{align*}
+  are vertex-decomposable complexes.
+
+  \begin{enumerate}
+  \item
+    Show that vertex-decomposable complexes $\Delta$ are shellable.
+
+    \begin{quote}
+    \footnotesize\color{green!30!black} 
+    Hint: Obviously you want to use induction.
+    Shell the facets in the deletion of~$e$ first,
+    then those in the star of~$e$, which is the cone over the link with apex~$e$.
+    Formally, for a face $F$ of~$\Delta$,
+    \begin{align*}
+      \thestar_\Delta(F) &= \{ G\in\Delta: F\cup G\in\Delta\},
+      \\
+      \link_\Delta(F) &= \{ G\in\Delta: F\cup G\in\Delta, F\cap G=\emptyset\}.
+    \end{align*}
+  \end{quote}
+
+  \medskip
+  \item
+  Show that for a matroid $M$ with $\Delta = \mathcal I(M)$ and any non-loop, non-coloop
+  element $e \in E$,
+  \begin{align*}
+    \del \Delta (e) &= \mathcal I(M \setminus e),
+    \\
+    \link \Delta (e) &= \mathcal I(M/e).
+  \end{align*}
+  Deduce that independent set complexes $\mathcal I(M)$ of matroids are vertex-decomposable.
+\end{enumerate}
+\bigskip
+
+\item
+\emph{Representability of the Fano and non-Fano matroids.}
+Show that the Fano matroid is coordinatizable only in characteristic 2,
+and the non-Fano matroid is coordinatizable only in characteristic distinct from 2.
+\begin{enumerate}
+\item
+  First show that in any coordinatization $V = \{a, b, c, d, e, f, g\}$ of either
+  the Fano or non-Fano matroids, with elements labelled as
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{scope}[very thick]
+        \draw[draw=white, double=black, thick] (0,0) circle (1);
+        \draw[thin] (1,0) -- (1,0.0001);
+        \draw[thin] (-1,0) -- (-1,-0.0001);
+
+        \draw[thin] ({-1/sqrt(2)},{-1/sqrt(2)}) -- ({-1/sqrt(2)+0.001},{-1/sqrt(2)-0.001});
+        \draw[thin] ({1/sqrt(2)},{-1/sqrt(2)}) -- ({1/sqrt(2)+0.001},{-1/sqrt(2)+0.001});
+
+        \node (0) at (0,0) {g};
+
+        \foreach \i/\j/\k in {0/{b}/{d},1/{a}/{e},2/{c}/{f}}{%
+          \node[fill=white] (\i;0) at ({2*cos(-30+120*\i)},{2*sin(-30+120*\i)}) {\(\j\)};
+          \node[fill=white] (\i;1) at ({cos(30+120*\i)},{sin(30+120*\i)}) {\(\k\)};
+        }
+        \foreach \i/\j/\k/\l in {0/0/0/1,0/1/1/0,1/0/1/1,1/1/2/0,2/0/2/1,2/1/0/0}{%
+          \draw[thin] (\i;\j) -- (\k;\l);
+        }
+        \draw[thin] (0) -- (0;1);
+        \draw[thin] (0) -- (1;1);
+        \draw[thin] (2;1) -- (0);
+        \draw[thin] (0) -- (0;0);
+        \draw[thin] (0) -- (1;0);
+        \draw[thin] (0) -- (2;0);
+      \end{scope}
+    \end{tikzpicture}
+    \qquad
+    \begin{tikzpicture}
+      \begin{scope}[very thick]
+    %    \draw[draw=white, double=black, thick] (0,0) circle (1);
+        \draw[thin] (1,0) -- (1,0.0001);
+        \draw[thin] (-1,0) -- (-1,-0.0001);
+
+        \draw[thin] ({-1/sqrt(2)},{-1/sqrt(2)}) -- ({-1/sqrt(2)+0.001},{-1/sqrt(2)-0.001});
+        \draw[thin] ({1/sqrt(2)},{-1/sqrt(2)}) -- ({1/sqrt(2)+0.001},{-1/sqrt(2)+0.001});
+
+        \node (0) at (0,0) {g};
+
+        \foreach \i/\j/\k in {0/{b}/{d},1/{a}/{e},2/{c}/{f}}{%
+          \node[fill=white] (\i;0) at ({2*cos(-30+120*\i)},{2*sin(-30+120*\i)}) {\(\j\)};
+          \node[fill=white] (\i;1) at ({cos(30+120*\i)},{sin(30+120*\i)}) {\(\k\)};
+        }
+        \foreach \i/\j/\k/\l in {0/0/0/1,0/1/1/0,1/0/1/1,1/1/2/0,2/0/2/1,2/1/0/0}{%
+          \draw[thin] (\i;\j) -- (\k;\l);
+        }
+        \draw[thin] (0) -- (0;1);
+        \draw[thin] (0) -- (1;1);
+        \draw[thin] (2;1) -- (0);
+        \draw[thin] (0) -- (0;0);
+        \draw[thin] (0) -- (1;0);
+        \draw[thin] (0) -- (2;0);
+      \end{scope}
+    \end{tikzpicture},
+  \end{center}
+you
+can use the action of $\GL_3 (\kk)$ along with scaling of individual vectors to assume
+that the representing matrix has columns looking like this:
+\[
+  \kbordermatrix{
+    & a & b & c & d & e & f & g\\
+    & 1 & 0 & 0 & 1 & 1 & 0 & \gamma\\
+    & 0 & 1 & 0 & 1 & 0 & \alpha & \delta\\
+    & 0 & 0 & 1 & 0 & 1 & \beta & \epsilon
+  }
+\]
+\item
+  Use some of the matroid dependencies to show that $\gamma=\delta=\epsilon$, and hence by
+  scaling, $\gamma = \delta = \epsilon = 1$.
+\item  Use some more of the matroid dependencies to show that $\alpha = \beta$.
+\item Use the last matroid dependence in the Fano matroid (and its absence in the non-Fano matroid)
+  to decide whether or not the characteristic of $\kk$ is $2$.
+\end{enumerate}
+
+\bigskip
+
+\item
+  Let $L_{n,d}$ be the set of \emph{lattice points} (i.e., points all whose coordinates are integers) in the following $(d-1)$-dimensional simplex in $\RR^d$:
+  \[
+    \Delta_{d-1}(n)
+    \ = \
+    \big\{
+    (x_1,x_2,\dots,x_d)\in\RR^d : x_1+x_2+\cdots + x_d = n-1
+    \text{ and } x_i\ge0 \text{ for all } i
+    \big\}.
+  \]
+  For $1\le k\in\NN$ a \emph{simplex of size~$k$} is a parallel translate of $L_{k,d}$.
+  For any subset $I\subset L_{n,d}$, a simplex of size~$k$ is \emph{$I$-saturated} if it contains exactly $k$~points of~$I$.
+
+  \medskip
+  \begin{enumerate}[(a)]
+  \item
+    Let $S,S'$ be two $I$-saturated simplices with $S\cap S'\ne\emptyset$, and
+    let $S\vee S'$ be the smallest simplex containing~$S$~and~$S'$.
+    Then the simplices $S\cap S'$ and $S\vee S'$ are also $I$-saturated.
+  \end{enumerate}
+
+  \medskip
+  Let $\cI_{n,d}$ be the collection of subsets $I$ of $L_{n,d}$ such that for every $k\in\NN$ with $1\le k\le n$,
+  every parallel translate of $L_{n,k}$ contains at most $k$~points of~$I$, cf.~Figure~\ref{fig:holes}.
+
+  \medskip
+  \begin{enumerate}[(a)]
+    \setcounter{enumii}{1}
+  \item Show that $\cI_{n,d}$ is the collection of independent sets of a matroid.
+    \begin{figure}[htbp]\centering
+      
+      \begin{tikzpicture}
+        \foreach \x in {0,1,2,3}{
+          \draw[draw=blue,thick] (\x,0) circle (.05);
+        }
+        \foreach \x in {0.5,1.5,2.5}{
+          \draw[draw=blue,thick] (\x,.866) circle (.05);
+        }
+        \foreach \x in {1,2}{
+          \draw[draw=blue,thick] (\x,1.732) circle (.05);
+        }
+        \draw[draw=blue,thick] (1.5,2.598) circle (.05);
+
+        \foreach \x/\y in {2/0,.5/.866,2.5/.866,1.5/2.598}{
+          \draw[draw=black,fill=blue,thick] (\x,\y) circle (.1);
+        }
+        \draw (1.5,3.031) circle(0);
+        \draw (-.5,-.433) circle(0);
+        \draw (3.5,-.433) circle(0);
+      \end{tikzpicture}
+      \qquad
+      \begin{tikzpicture}
+        \foreach \x in {0,1,2,3}{
+          \draw[draw=blue,thick] (\x,0) circle (.05);
+        }
+        \foreach \x in {0.5,1.5,2.5}{
+          \draw[draw=blue,thick] (\x,.866) circle (.05);
+        }
+        \foreach \x in {1,2}{
+          \draw[draw=blue,thick] (\x,1.732) circle (.05);
+        }
+        \draw[draw=blue,thick] (1.5,2.598) circle (.05);
+
+        \foreach \x/\y in {2/0,.5/.866,2.5/.866,1.5/2.598}{
+          \draw[draw=black,fill=blue,thick] (\x,\y) circle (.1);
+        }
+
+        \draw[green!20!black] (-.5,-.433)--(3.5,-.433);
+        \draw[green!20!black] (-.5,-.433)--(1.5,3.031);
+        \draw[green!20!black] (3.5,-.433)--(1.5,3.031);
+
+        \draw[green!20!black] (0,.433)--(3,.433);
+        \draw[green!20!black] (.5,1.299)--(1.5,1.299);
+        \draw[green!20!black] (1,2.165)--(2,2.165);
+        
+        \draw[green!20!black] (.5,-.433)--(1,.433);
+        \draw[green!20!black] (1.5,1.299)--(2,2.165);
+        \draw[green!20!black] (1.5,-.433)--(2.5,1.299);
+
+        \draw[green!20!black] (.5,1.299)--(1,.431);
+        \draw[green!20!black] (1.5,1.299)--(2,.431);
+        \draw[green!20!black] (2,.431)--(2.5,-.433);
+      \end{tikzpicture}      
+      
+      \caption{
+        \emph{Left:} The lattice points $L_{4,3}$ in~$\Delta_2(4)$. The filled circles correspond to a basis (a maximal independent set) of $\cI_{4,3}$.
+        \emph{Right:} A tesselation of $T(4)$ with $4$~triangles (``holes'') and the rest rhombi of angles $60^\circ$ and~$120^\circ$.
+      } \label{fig:holes}
+    \end{figure}
+    \medskip
+  \item Let $T(n)$ be an equilateral triangle with side length $n$.
+    Suppose we want to tile $T(n)$ using unit rhombi with angles equal to $60^\circ$ and $120^\circ$.
+    Show that this is impossible.
+    \begin{quote}
+      \footnotesize\color{green!30!black} 
+      Hint: Cut $T(n)$ into $n^2$ unit equilateral triangles.
+      How many of these point upward?
+      How many downward?
+    \end{quote}
+
+  \medskip
+\item Suppose that we make $n$~holes in the triangle $T(n)$, by cutting out $n$~of the upward triangles.
+  Show that it may or may not be possible to tile the remaining shape with rhombi.
+
+  \medskip
+\item Show that the possible locations of $n$ holes for which a rhombus tiling of the ``holey'' triangle~$T(n)$ exists
+  correspond to the bases of the matroid~$\cI_{n,3}$. 
+\end{enumerate}
 
 \bigskip
 \item
-  Consider the matroid $M$ realized by the columns of the matrix
-  \[
-    \begin{bmatrix}
-      0 & 1 & 1 & 0 & 1 \\
-      1 & 0 & 1 & 0 & 1 \\
-      0 & 1 & 1 & 1 & 0
-    \end{bmatrix}.
-  \]
-  Compute a realization of~$M^\star$, and some contractions of~$M$ of your choosing.
+  For each the affine Gale diagrams of Figure~\ref{fig:Gale0},
+  determine the dimension and write down the vertex sets of the facets of their corresponding polytopes.
+  Gray points are pyramid points.
+  \begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+      \draw[black,fill=black] (0,0) circle(.1);
+      \draw[black,fill=black] (.18,.1) circle(.1);
+      \draw[black,fill=white] (.18,-.1) circle(.1);
+      \draw[black,fill=white] (0,-.18) circle(.1);
+      \draw[black,fill=black] (-.18,.1) circle(.1);
+      \draw[black,fill=black] (-.18,-.1) circle(.1);
 
+      \draw[black,fill=black] (2,0) circle(.1);
+      \draw[black,fill=white] (2.18,.1) circle(.1);
+      \draw[black,fill=white] (2.18,-.1) circle(.1);
+      \draw[black,fill=white] (2,-.18) circle(.1);
+      \draw[black,fill=black] (2-.18,.1) circle(.1);
+      \draw[black,fill=black] (2-.18,-.1) circle(.1);
+
+      \draw[black,fill=black] (4,0) circle(.1);
+      \draw[black,fill=black!50!white] (4.18,.1) circle(.1);
+      \draw[black,fill=white] (4.18,-.1) circle(.1);
+      \draw[black,fill=white] (4,-.18) circle(.1);
+      \draw[black,fill=black] (4-.18,.1) circle(.1);
+      \draw[black,fill=black] (4-.18,-.1) circle(.1);
+
+      \draw[black,fill=black] (6,0) circle(.1);
+      \draw[black,fill=black!50!white] (6.18,.1) circle(.1);
+      \draw[black,fill=white] (6.18,-.1) circle(.1);
+      \draw[black,fill=white] (6,-.18) circle(.1);
+      \draw[black,fill=black] (6-.18,.1) circle(.1);
+      \draw[black,fill=black!50!white] (6-.18,-.1) circle(.1);
+
+    \end{tikzpicture}
+    \caption{Four affine Gale diagrams}
+    \label{fig:Gale0}
+  \end{figure}
+
+\bigskip
+\item Consider the convex polytopes described by the following affine Gale diagrams in Figure~\ref{fig:Gale1}.
+  \begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+      \draw (0,1.5)--(1,1.75)--(2,1.75)--(3,1.5);
+      \draw (0,0)--(1,-.25)--(2,-.25)--(3,0);
+      \draw[black,fill=black] (0,1.5) circle(.1);
+      \draw[black,fill=white] (1,1.75) circle(.1);
+      \draw[black,fill=black] (2,1.75) circle(.1);
+      \draw[black,fill=white] (3,1.5) circle(.1);
+      \draw[black,fill=white] (0,0) circle(.1);
+      \draw[black,fill=black] (1,-.25) circle(.1);
+      \draw[black,fill=white] (2,-.25) circle(.1);
+      \draw[black,fill=black] (3,0) circle(.1);
+    \end{tikzpicture}
+    \qquad\qquad
+    \begin{tikzpicture}
+      \draw (0,1.5)--(1,1.25)--(2,1.25)--(3,1.5);
+      \draw (0,0)--(1,-.25)--(2,-.25)--(3,0);
+      \draw[black,fill=black] (0,1.5) circle(.1);
+      \draw[black,fill=white] (1,1.25) circle(.1);
+      \draw[black,fill=black] (2,1.25) circle(.1);
+      \draw[black,fill=white] (3,1.5) circle(.1);
+      \draw[black,fill=white] (0,0) circle(.1);
+      \draw[black,fill=black] (1,-.25) circle(.1);
+      \draw[black,fill=white] (2,-.25) circle(.1);
+      \draw[black,fill=black] (3,0) circle(.1);
+      \draw[dashed] (2,1.25) -- (-.5,.625);
+      \draw[dashed] (1,1.25) -- (3.5,.625);
+    \end{tikzpicture}    
+    \caption{Two affine Gale diagrams}
+    \label{fig:Gale1}
+  \end{figure}
+
+  \begin{enumerate}
+  \item
+    Show that both convex polytopes have dimension~$4$ and $8$~vertices.
+  \item
+    Using the Gale diagram,
+    show that both polytopes are \defn{$2$-neighborly},
+    which means that all $\binom{8}{2}$~edges lie on the convex hull,
+    or equivalently, that their graph is the complete graph~$K_8$.
+  \item
+    From the Gale diagram, deduce all $2$- and $3$-dimensional faces of these polytopes.
+  \item
+    Draw the \defn{dual graph} of these polytopes, which is the graph that has the $3$-dimensional faces (``facets'') as nodes,
+    and in which two nodes are adjacent iff the corresponding $3$-dimensional faces intersect in a $2$-dimensional face.
+  \item
+    Show that the two polytopes are not \defn{combinatorially equivalent}, which means that there is no bijection between their vertex sets
+    that induces a bijection between the sets of faces.
+    \begin{quote}
+      \footnotesize\color{green!30!black} 
+      Hint: The left diagram is that of the \emph{cyclic} polytope $C_4(8)$. We met its smaller cousin, $C_4(7)$, in an in-class exercise.
+    \end{quote}
+    
 \end{enumerate}
 
+\bigskip
+\item
+  Consider the affine Gale diagram of Figure~\ref{fig:Gale2}.
+  \begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+      \draw (-2,3)--(0,0)--(2,3);
+      \draw (-1,1.5)--(2,3);
+      \draw (-2,3)--(1,1.5);
+      \draw[black,fill=white] (-2,3) circle(.1);
+      \draw[black,fill=black] (2,3) circle(.1);
+      \draw[black,fill=black] (0,2) circle(.1);
+      \draw[black,fill=black] (0,0) circle(.1);
+      \draw[black,fill=black] (-1.05,1.55) circle(.1);
+      \draw[black,fill=white] (-.99,1.48) circle(.1);
+      \draw[black,fill=white] (1.05,1.6) circle(.1);
+      \draw[black,fill=white] (.99,1.48) circle(.1);
+
+      \node at (-2.3,3) {$2$};
+      \node at (2.3,3) {$6$};
+      \node at (-1.3,1.6) {$1$};
+      \node at (-1.1,1.2) {$4$};
+      \node at (1.3,1.6) {$7$};
+      \node at (1.1,1.2) {$8$};
+      \node at (.3,0) {$5$};
+      \node at (0,2.3) {$3$};
+    \end{tikzpicture}
+    \caption{Another affine Gale diagram}
+    \label{fig:Gale2}
+  \end{figure}
+  \begin{enumerate}
+  \item
+    Show that it represents a $4$-dimensional polytope with $8$~vertices.
+  \item
+    Show that the polytope has $9$~facets: four tetrahedra, four square pyramids, and an octahedron $235678$.
+    Write down their vertex sets.
+  \item
+    Every Gale diagram with the same positive circuits has $7$ and $8$ on the same point.
+  \item
+    Therefore, in every combinatorially equivalent polytope the vertices $2356$ of the octahedron facet are coplanar.
+    In consequence, the shape of the octahedron facet cannot be prescribed arbitrarily.
+    
+  \end{enumerate}
+\end{enumerate}
 
 \end{document}
