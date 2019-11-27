@@ -171,7 +171,22 @@ However, we do observe that the behaviour, the pattern described by execution ti
 This is a great example not to underestimate the constants affecting our expected running time, usually disregarded by complexity theory and big $\mathcal{O}$ notation.
 %Under our point of view, each programming language has it's 
 
-<<<<<<< HEAD
+\subsection{Terrible Island}
+\label{terribleisland}
+
+Both codes follow the same procedure, in that they check, for every base, all other bases, and then in each of these pairs, we check the exchange axiom. If we consider a set of $n$ bases, and $m$ to be the longest check for the exchange axiom (which will be at most the size of the largest base in the set), the complexity of the algorithm is $O(n^{2}m)$.
+
+As it can be seen in \ref{figureterribleisland}, the execution times increase quickly with the number of bases in the files (in the cases they are matroids). Quite unexpectedly, the \textsc{Python} execution times are a lot faster than the \textsc{Julia} ones, the earlier being capable of processing up to 1716 bases before the time limit in contrast to the 924 of the later.
+
+All pairs are checked twice in these algorithms, which could be optimised so the running time would be halved, though this would still keep the complexity at $O(n^{2}m)$.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=.7\textwidth]{./Terrible-Island/times.jpeg}
+	\caption{Execution times of the algorithms \ref{terribleisland}}
+	\label{figureterribleisland}
+\end{figure}
+
 \subsection{A-team-has-no-name}
 
 1)Our code can process all the files, but the Haskell version takes 11 thousand seconds for the largest file and the python best algorithm takes 917 seconds which is still a lot.
@@ -182,7 +197,7 @@ We tried to reduce this complexity by trying to check relations between the elem
 
 Haskell code runs equally in $\mathcal{O}(n^3)$.
 
-For the second python code we thought about using a biyection between sets and integer number so that we could order the list of sets and check if $B_1$ is in the list in logarithmic time.
+For the second python code we thought about using a bijection between sets of integers and integer numbers so that we could order the list of sets and check if $B_1$ is in the list in logarithmic time.
 This was done by assigning every set the sum of 2 powered to every of the elements in the set. 
 This assumes that we are using integers for each set in the matroid and that there are not a lot of elements in total. If there were other elements that were not integers we could do a bijection between the elements and $\mathbb{Z}$ so we could apply this method.
 This allows us to avoid the last loop by using a binary search in the ordered set of values of each element in the matroid, reducing the complexity to $\mathcal{O}(n^3)*\log(n)$. 
@@ -194,23 +209,8 @@ More exactle this version has an expected complexity of $\mathcal{O}(n^2)$ and a
 
 It is also worth mention that both of the python algorithm will stop as soon as they find a $B_1$ that does not verify the condition, and that is why 4096.bases files or similar get checked so quickly.
 
-=======
-\subsection{Terrible Island}
-\label{terribleisland}
+The algorithm is described in the code in form of commentaries.
 
-Both codes follow the same procedure, in that they check, for every base, all other bases, and then in each of these pairs, we check the exchange axiom. If we consider a set of $n$ bases, and $m$ to be the longest check for the exchange axiom (which will be at most the size of the largest base in the set), the complexity of the algorithm is $O(n^{2}m)$.
-
-As it can be seen in \ref{figureterribleisland}, the execution times increase quickly with the number of bases in the files (in the cases they are matroids). Quite unexpectedly, the \textsc{Python} execution times are a lot faster than the \textsc{Julia} ones, the earlier being capable of processing up to 1716 bases before the time limit in contrast to the 924 of the later.
-
-All pairs are checked twice in these algorithms, which could be optimised so the running time would be halved, though this would still keep the complexity at $O(n^{2}m)$.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=.7\textwidth]{./Terrible-Island/times.jpeg}
-    \caption{Execution times of the algorithms \ref{terribleisland}}
-    \label{figureterribleisland}
-\end{figure}
->>>>>>> 4582d2b9363d4bea738dd4770436459f9f9c21ea
 
 \subsection{other-awesome-team-name}
 

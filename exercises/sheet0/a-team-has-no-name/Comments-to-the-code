@@ -4,8 +4,10 @@
 
 Haskell code runs equally in O(n³).
 
-For the second python code we thought about using a biyection between sets and integer number so that we could order the list of sets and check if B_3 is in the list in logarithmic time. This was done by assigning every set the sum of 2 powered to every of the elements in the set. This assumes that we are using integers for each set in the matroid and that there are not a lot of elements in total. If there were other elements that were not integers we could do a bijection between the elements and Z so we could apply this method.
+For the second python code we thought about using a bijection between sets of integers and integers number so that we could order the list of sets and check if B_3 is in the list in logarithmic time. This was done by assigning every set the sum of 2 powered to every of the elements in the set. This assumes that we are using integers for each set in the matroid and that there are not a lot of elements in total. If there were other elements that were not integers we could do a bijection between the elements and Z so we could apply this method.
 This allows us to avoid the last loop by using a binary search in the ordered set of values of each element in the matroid, reducing the complexity to O(n²*log(n)). If m was big we expect this algorithm to be worse than the first one, so it is input sensitive. 
+
+For the last python code we changed the ordered list by a hash table (set in python) so that the search for an element runs in average in O(1) time instead of O(logn) time. In general this version is quicker but in the worst possible case it is worse than the previous one. More exactle this version has an expected complexity of O(n²) and a (worst-case) complexity of O(n³)
 
 It is also worth mention that both of the python algorithm will stop as soon as they find a B1 that does not verify the condition, and that is why 4096.bases files or similar get checked so quickly.
 
