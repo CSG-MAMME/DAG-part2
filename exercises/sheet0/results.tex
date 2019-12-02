@@ -24,6 +24,10 @@
     & yes
     & 121s
     \\
+    & A-Team-Has-No-Name
+    & yes
+    & 28.97 s
+    \\
     & other-awesome-team-name
     & yes/no
     & [seconds]
@@ -36,16 +40,28 @@
     & Terrible Island
     & yes
     & 0.3 s
+    \\
+    & A-Team-Has-No-Name
+    & yes
+    & 0.424 s
     \\\hline
       \texttt{3432.bases}
     & Team Bearland
     & yes
     & 1.276 s
+    \\
+    & A-Team-Has-No-Name
+    & yes
+    & 131.9 s
     \\\hline
       \texttt{4092.bases}
     & Team Bearland
     & no
     & 0.019 s
+    \\
+    & A-Team-Has-No-Name
+    & no
+    & 2.50 s
     \\\hline
       \texttt{417.bases}
     & Team Bearland
@@ -55,6 +71,10 @@
     & Terrible Island
     & no
     & 0.031 s
+    \\
+    & A-Team-Has-No-Name
+    & no
+    & 0.151 s
     \\\hline
       \texttt{462.bases}
     & Team Bearland
@@ -64,16 +84,28 @@
     & Terrible Island
     & yes
     & 2.073 s
+    \\
+    & A-Team-Has-No-Name
+    & yes
+    & 1.535 s
     \\\hline
       \texttt{4639.bases}
     & Team Bearland
     & no
     & 0.397 s
+    \\
+    & A-Team-Has-No-Name
+    & no
+    & 3.792 s
     \\\hline
     \texttt{6435.bases}
     & Team Bearland
     & yes
     & 4.506 s
+    \\
+    & A-Team-Has-No-Name
+    & yes
+    & 508.5 s
     \\\hline
     \texttt{924.bases}
     & Team Bearland
@@ -83,7 +115,26 @@
     & Terrible Island
     & yes
     & 18.26 s
+    \\
+    & A-Team-Has-No-Name
+    & yes
+    & 7.422 s
     \\\hline
+    \texttt{definetely-bases.txt}
+    & A-Team-Has-No-Name
+    & yes
+    & 0.00022 s
+    \\\hline
+    \texttt{not-bases-1.txt}
+    & A-Team-Has-No-Name
+    & no
+    & 0.000282 s
+    \\\hline
+    \texttt{not-bases-2.txt}
+    & A-Team-Has-No-Name
+    & no
+    & 0.000006 s
+    \\\hline    
   \end{tabular}
 \end{center}
 
@@ -121,11 +172,36 @@ As it can be seen in \ref{figureterribleisland}, the execution times increase qu
 All pairs are checked twice in these algorithms, which could be optimised so the running time would be halved, though this would still keep the complexity at $O(n^{2}m)$.
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=.7\textwidth]{./Terrible-Island/times.jpeg}
-    \caption{Execution times of the algorithms \ref{terribleisland}}
-    \label{figureterribleisland}
+	\centering
+	\includegraphics[width=.7\textwidth]{./Terrible-Island/times.jpeg}
+	\caption{Execution times of the algorithms \ref{terribleisland}}
+	\label{figureterribleisland}
 \end{figure}
+
+\subsection{A-team-has-no-name}
+
+1)Our code can process all the files, but the Haskell version takes 11 thousand seconds for the largest file and the python best algorithm takes 917 seconds which is still a lot.
+
+2)If n is the number of elements in $\mathcal{B}$ and m the max number of elements in any of the elements of $\mathcal{B}$, our first python code runs in $\mathcal{O}(n^3)*\mathcal{O}(m^4)$.
+We could reduce the complexity concerning m, but as in almost any case we can find m is going to be a constant amount compared to n, we have not worried a lot about it as the complexity for those kinds of general examples is actually $\mathcal{O}(n^3)$.
+We tried to reduce this complexity by trying to check relations between the elements in B but at first we ended up making the complexity worse, and then when improved we returned back to $\mathcal{O}(n^3)$ but reducing the running time to a 60\%-70\% of the original one for the files we processed.
+
+Haskell code runs equally in $\mathcal{O}(n^3)$.
+
+For the second python code we thought about using a bijection between sets of integers and integer numbers so that we could order the list of sets and check if $B_1$ is in the list in logarithmic time.
+This was done by assigning every set the sum of 2 powered to every of the elements in the set. 
+This assumes that we are using integers for each set in the matroid and that there are not a lot of elements in total. If there were other elements that were not integers we could do a bijection between the elements and $\mathbb{Z}$ so we could apply this method.
+This allows us to avoid the last loop by using a binary search in the ordered set of values of each element in the matroid, reducing the complexity to $\mathcal{O}(n^3)*\log(n)$. 
+If m was big we expect this algorithm to be worse than the first one, so it is input sensitive. 
+
+For the last python code we changed the ordered list by a hash table (sets in Python) so that the search for an element runs in average in $\mathcal{O}(1)$ time instead of $\mathcal{O}(\log(n))$ time.
+In general this version is quicker but in the worst possible case it is worse than the previous one.
+More exactly this version has an expected complexity of $\mathcal{O}(n^2)$ and a (worst-case) complexity of $\mathcal{O}(n^3)$.
+
+It is also worth mentioning that both of the python algorithms will stop as soon as they find a $B_1$ that does not verify the condition, and that is why 4096.bases files or similar get checked so quickly.
+
+The algorithms are described in the code in form of commentaries.
+
 
 \subsection{other-awesome-team-name}
 
