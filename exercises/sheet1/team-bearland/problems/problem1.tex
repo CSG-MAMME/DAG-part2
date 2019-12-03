@@ -1,0 +1,138 @@
+\textbf{\textit{(1) True or false?}}
+
+\vspace{3pt}
+
+\hspace{5pt} \textbf{\textit{(a) This notion of contraction agrees with the notion of contraction in graph theory.}}
+
+\vspace{3pt}
+
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[thick,scale=0.8]%
+        \draw (0,0) node[style=vertice]{} -- ++ (0.5, 0.5) node[above] {e} -- (1,1) node[style=vertice]{};
+    \end{tikzpicture}
+\end{figure}
+
+\hspace{5pt} \textbf{\textit{(b) $M_{G^\star} = \left(M_G\right)^\star$, if G is a planar graph and $G^\star$ its dual planar graph.}}
+
+\vspace{10pt}
+
+\textbf{\textit{(2) Prove that if a matroid M is realizable over a ground field $\mathbbm{k}$, then the dual matroid $M^\star$ is also realizble over $\mathbbm{k}$.}}
+
+\vspace{10pt}
+
+\textbf{\textit{(3) Consider the matroid M realized by the columns of the matrix}}
+$$
+A = \left[
+    \begin{array}{ccccc}
+        0 & 1 & 1 & 0 & 1 \\
+        1 & 0 & 1 & 0 & 1 \\
+        0 & 1 & 1 & 1 & 0
+    \end{array}
+\right]
+$$
+\textbf{\textit{ Compute a realization of $M^\star$, and some contractions of M of your choosing.}}
+
+\vspace{5pt}
+
+We will first compute a realization of matrix A.
+To do so, we will swap columns two and four and perform a change of basis to basis $\mathcal{B} = \left\lbrace \left( \begin{array}{c} 0 \\ 1 \\ 0 \end{array} \right), \left( \begin{array}{c} 1 \\ 0 \\ 1 \end{array} \right), \left( \begin{array}{c} 1 \\ 1 \\ 1 \end{array} \right) \right\rbrace$. We then have,
+\begin{equation*}
+    \begin{split}
+        A & = \left[
+            \begin{array}{ccccc}
+                0 & 1 & 1 & 0 & 1 \\
+                1 & 0 & 1 & 0 & 1 \\
+                0 & 1 & 1 & 1 & 0
+            \end{array}
+        \right]
+        \longrightarrow
+        \left[
+            \begin{array}{ccccc}
+                0 & 0 & 1 & 1 & 1 \\
+                1 & 0 & 1 & 0 & 1 \\
+                0 & 1 & 1 & 1 & 0
+            \end{array}
+        \right]
+        \overset{\mathcal{B}}{\longrightarrow}
+        \bar{A} = \left[
+            \begin{array}{ccccc}
+                1 & 0 & 0 & -1 & 0 \\
+                0 & 1 & 0 & 0 & -1 \\
+                0 & 0 & 1 & 1 & 1
+            \end{array}
+        \right]
+        \hspace{10pt} \text{ which also represents $M$.} \\[10pt]
+        \bar{A}B^T & = 0 \Longrightarrow 
+        B^T = \left[
+            \begin{array}{cc}
+                -1 & 0  \\
+                0  & -1 \\
+                1  & 1 \\
+                -1 & 0 \\
+                0 & -1
+            \end{array}
+        \right] \hspace{5pt} \text{ (for example) } \Longrightarrow
+        B = \left[
+            \begin{array}{ccccc}
+                -1 & 0 & 1 & -1 & 0 \\
+                0 & -1 & 1 & 0 & -1
+            \end{array} 
+        \right] \hspace{5pt} \text{ which is $M^*$.}
+    \end{split}
+\end{equation*}
+
+Now we will compute a contraction of $M$, $M / 1$, using a deletion in its dual matroid, $M^*$, $(M^* \backslash 1)^*$.
+\begin{equation*}
+    \begin{split}
+        B \backslash 1 & = \left[
+            \begin{array}{cccc}
+                0 & 1 & -1 & 0 \\
+                -1 & 1 & 0 & -1 
+            \end{array} 
+        \right] \text{ ;} \hspace{5pt}
+        (B  \backslash 1)\cdot c^T = 0 \Rightarrow 
+        c^T = \left[
+                \begin{array}{cc}
+                    0 & 1 \\
+                    1 & 1 \\
+                    1 & 1 \\
+                    1 & 0
+                \end{array} 
+            \right] \Rightarrow
+        c = \left[
+                \begin{array}{cccc}
+                    0 & 1 & 1 & 1 \\
+                    1 & 1 & 1 & 0
+                \end{array} 
+            \right] \hspace{3pt} \text{which is $M / 1$.}
+    \end{split}
+\end{equation*}
+
+An alternative method for computing $ M / 1$ is doing the projection in the corresponding direction. In particular, to find $ M / 1$ it suffices to project $A$ in direction $\left( \begin{array}{ccc} 0 & 1 & 0 \end{array} \right)^T$ and get rid of loops. In particular,
+\begin{equation*}
+    \begin{split}
+        A & = \left[
+            \begin{array}{ccccc}
+                0 & 0 & 1 & 1 & 1 \\
+                1 & 0 & 1 & 0 & 1 \\
+                0 & 1 & 1 & 1 & 0
+            \end{array}
+        \right]
+        \overset{\text{\footnotesize{Project}}}{\longrightarrow}
+        \left[
+            \begin{array}{ccccc}
+                0 & 0 & 1 & 1 & 1 \\
+                0 & 1 & 1 & 1 & 0
+            \end{array}
+        \right]
+        \overset{\text{\footnotesize{No Loops}}}{\longrightarrow}
+        \left[
+            \begin{array}{ccccc}
+                0 & 1 & 1 & 1 \\
+                1 & 1 & 1 & 0
+            \end{array}
+        \right] \hspace{5pt} \text{ which again is $ M / 1$.}
+    \end{split}
+\end{equation*}
