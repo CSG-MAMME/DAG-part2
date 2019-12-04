@@ -220,13 +220,13 @@ The complexity of our code is the same in both implementations.
 It can be computed as follows, where $N$ is the number of bases:
 
 \begin{itemize}
- \item Process file: $O(N)$.
- \item Compare bases: $O(N^2)$.
+ \item Process file: $\mathcal{O}(N)$.
+ \item Compare bases: $\mathcal{O}(N^2)$.
  \item Compare each pair of subsets of the base:
        constant time, with a large constant.
 \end{itemize}
 
-Thus, overall complexity is $O(N^2)$.
+Thus, overall complexity is $\mathcal{O}(N^2)$.
 It is also output-sensitive,
 as it stops if it finds a pair of bases do not satisfy the exchange axiom.
 
