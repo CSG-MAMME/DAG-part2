@@ -1,0 +1,40 @@
+\textbf{\textit{(8) We have seen that a matroid can be given by its collections of independent sets, bases, circuits, cocircuits, flats, or its rank function. Find algroithms to convert between as many of these entitites as you can. What is their combinatorial complexity?}}
+
+\vspace{3pt}
+
+For the rest of the exercise, it will be useful having the following graph in mind.
+We will refer to specific algorithms by the letter of their edge.
+In doing so, we won't assume anything on our ground set, neither on a theoretical implementation, we will just focus on the combinatorial complexity.
+Note that we have chosen this \textit{bipartite} representation to improve readability.
+
+\begin{center}
+\begin{tikzpicture}\small
+  \tikzset{>=stealth}
+    % Top Row Nodes
+    \node (independence-sets) {Independence Sets};
+    \node [right=of independence-sets] (basis) {Basis};
+    \node [right=of basis] (circuits) {Circuits};
+    \node [right=of circuits] (cocircuits) {Cocircuits};
+    \node [right=of cocircuits] (flats) {Flats};
+    \node [right=of flats] (rank) {Rank Function};
+    % Bottom Row Nodes
+    \node [below=of independence-sets] (independence-sets-b) {Independence Sets};
+    \node [right=of independence-sets-b] (basis-b) {Basis};
+    \node [right=of basis-b] (circuits-b) {Circuits};
+    \node [right=of circuits-b] (cocircuits-b) {Cocircuits};
+    \node [right=of cocircuits-b] (flats-b) {Flats};
+    \node [right=of flats-b] (rank-b) {Rank Function};
+    \draw[->] (independence-sets) --  (basis-b) node[midway, above] {(a)};
+    \draw[->] (basis) -- (independence-sets-b) node[near end, above, xshift = -5pt, yshift = -5pt] {(b)};
+  \end{tikzpicture}
+\end{center}
+
+Beneath we describe each algorithm indexed by the label of the edge and include its complexity:
+\begin{itemize}
+    \item[(a)] 
+        We have that a set is independent if and only if it is a subset of a basis.
+        In other words, a basis is a maximaly independent set.
+        To obtain $\mathcal{B}$ from $\mathcal{I}$ we iteratively, add independent elements to our basis with the caveat that subsets of already existing elements are discarded, and elements containing an already included one are swapped.
+        The combinatorial complexity is $\mathcal{O}(|\mathcal{I}|^2)$.
+    \item[(b)] Symetrically, $\mathcal{I}$ is the power set of $\mathcal{B}$, from which the algorithm clearly follows.
+\end{itemize}
