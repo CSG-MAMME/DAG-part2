@@ -141,11 +141,12 @@ An alternative method for computing $ M / 1$ is doing the projection in the corr
     \end{split}
 \end{equation*}
 
-%\begin{figure}[h!]
-%    \centering
-%    \begin{tikzpicture}[thick,scale=0.8]%
-%        \draw (0,0) node[style=vertice]{} -- ++ (0.5, 0.5) node[above] {e} -- (1,1) node[style=vertice]{};
-%    \end{tikzpicture}
-%\end{figure}
-
-MISSING CIRCUITS AND COCIRCUITS
+Lastly, circuits are minimal linear combinations, and co-circuits are their dual counterparts.
+Hence, computing both the circuits of $M$ and $M^*$ we will also have the co-circuits of $M^*$ and $M$ respectively.
+In particular, by inspection we have:
+\begin{equation*}
+    \text{Circuits of $M$ } = (-1, 0, 1, -1, 0), (0, -1, 1, 0, -1) = \text{ Cocircuits of $M^*$}
+\end{equation*}
+\begin{equation*}
+    \text{Circuits of $M^*$ } = (1, 1, 1, 0, 0), (0, 0, 1, 1, 1), (1, 0, 0, -1, 0), (0, 1, 0, 0, -1) = \text{ Cocircuits of $M$}
+\end{equation*}
