@@ -16,14 +16,14 @@
 \vspace{3pt}
 
 We will start the proof by recalling the definitions given in class for linear, transversal, and graphical matroids.
-We will define them by means of their ground set $\mathcal{E}$ and their independence sets $\mathcal{I}$.
+We will define them by means of their ground set $E$ and their independence sets $\I$.
 
 \begin{definition}[Linear Matroid]
     Let $V$ be a vector space, then a linear matroid in $V$ is defined by
     \begin{equation*}
         \begin{split}
-            \mathcal{E} & = \lbrace \text{ finite subset of } V \rbrace \\
-            \mathcal{I} & = \lbrace \text{ linearly independent subsets of } \mathcal{E} \rbrace
+            E & = \lbrace \text{ finite subset of } V \rbrace \\
+            \I & = \lbrace \text{ linearly independent subsets of } E \rbrace
         \end{split}
     \end{equation*}
 \end{definition}
@@ -32,8 +32,8 @@ We will define them by means of their ground set $\mathcal{E}$ and their indepen
     Let $G = (V, E)$ be a graph,
     \begin{equation*}
         \begin{split}
-            \mathcal{E} & = \lbrace \text{ edges of } G \rbrace = E \\
-            \mathcal{I} & = \lbrace \text{ edges of forests of } \mathcal{G} \rbrace
+            E & = \lbrace \text{ edges of } G \rbrace = E \\
+            \I & = \lbrace \text{ edges of forests of } \mathcal{G} \rbrace
         \end{split}
     \end{equation*}
 \end{definition}
@@ -42,8 +42,8 @@ We will define them by means of their ground set $\mathcal{E}$ and their indepen
     Let $G = (U, V, E)$ be a bipartite graph,
     \begin{equation*}
         \begin{split}
-            \mathcal{E} & = \lbrace \text{ bottom vertices of } G \rbrace = U \\
-            \mathcal{I} & = \lbrace \text{ endpoints of maximal matchings } \mathcal{V} \rbrace
+            E & = \lbrace \text{ bottom vertices of } G \rbrace = U \\
+            \I & = \lbrace \text{ endpoints of maximal matchings } \mathcal{V} \rbrace
         \end{split}
     \end{equation*}
 \end{definition}
@@ -54,18 +54,18 @@ Following the hint, let us define $U = \mathbb{R}^V$ whose standard basis is ind
 Then, if $V = \lbrace v_1, \dots, v_n \rbrace$ and $\lbrace e_{v_1}, \dots, e_{v_n}\rbrace$ is the standard basis in $U$, our ground and independence sets are defined as follows:
 \begin{equation*}
     \begin{split}
-        \mathcal{E} = \lbrace e_{v_i} - e_{v_j} : v_iv_j \in E \rbrace ;
-        \hspace{5pt} \mathcal{I} = \bigcup_{f \text{ forest}} \lbrace e_{v_i} - e_{v_j} : v_iv_j \in E(f) \rbrace
+        E = \lbrace e_{v_i} - e_{v_j} : v_iv_j \in E \rbrace ;
+        \hspace{5pt} \I = \bigcup_{f \text{ forest}} \lbrace e_{v_i} - e_{v_j} : v_iv_j \in E(f) \rbrace
     \end{split}
 \end{equation*}
-It just remains to prove that $\mathcal{I}$ as defined are indeed linearly independent subsets of $\mathcal{E}$.
+It just remains to prove that $\I$ as defined are indeed linearly independent subsets of $E$.
 Let's assume not, \textit{i.e.} one of such subset contains a linear dependence.
 This is, for a forest $f$ in $G$ we have:
 \begin{equation*}
     e_{v_k} - e_{v_l} = (e_{v_l} - e_{v_j}) + \dots + (e_{v_m} - e{v_n})
 \end{equation*}
 in this case it is clear that $k = n$ and there are two different paths to go from $v_l$ to $v_k$ what implies the existance of a cycle and hence $f$ is not a forest.
-This contradicts our initial hypothesis and as a consequence $\mathcal{I}$ as defined is indeed an independence set what proves (a).
+This contradicts our initial hypothesis and as a consequence $\I$ as defined is indeed an independence set what proves (a).
 
 To prove (b) we will proceed in a similar manner.
 In this case we have a bipartite graph $G = (E, F, H)$ where $E$ is the \textit{bottom} partition of vertices.
@@ -73,11 +73,11 @@ For our linear matroid we choose our vector space $V$ to be $\mathbbm{k}(X)^F$ w
 Then our ground, and independence sets are defined as follows:
 \begin{equation*}
     \begin{split}
-        \mathcal{E} = \left\lbrace \left\lbrace \sum_{f \in F, ef \in H} x_{e,f} u_f \right\rbrace : e \in E \right\rbrace ;
-        \hspace{5pt} \mathcal{I} = \bigcup_{\text{$m$ max. matching}} \lbrace e : ef \in m, e \in E, F \in F \rbrace
+        E = \left\lbrace \left\lbrace \sum_{f \in F, ef \in H} x_{e,f} u_f \right\rbrace : e \in E \right\rbrace ;
+        \hspace{5pt} \I = \bigcup_{\text{$m$ max. matching}} \lbrace e : ef \in m, e \in E, F \in F \rbrace
     \end{split}
 \end{equation*}
-It just remains to prove that the sets in $\mathcal{I}$ are indeed independent.
+It just remains to prove that the sets in $\I$ are indeed independent.
 In the same way we did for (a), we will assume some set not to be independent, hence yielding the following depndence relation:
 \begin{equation*}
     \sum_{f \in F, e_1f \in H} x_{e_1,f} u_f = \sum_{f \in F, e_2f \in H} x_{e_2,f} u_f  + \dots + \sum_{f \in F, e_kf \in H} x_{e_1,f} u_f 
