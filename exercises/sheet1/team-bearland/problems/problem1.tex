@@ -12,7 +12,13 @@ WRITE HERE
 
 \vspace{3pt}
 
-WRITE HERE
+Let $M=(E,\I)$ be a matroid. Given a set $S\subseteq E$, the contraction $M/S$ is defined as the matroid induced by the independent sets $\{I \backslash S \ | \ S\subseteq I \in \I\}$.
+
+The deletion $M \backslash S$ is defined as the matroid on the ground set $E\backslash S$ whose independent sets are $\{I\subseteq E\backslash S \ | \ I\in\I\} = \{I \ | \ I\cap S = \varnothing, I\in\I\}$.
+
+The dual matroid $M^\star=(E,\I^\star)$ is defined on the same ground set and has $\I^\star=\{E \backslash I \ | \ I\in\I\}$ as independent sets.
+
+Then, $M^\star \backslash S$ has $E\backslash S$ as ground set and $\{(E\backslash I) \ | \ (E \backslash I)\cap S=\varnothing, I\in\I\}$ as independent sets. And finally, $(M^\star \backslash S)^\star$ is induced by $\{(E\backslash S)\backslash (E\backslash I) \ | \ (E \backslash I)\cap S=\varnothing, I\in\I\}$. Observe that $\{E\backslash(E\backslash I) \ | \ E\backslash I \cap S = \varnothing,I\in\I\}=\{I \ | \ S\subseteq I\in \I\}$ and note that $(E\backslash S)\backslash (E\backslash I) = E\backslash(E\backslash I)\backslash S$. Hence, $(M^\star \backslash S)^\star$ is induced by $\{I \backslash S \ | \ S\subseteq I \in \I\}$ and $M/S=(M^\star \backslash S)^\star$.
 
 \vspace{3pt}
 
