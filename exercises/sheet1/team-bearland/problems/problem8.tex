@@ -29,6 +29,13 @@ Note that we have chosen this \textit{bipartite} representation to improve reada
     \draw[->] (circuits) --  (cocircuits-b) node[midway, above] {(c)};
     \draw[->] (cocircuits) -- (circuits-b) node[near end, above, xshift = -5pt, yshift = -5pt] {(d)};
     \draw[->] (basis) --  (circuits-b) node[midway, above] {(e)};
+    \draw[->] (circuits) -- (basis-b) node[near end, above, xshift = -5pt, yshift = -5pt] {(f)};
+    \draw[->] (rank) --  (flats-b) node[midway, above] {(g)};
+    \draw[-] (rank) --  (14,-1) node[midway, above] {(h)};
+    \draw[->] (-0.5,-1) --  (independence-sets-b) node[midway, above] {(h)};
+    \draw[-] (independence-sets) --  (-1.5,-1) node[midway, above] {(i)};
+    \draw[->] (14,-0.75) --  (rank-b) node[midway, above, yshift=-3pt] {(i)};
+    \draw[->] (flats) --  (rank-b) node[midway, above, xshift=-30pt, yshift=-0pt] {(f)};
   \end{tikzpicture}
 \end{center}
 
@@ -39,8 +46,17 @@ Beneath we describe each algorithm indexed by the label of the edge and include 
         In other words, a basis is a maximaly independent set.
         To obtain $\B$ from $\I$ we iteratively, add independent elements to our basis with the caveat that subsets of already existing elements are discarded, and elements containing an already included one are swapped.
         The combinatorial complexity is $\mathcal{O}(|\I|^2)$.
-    \item[(b)] Symetrically, $\I$ is the power set of $\B$, from which the algorithm clearly follows. The complexity is ruled by printing or returning all elements in the set, which is $\mathcal{O}\left(2^{|\B|}\right)$.
-    \item[(c)] THINK
+    \item[(b)] Symetrically, $\I$ is the power set of $\B$, from which the algorithm clearly follows. The complexity is ruled by printing or returning all elements in the set, which is $\mathcal{O}\left(\mathcal{P}(|\B|)\right)$.
+    \item[(c)] Hull, B. \footnote{Hull, B. \textit{Two algorithms for Matroids}. Discrete Mathematics, Volume 13, Issue 2, 1975, Pages 121-128} presents an algorithm to, given the circuits of a matroid, find those of its dual matroid. The algorithm builds an element from $\C^*$ starting from one in $\C$ and using the elements of $E$. The algorithm in detail uses a recursion for which a more precise complexity calculation would be required. It is clear that, if we have the circuits of the dual matroid, we can find the cocircuits of the original one in linear time.
     \item[(d)] As proven in class, finding the dual of a matroid is linear in its size (doing Gauss). Further, given that the cocricuits are the circuits of the dual matroid, to obtain the cocircuits we can find the dual of the matroid (lineal time) and then apply (c).
     \item[(e)] A circuit is a minimally dependent set, all its proper subsets are independent. If we are given $\B$, we have to check whether adding a new element of $E$ creates a circuit or not. Note that, $\forall x \in E, \B \cup x$ contains one circuit but we want to make sure that it is minimally dependent. The algorithm consists then in for each $B \in \B = {x_1, \dots, x_b}$ and for each $x \in E$ we generate a circuit $C$ consisting of $x \cup \lbrace x_i : x_i \in B \wedge B \cup \{ x\} - x_i \in \B \rbrace$. The algorithm's complexity is then $\mathcal{O}\left(|\B||E||B|\right)$\footnote{E. Minieka, \textit{Finding the Circuits of a Matroid}. Journal of research of the National Bureau of Standards.}.
+    \item[(f)] To obtain the basis of a matroid from its circuits, we have found a very intuitive and graphical algorithm presented by Hull in $1975^1$. In essence, it uses that no subset of a circuit is a circuit, and hence looks for a unique element in each circuit (it must exist) that makes it be minimally dependent. Removing it turns that circuit into a base. Looking for this odd elements (called \textit{pegs} in the original algorithm) can be done in linear time if implemented correctly. Then to find all basis we need to find all orderings of the induced basis from circuits. This last step rules our complexity.
+    \item[(g)] This algorithm stems from the definition of a flat. A flat is a set whose closure is equal to itself, it is maximal in its rank. This is, adding an element would increase it's size. A naive algorithm would then be: for each subset  $S \subset E$, test the rank of $S \cup \{x \}$ for all $x \in E$ not in $S$. If every one adds to the current rank of $S$, then $S$ is a flat. The algorithm has complexity $\mathcal{O}(\mathcal{P}(E) \cdot |E|)$.
+    \item[(h)] This algorithm also stems immediately from the fact that $A \subset E$ is an independence set iff it's rank equals its cardinality.
+    \item[(i)] The rank function of a matroid, maps sets of elements to their rank. If a set $S \subset E$ belongs to $\I$, then it's rank will be its cardinality. Otherwise, the rank is the size of the maximum independence subset in $S$. A naive algorithm could be the following: for all $S \in E$, if $S \in \I$ we return $|S|$, otherwise, for each $U \in \I$ we look for that of maximum cardinality which is a subset of $S$. Hence, we can determine the rank of a set in $\mathcal{O}(|\I|)$.
+    \item[(j)] We can implement a black-box style rank function using only the set of flats. To do so, we need to first know the maximum rank, $R$, of the sets of flats, $\F$. Then, given $S \subset E$, if $|S| = |E|$ we have its rank, which is maximum. Otherwise, we look for an element $F \in \F$ with only one element more, and compute the number of steps we take until we reach $E$. This number is the corank, which yields the corank. Alternatively, we could build the lattice of flats and compute this height manually.  
 \end{itemize}
+
+As a disclaimer and to finalize the exercise, we would like to note that we only present a subset of the algorithms we found.
+Given the inherent (by definition) equivalences among many of the collections we defined, most algorithms could be easily rephrased to start from a different collection.
+We have provided the sufficient selection to, concatenating one with the other, be able to get from any starting point to any ending point.
