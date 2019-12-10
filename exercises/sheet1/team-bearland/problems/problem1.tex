@@ -6,7 +6,11 @@
 
 \vspace{3pt}
 
-Let $G = (V, E)$ be a simple graph (no loops, no multiedges). Let $M = (E, \mathcal B)$ be a matroid, where $\mathcal B \subset \mathcal P(E)$ is the set of spanning trees of $G$ (considering only the edges of such spanning trees). Let $e \in E$, and consider a spanning tree $\{e_0, e_1, \ldots e_r\}$ satisfying $e = e_0$. Now, $B/e = \{e_1, \ldots, e_r\}$ is a spanning tree of $G/e$. Similarly, if $B' = \{e_1, \ŀdots, e_r\}$ is a spanning tree of $G/e$, $B = B' \cup \{e\}$ is a spanning tree of $G$, meaning $B'$ is   a base of $M/e$ %% REVISE
+Let $G = (V, E)$ be a simple graph (no loops, no multiedges). Let $M = (E, \mathcal B)$ be a matroid, where $\mathcal B \subset \mathcal P(E)$ is the set of spanning trees of $G$ (considering only the edges of such spanning trees).
+
+Let $e \in E$, and consider a spanning tree $\{e_0, e_1, \ldots e_r\}$ satisfying $e = e_0$. Now, $B/e = \{e_1, \ldots, e_r\}$ is a spanning tree of $G/e$.
+
+Similarly, if $B' = \{e_1, \ldots, e_r\}$ is a spanning tree of $G/e$, $B = B' \cup \{e\}$ is a spanning tree of $G$, meaning $B'$ is a base of $M/e$.
 
 
 \hspace{5pt} \textbf{\textit{(b) Contracion in $M$ as defined in class agrees with $M / S \coloneqq (M^\star \backslash S)^\star$ for a subset $S \subset [n]$.}}
@@ -25,12 +29,17 @@ Then, $M^\star \backslash S$ has $E\backslash S$ as ground set and $\{(E\backsla
 
 \hspace{5pt} \textbf{\textit{(c) $M_{G^\star} = \left(M_G\right)^\star$, if G is a planar graph and $G^\star$ its dual planar graph.}}
 
-%\textbf{\textit{(2) Prove that if a matroid M is realizable over a ground field $\mathbbm{k}$, then the dual matroid $M^\star$ is also realizble over $\mathbbm{k}$.}}
-
 \vspace{3pt}
 
-WRITE HERE
+Let $M_G = (E, \mathcal B)$ be the graphical matroid of the graph $G$. Consider a spanning tree $B \in \mathcal B$ of $G$.
 
+Observe that any edge $e \notin \cap_{B \in \mathcal B} B$ (namely, that is not a coloop), is an edge that separates two faces, or namely, its corresponding edge of the dual $e^\star$, connects two vertices of $G^\star$. 
+
+Consider now the set of edges $E(G) \setminus B =: B^\star \subset E(G^\star)$. If $B^\star$ contains a cycle, this means that $B$ is not connected, since the cycle would imply that the vertices of $G$ that are inside of the cycle (when the graph is drawn in the plane), are disconnected from the ones outside, since no edge of $B$ crosses the two regions.
+
+Now, assume that there is some vertex of $G^\star$ which is not covered by any edge of $B^\star$. This will mean that there exists a face of $G$ with all its edges in $B$, meaning that $B$ has a cycle, and contradicting that it is a spanning tree.
+
+Therefore, $B^\star$ is a spanning tree of $G^\star$. Finally, by the same argument, we will have $(B^\star)^\star = B$ is a spanning tree of $(G^\star)^\star = G$, completing the proof.
 \vspace{3pt}
 
 \hspace{5pt} \textbf{\textit{(d) Consider the matroid M realized by the columns of the matrix}}

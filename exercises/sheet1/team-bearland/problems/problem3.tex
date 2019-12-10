@@ -4,13 +4,24 @@
 
 \vspace{3pt}
 
-Let us rename the independent sets $I_0, I_1, \ldots, I_r$. Where $I_0 = \emptyset$, and $I_{j+1} = I_j \cup \{y_j\}$, for some $y_j \in E \setminus I_j$. Let us show $|I_j| = j$ by induction, and that, assuming $E$ is finite, there exists a final $I_r$, for some $r$ that satisfies $r = \max_{I \in \mathcal I} |I|$.
+Let us rename the independent sets $I_0, I_1, \ldots, I_r$, where $I_0 = \emptyset$, and $I_{j+1} = I_j \cup \{y_j\}$, for some $y_j \in E \setminus I_j$ with $\omega y_j$ as large as possible. Let us show $|I_j| = j$ by induction, and that, assuming $E$ is finite, there exists a final $I_r$, for some $r$ that satisfies $r = \max_{I \in \mathcal I} |I|$.
 
 For $j = 0$, $|I_0| = |\emptyset| = 0$
-For $j > 0$ assuming induction hypothesis $I_{j+1} = I_j \cup \{y_j\}$, for some $y_j \in E \setminus I_j$, and therefore $|I_{j+1}| = |I_j| + 1 = j + 1$. Assume that the last independendent set is $I_s$ for some $s$. Obviously, $s \leq r = \max_{I \in \mathcal I} |I|$, since $I_s \in \mathcal I$. If $s < r$, there will be a set $I'$ with $|I'| = r$. By the exchange axiom, there would be an $y_s \in I' \ I_s \subset E \ I_s$ such that $I_s \cup \{y_s\} = \mathcal I$, leading to a contradiction.
+For $j > 0$, assuming induction hypothesis, $I_{j+1} = I_j \cup \{y_j\}$, for some $y_j \in E \setminus I_j$, and therefore $|I_{j+1}| = |I_j| + 1 = j + 1$. Assume that the last independendent set is $I_s$ for some $s$. Obviously, $s \leq r = \max_{I \in \mathcal I} |I|$, since $I_s \in \mathcal I$. If $s < r$, there will be a set $I'$ with $|I'| = r$. By the exchange axiom, there would be an $y_s \in I' \setminus I_s \subset E \setminus I_s$ such that $I_s \cup \{y_s\} \in \mathcal I$, leading to a contradiction since $|I_s \cup \{y_s\} \in \mathcal I| = s + 1 > s$.
 
-We are left with proving that the weight we obtain with the algorithm is indeed the maximum achievable. Let us show by induction that $I_j$ is the maximum weight we can achieve among all sets of $\mathcal I$ that have $j$ elements. %%%%%
+We are left with proving that the weight we obtain with the algorithm is indeed the maximum achievable. Let us show by induction that $I_j$ is contained in an optimal basis $B$.
 
+For the case $j = 0$, it is trivial, since $\emptyset = I_0 \subset B$. Now, applying induction hypothesis, if $I_j \subset B$, let us see what happens for $I_{j+1} = I_j \cup \{y_j\}$. If $y_j \in B$, $I_{j+1} \subset B$, so let us assume $y_j \notin B$. In this case $I_{j+1} \not\subset B$, but $I_{j+1} \subset B'$ for some basis $B'$ which is not optimal. By the exchange axiom, since $y_j \in B' \setminus B$, there is $y_j' \in B \setminus B'$ such that $B'' = B \setminus \{y_j'\} \cup \{y_j\}$ is a basis. $I_j \cup \{y_j'\}$ is independent as well since it is contained in a basis. By the construction of the algorithm, $\omega(y_j') \leq \omega(y_j)$. This implies that
+\[
+\sum_{b \in B} \omega(b) =
+w(y_j') + \sum_{b \in B, b \neq y_j'} \omega(b) \leq
+w(y_j) + \sum_{b \in B, b \neq y_j} \omega(b) =
+\sum_{b \in B \setminus \{y_j'\} \cup \{y_j'\}} \omega(b) =
+\sum_{b \in B''} \omega(b),
+\]
+Meaning that $B''$ is another optimal basis that contains $I_{j+1}$.
+
+Finally, $I_r$, since its size will be the maximum set of an independent set, and therefore is a basis. Since a basis cannot be contained in another basis, $I_r$ will be the optimal basis.
 \vspace{3pt}
 
 \hspace{5pt}\textbf{\textit{(b) Show that that this property characterizes independent sets of matroids among all simplicial complexes. In other words, given a simplicial complex $\Sigma$ for which the greedy algorithm always works, regardless of the weight function~$\omega$, show that $\Sigma = \mathcal I(M)$ for some matroid~$M$.}}
