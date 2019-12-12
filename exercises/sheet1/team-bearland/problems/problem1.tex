@@ -2,18 +2,18 @@
 
 \vspace{3pt}
 
-\hspace{5pt} \textbf{\textit{(a) Contracion in $M$ as defined in class agrees with the notion of contraction in graphs.}}
+\hspace{5pt} \textbf{\textit{(a) Contraction in $M$ as defined in class agrees with the notion of contraction in graphs.}}
 
 \vspace{3pt}
 
-Let $G = (V, E)$ be a simple graph (no loops, no multiedges). Let $M = (E, \mathcal B)$ be a matroid, where $\mathcal B \subset \mathcal P(E)$ is the set of spanning trees of $G$ (considering only the edges of such spanning trees).
+Let $G = (V, E)$ be a simple graph (no loops, no multiedges). Let $M = (E, \mathcal I)$ be a matroid, where $\mathcal I \subset \mathcal P(E)$, the family of independent sets of the matroid, is the set of acyclic subgraphs of $G$ (considering only their edges).
 
-Let $e \in E$, and consider a spanning tree $\{e_0, e_1, \ldots e_r\}$ satisfying $e = e_0$. Now, $B/e = \{e_1, \ldots, e_r\}$ is a spanning tree of $G/e$.
+Let $e \in E$, and consider $I \in \mathcal I$ such that $I = \{e_0, e_1, \ldots e_r\}$, and $e \in I$ (let us assume WLOG $e = e_0$). Now, $I/e = \{e_1, \ldots, e_r\}$ is an acyclic subgraph of $G/e$, meaning $I'$ is an independent set of $M/e$.
 
-Similarly, if $B' = \{e_1, \ldots, e_r\}$ is a spanning tree of $G/e$, $B = B' \cup \{e\}$ is a spanning tree of $G$, meaning $B'$ is a base of $M/e$.
+Similarly, if $I' = \{e_1, \ldots, e_r\} \in \mathcal I(M/e)$ is an acyclic subgraph of $G/e$, $I = I' \cup \{e\}$ is an acyclic subgraph of $G$, meaning $I$ is an independent set of $M$.
 
 
-\hspace{5pt} \textbf{\textit{(b) Contracion in $M$ as defined in class agrees with $M / S \coloneqq (M^\star \backslash S)^\star$ for a subset $S \subset [n]$.}}
+\hspace{5pt} \textbf{\textit{(b) Contraction in $M$ as defined in class agrees with $M / S \coloneqq (M^\star \backslash S)^\star$ for a subset $S \subset [n]$.}}
 
 \vspace{3pt}
 
@@ -31,9 +31,9 @@ Then, $M^\star \backslash S$ has $E\backslash S$ as ground set and $\{(E\backsla
 
 \vspace{3pt}
 
-Let $M_G = (E, \mathcal B)$ be the graphical matroid of the graph $G$. Consider a spanning tree $B \in \mathcal B$ of $G$.
+Let $M_G = (E, \mathcal B)$ be the graphical matroid of the graph $G$, in terms of its basis (which will be the set of spanning trees of the graph). Consider a spanning tree $B \in \mathcal B$ of $G$.
 
-Observe that any edge $e \notin \cap_{B \in \mathcal B} B$ (namely, that is not a coloop), is an edge that separates two faces, or namely, its corresponding edge of the dual $e^\star$, connects two vertices of $G^\star$. 
+Observe that any edge $e \notin \cap_{B \in \mathcal B} B$ (namely, that is not a coloop), is an edge that separates two different faces, or namely, its corresponding edge of the dual $e^\star$, connects two vertices of $G^\star$. 
 
 Consider now the set of edges $E(G) \setminus B =: B^\star \subset E(G^\star)$. If $B^\star$ contains a cycle, this means that $B$ is not connected, since the cycle would imply that the vertices of $G$ that are inside of the cycle (when the graph is drawn in the plane), are disconnected from the ones outside, since no edge of $B$ crosses the two regions.
 
