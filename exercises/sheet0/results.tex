@@ -10,15 +10,15 @@
 
 \begin{center}
   \begin{tabular}[c]{llll}
-    file
-    & team
-    & is matroid?
-    & execution time
-    \\\hline
+    \hline
     \texttt{1716.bases}
     & Team Bearland
     & yes
     & 0.33 s
+    \\
+    & Tresplans
+    & yes
+    & 0.210 s
     \\
     & Terrible Island
     & yes
@@ -37,6 +37,10 @@
     & yes
     & 0.007 s
     \\
+    & Tresplans
+    & yes
+    & 0.004 s
+    \\
     & Terrible Island
     & yes
     & 0.3 s
@@ -50,6 +54,10 @@
     & yes
     & 1.276 s
     \\
+    & Tresplans
+    & yes
+    & 0.810 s
+    \\
     & A-Team-Has-No-Name
     & yes
     & 131.9 s
@@ -59,6 +67,10 @@
     & no
     & 0.019 s
     \\
+    & Tresplans
+    & no
+    & 0.001 s
+    \\
     & A-Team-Has-No-Name
     & no
     & 2.50 s
@@ -67,6 +79,10 @@
     & Team Bearland
     & no
     & 0.002 s
+    \\
+    & Tresplans
+    & no
+    & 0.001 s
     \\
     & Terrible Island
     & no
@@ -81,6 +97,10 @@
     & yes
     & 0.021 s
     \\
+    & Tresplans
+    & yes
+    & 0.130 s
+    \\
     & Terrible Island
     & yes
     & 2.073 s
@@ -94,6 +114,10 @@
     & no
     & 0.397 s
     \\
+    & Tresplans
+    & no
+    & 0.001 s
+    \\
     & A-Team-Has-No-Name
     & no
     & 3.792 s
@@ -103,6 +127,10 @@
     & yes
     & 4.506 s
     \\
+    & Tresplans
+    & yes
+    & 2.861 s
+    \\
     & A-Team-Has-No-Name
     & yes
     & 508.5 s
@@ -111,6 +139,10 @@
     & Team Bearland
     & yes
     & 0.088 s
+    \\
+    & Tresplans
+    & yes
+    & 0.070 s
     \\
     & Terrible Island
     & yes
@@ -161,6 +193,73 @@ The results were to be expected, the compiled, performance-oriented, \textsc{C++
 However, we do observe that the behaviour, the pattern described by execution times as we increase the load (\textit{i.e.} the complexity) is the same for both algorithms.
 This is a great example not to underestimate the constants affecting our expected running time, usually disregarded by complexity theory and big $\mathcal{O}$ notation.
 %Under our point of view, each programming language has it's 
+
+\subsection{Tresplans}
+
+We implemented an algorithm based on hash tables (dictionaries in python).
+In order to convert each integer list into a distinct key,
+we stored each digit as a shifted bit into a bit array,
+the whole list is then the sum of all bits (with an OR operation).
+This method gives us distinct keys for each list of integers.
+With this method,
+we have been able to process all files.
+
+Then, we can check if a list of bases exist in the hash table in a constant time.
+The operation
+\(x \in B_1 \setminus B_2\)
+is implemented as
+\(B_1 \land \neg B_2\)
+on the bit array and selecting digits on the resulting bit array
+(similar for \(y\)).
+The operation
+\(B_1 \setminus \{x\} \cup \{y\}\)
+is also implemented as
+\(B_1 \land \neg \{x\} \lor \{y\}\).
+
+The complexity of our code is the same in both implementations.
+It can be computed as follows, where $N$ is the number of bases:
+
+\begin{itemize}
+ \item Process file: $\mathcal{O}(N)$.
+ \item Compare bases: $\mathcal{O}(N^2)$.
+ \item Compare each pair of subsets of the base:
+       constant time, with a large constant.
+\end{itemize}
+
+Thus, overall complexity is $\mathcal{O}(N^2)$.
+It is also output-sensitive,
+as it stops if it finds a pair of bases do not satisfy the exchange axiom.
+
+In figure~\ref{fig:Tresplans} we have the running time of both implementations.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.75\textwidth]{./Tresplans/Tresplans_exec_time.pdf}
+    \caption{Execution times of the different implementations.
+    \label{fig:Tresplans}}
+\end{figure}
+
+Time is displayed in logarithm scale to be able to compare it better,
+as the values have a large span either between the same implementations,
+and within the same implementation with different files.
+Note that as the algorithm is output-sensitive,
+a larger file not always leads to larger execution times,
+as if there is a pair of bases that do not satisfy the exchange axiom,
+then the routine exits.
+
+It is clear that the \textsc{C} implementation is much faster in all cases.
+The \textsc{Python} implementation takes a long time to build the dictionary.
+It can be observed as the running time is much similar to the
+\textsc{C} implementation when the file is large.
+Also, most of the difference is because \textsc{Python} checks the type
+of the variables in running time,
+while in the case of the \textsc{C} code,
+it does not happen and mostly works with memory addresses.
+
+In both cases,
+due to the complexity of the algorithm
+and the fact that in each iteration we need to do a lot of operations and checks,
+the execution times grow orders of magnitudes when comparing different files.
 
 \subsection{Terrible Island}
 \label{terribleisland}

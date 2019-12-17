@@ -1,0 +1,276 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{mathptmx}
+\usepackage{a4wide}
+\usepackage{paralist}
+\usepackage{url}
+\usepackage{bbm}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cS}{\mathcal{S}}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\New}{New}
+\DeclareMathOperator{\area}{area}
+\DeclareMathOperator{\del}{del}
+\DeclareMathOperator{\link}{link}
+\DeclareMathOperator{\thestar}{star}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\corank}{corank}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\aff}{aff}
+
+\newcommand{\NN}{\mathbbm{N}}
+\newcommand{\RR}{\mathbbm{R}}
+\newcommand{\CC}{\mathbbm{C}}
+\newcommand{\kk}{\mathbbm{k}}
+\newcommand{\cI}{\mathcal{I}}
+
+\newcommand{\aaa}{\mathbf{a}}
+
+\newcommand{\defn}[1]{{\color{blue}#1}}
+\newcommand{\alert}[1]{\textbf{\color{red}#1}}
+
+\renewcommand{\FancyVerbFormatCom}{\color{green!30!black}}
+
+\newtheorem*{thmstar}{Theorem}
+
+\begin{document}
+\DefineShortVerb{\·}
+
+\begin{center}
+\textbf{\sffamily
+   Discrete and Algorithmic Geometry }
+
+\medskip
+   Julian Pfeifle,
+   UPC, 2019
+\end{center}
+
+\medskip
+
+\begin{center}
+  \textbf{\sffamily Sheet 2}
+
+  \bigskip
+Due on Thursday, December 19, 2019
+\end{center}
+
+\bigskip
+
+You should work in your teams and complete half of the exercises on this sheet.
+Submissions work in the same way as for Sheet 1.
+
+
+\bigskip
+\begin{enumerate}
+
+\item
+  Let $\cA=(a_1,\dots,a_{d+2})\subset\RR^d$ be a full-dimensional point configuration of $d+2$ points,
+  so that the associated vector configuration that one gets by homogenizing coordinates has rank~$d+1$, and therefore $\corank\cA=1$.
+  Let $\lambda\in\RR^{d+2}$ be the vector of coefficients of the unique affine dependency $J=(J_+,J_-)$ among the members of~$\cA$.
+  \begin{enumerate}
+  \item Show using Cramer's rule that, up to a global sign,
+    \[
+      \lambda_i
+      \ = \
+      (\text{volume of the simplex $\cA\setminus a_i$})\cdot
+      \begin{cases}
+        +1
+        &
+        \text{if } i \in J_+
+        \\
+        -1
+        &
+        \text{if } i \in J_-        
+      \end{cases}
+    \]
+
+  \item 
+    Let $T_\pm=\{\cA\setminus a_j:j\in J_\pm\}$ be the two unique triangulations of~$\cA$,
+    and let
+    \[
+      \phi_{\cA}(T_\pm)
+      \ = \
+      \sum_{j=1}^{d+2}\vol\thestar_{T_\pm}(a_j)\,e_j
+    \]
+    be their corresponding GKZ-vectors. Show that
+    \[
+      \big(\phi_{\cA}(T_+)\big)_i
+      \ = \
+      \begin{cases}
+        \vol\,\conv\cA
+        &
+        \text{if } i\in J_-,
+        \\
+        \vol\,\conv\cA - \vol\,\conv(\cA\setminus a_i)
+        &
+        \text{if } i\in J_+.        
+      \end{cases}
+    \]
+
+  \item
+    What is the relationship between $\phi_\cA(T_+)$, $\phi_\cA(T_-)$, and $\lambda$?
+  \end{enumerate}
+
+  \bigskip
+
+\item
+  Consider a full-dimensional point configuration $\cA\subset\RR^d$.
+  Show that the affine hull of the secondary polytope $\Sigma$-poly$(\cA)$ is given by
+  \begin{align*}
+    \sum_{\aaa\in\cA} x_\aaa \
+    &= \
+      d(d+1)\vol\,\conv\cA,
+    \\
+    \sum_{\aaa\in\cA} x_\aaa\,\aaa \
+    &= \
+      \big((d+1)\vol\,\conv\cA\big)\mathbf{c}_\cA,
+  \end{align*}
+  where $\mathbf{c}_\cA$ denotes the centroid of $\conv\cA$.
+
+  \bigskip
+
+\item
+  Show that every configuration $\cA$ of $d+4$ points in dimension~$d$
+  has at most $O(d^4)$ regular triangulations:
+  \begin{enumerate}
+  \item
+    Think of their chamber complexes as cell decompositions of a $2$-sphere.
+
+  \item
+    Bound the number of vertices in these chamber complexes by $O(d^4)$,
+    showing that every vertex corresponds
+    (not uniquely, but that is not a problem)
+    to a pair of circuits of~$\cA$.
+
+  \item
+    Using Euler's formula, show that any (polyhedral) cell
+    decomposition of a $2$-sphere has about as many vertices as it has
+    $2$-cells. More precisely, these two numbers are within a factor of~$2$
+     of each other.
+   \end{enumerate}
+
+   \bigskip
+
+ \item
+   Show that the cyclic polytope $C_{4k}(4k+4)$ has at least $\frac14\,2^k$ many
+   non-regular triangulations:
+   \begin{enumerate}
+   \item
+     Consider first the coordinatization having a cyclically symmetric affine
+     Gale diagram, in which $k$~lines meet in a zero-dimensional chamber
+     at the center.
+
+   \item
+     Show that by perturbing the coordinates, each of these $k$~lines can be
+     moved towards one or the other side of the center.
+     Since the cyclic configuration is in general position,
+     these perturbations produce different coordinatizations of the same oriented matroid,
+     hence give the same polytope.
+
+   \item
+     Show that for all these perturbations the center of the Gale diagram
+     corresponds to distinct triangulations. For this, use the description
+     of a chamber as an intersection of the ``dual simplicial cones'' of the
+     corresponding triangulation.
+   \end{enumerate}
+  \bigskip
+  
+\item
+  Let $\cT=\{\sigma_1,\dots,\sigma_m\}$ be a triangulation of a full-dimensional point configuration $\cA=(\aaa_1,\dots,\aaa_n)\subset\RR^d$ of $n$~points,
+  where we consider the $\sigma_i\in\binom{[n]}{d+1}$ to be index sets.
+  Let $R^{\text{int}}$ be the set of \defn{interior ridges},
+  defined to be intersections $\rho = \rho_{ij} = \sigma_i\cap\sigma_j$ of two facets of~$\cT$
+  such that the affine span of the points of~$\cA$ indexed by~$\rho$ has dimension~$d-1$.
+  (In the triangulations of~Figure~\ref{fig:triangs1}, they are the interior edges.)
+
+  \begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale=.4]
+      \coordinate (1) at (0,0);
+      \coordinate (2) at (12,-1);
+      \coordinate (3) at (6,9);
+      \coordinate (4) at (3,1.5);
+      \coordinate (5) at (9,1.5);
+      \coordinate (6) at (6,6);
+
+      \draw[very thick] (1)--(2)--(3)--(1)--(4)--(5)--(6)--(4);
+      \draw[very thick] (2)--(5);
+      \draw[very thick] (3)--(6);
+
+      \draw[very thick] (1)--(5);
+      \draw[very thick] (2)--(6);
+      \draw[very thick] (3)--(4);
+    \end{tikzpicture}
+    \qquad
+    \begin{tikzpicture}[scale=.4]
+      \coordinate (1) at (0,0);
+      \coordinate (2) at (12,-1);
+      \coordinate (3) at (6,9);
+      \coordinate (4) at (3,1.5);
+      \coordinate (5) at (9,1.5);
+      \coordinate (6) at (6,6);
+
+      \draw[very thick] (1)--(2)--(3)--(1)--(4)--(5)--(6)--(4);
+      \draw[very thick] (2)--(5);
+      \draw[very thick] (3)--(6);
+
+      \draw[very thick] (2)--(4);
+      \draw[very thick] (3)--(5);
+      \draw[very thick] (1)--(6);
+    \end{tikzpicture}    
+    \caption{Two triangulations.
+    View the source code for the coordinates of the points.}
+    \label{fig:triangs1}
+  \end{figure}
+
+  \begin{enumerate}
+  \item
+    For a vector $\omega\in\RR^n$, lift the points in $\cA$ to heights~$\omega$, so that
+    $\cA^\omega=\big(\binom{\aaa_1}{\omega_1},\dots,\binom{\aaa_n}{\omega_n}\big)$.
+    For each interior ridge $\rho=\sigma_i\cap\sigma_j\in R^{\text{int}}$,
+    formulate the \defn{folding condition} that expresses that $\rho$ indexes a face of the lower convex hull of~$\cA^\omega$,
+    in terms of the coordinates of the~$\aaa_i$ and~$\omega$.
+    Your folding condition should be an inequality that is linear in each height~$\omega_i$.
+
+  \item
+    Write code that takes the coordinates of the $\aaa_i$ and the facets $\sigma_i$ of a triangulation as input,
+    and outputs the set of folding conditions in a text file in
+    \href{https://www.gurobi.com/documentation/8.1/refman/lp_format.html}{LP file format}.
+
+  \item
+    Download a linear programming software such as
+    \href{https://www.gurobi.com/academia/academic-program-and-licenses/}{\texttt{gurobi}},
+    \href{https://www.ibm.com/analytics/cplex-optimizer}{\texttt{cplex}} or
+    \href{https://scip.zib.de/}{\texttt{scip}}/\href{https://soplex.zib.de/}{\texttt{soplex}}
+    and check explicitly whether there exists a choice of heights $\omega$ that induces each of the triangulations of Figure~\ref{fig:triangs1}.
+
+  \item
+    Using this code,
+    check that the triangulation of the $4$-dimensional cube from~\cite{deLoera96}
+    given by the files \texttt{4-cube.vertices} and \texttt{4-cube.triangulation}
+    is non-regular, i.e., it does not come from a lifting to~$\RR^5$.
+    If you like, download and play with \href{http://www.rambau.wm.uni-bayreuth.de/TOPCOM}{TOPCOM}.
+  \end{enumerate}
+
+  \bigskip
+
+\item
+  The \defn{permutohedron} $\Pi^{n-1}$ is the convex hull of all $n!$ permutations of the vector $(1,2,\dots,n)$.
+  For $n\ge3$,
+  show that $\dim\Pi^{n-1}=n-1$,
+  that $f_{n-2}(\Pi^{n-1}) = 2^n-2$,
+  and $f_1(\Pi^{n-1}) = \tfrac12 (n-1)n!$.
+  If you like, show that $f_k(\Pi^{n-1}) = k!\{{n\atop k}\} = \sum_{i=0}^k(-1)^i\binom{k}{i}(k-i)^n$.
+\end{enumerate}
+
+\bibliographystyle{plain}
+\bibliography{sheet2}
+
+\end{document}
