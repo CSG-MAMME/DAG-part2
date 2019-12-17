@@ -1,0 +1,47 @@
+\textbf{\textit{(3) The greedy algorithm always works for matroids.}}
+
+\hspace{5pt}\textbf{\textit{(a) Show that Kruskal's greedy algorithm always finds a maximum weight independent set in a matroid $M = (E, \mathcal{I})$, regardless of the choice of weight function $\omega : E \mapsto \mathbb{R}_{>0}$. Recall that the greedy algorithm starts by setting $I \coloneqq \emptyset$, and next repeatedly chooses $y \in E \backslash I$ with $I \cup \lbrace y \rbrace \in \mathcal{I}$ and with $\omega(y)$ as large as possible. It stops if no such $y$ exists.}}
+
+\vspace{3pt}
+
+Let us rename the independent sets $I_0, I_1, \ldots, I_r$, where $I_0 = \emptyset$, and $I_{j+1} = I_j \cup \{y_j\}$, for some $y_j \in E \setminus I_j$ with $\omega( y_j)$ as large as possible. Let us show $|I_j| = j$ by induction, and that, assuming $E$ is finite, there exists a final $I_r$, with $r = \max_{I \in \mathcal I} |I|$.
+
+For $j = 0$, $|I_0| = |\emptyset| = 0$
+For $j > 0$, assuming induction hypothesis, $I_{j+1} = I_j \cup \{y_j\}$, for some $y_j \in E \setminus I_j$, and therefore $|I_{j+1}| = |I_j| + 1 = j + 1$. Assume that the last independendent set is $I_s$ for some $s$. Obviously, $s \leq r = \max_{I \in \mathcal I} |I|$, since $I_s \in \mathcal I$. If $s < r$, there will be a set $I'$ with $|I'| = r$. By the exchange axiom, there would be an $y_s \in I' \setminus I_s \subset E \setminus I_s$ such that $I_s \cup \{y_s\} \in \mathcal I$, leading to a contradiction since $|I_s \cup \{y_s\}| = s + 1 > s$.
+
+We are left with proving that the weight we obtain with the algorithm is indeed the maximum achievable. Let us show by induction that $I_j$ is contained in an optimal basis $B$.
+
+For the case $j = 0$, it is trivial, since $\emptyset = I_0 \subset B$. Now, applying induction hypothesis, if $I_j \subset B$, let us see what happens for $I_{j+1} = I_j \cup \{y_j\}$. If $y_j \in B$, $I_{j+1} \subset B$, so let us assume $y_j \notin B$. In this case $I_{j+1} \not\subset B$, but $I_{j+1} \subset B'$ for some basis $B'$ which is not optimal. By the exchange axiom, since $y_j \in B' \setminus B$, there is $y_j' \in B \setminus B'$ such that $B'' = B \setminus \{y_j'\} \cup \{y_j\}$ is a basis. $I_j \cup \{y_j'\}$ is independent as well since it is contained in a basis. By the construction of the algorithm, $\omega(y_j') \leq \omega(y_j)$. This implies that
+\[
+\sum_{b \in B} \omega(b) =
+w(y_j') + \sum_{b \in B, b \neq y_j'} \omega(b) \leq
+w(y_j) + \sum_{b \in B, b \neq y_j} \omega(b) =
+\sum_{b \in B \setminus \{y_j'\} \cup \{y_j'\}} \omega(b) =
+\sum_{b \in B''} \omega(b),
+\]
+Meaning that $B''$ is another optimal basis that contains $I_{j+1}$.
+
+Finally, $I_r$, will be a basis, since it as an independent set of maximum size. Since a basis cannot be contained in another basis, $I_r$ will be the optimal basis.
+\vspace{3pt}
+
+\hspace{5pt}\textbf{\textit{(b) Show that that this property characterizes independent sets of matroids among all simplicial complexes. In other words, given a simplicial complex $\Sigma$ for which the greedy algorithm always works, regardless of the weight function~$\omega$, show that $\Sigma = \mathcal I(M)$ for some matroid~$M$.}}
+
+\vspace{3pt}
+
+Let $I_1, I_2 \in \mathcal I$ with $|I_2| = |I_1| + 1 = k + 1$, and let $\omega$ be defined as:
+\[
+\omega(e) = \left\{
+\begin{array}{lr}
+	\frac{k+1}{k+2}, & \text{for } e \in I_1 \\
+	\frac{k}{k+1}, & \text{for } e \in I_2 \setminus I_1\\
+    a(e), & \text{otherwise }
+\end{array}
+\right. ,
+\]
+Where the $a(e) > 0$ satisfy that $0 < \sum_{e \notin I_2} a(e) < k - \frac{k(k+1)}{k+2}$.
+
+The algorithm will start building $I_1$ at the beginning since it will start with $\emptyset = I \subset I_1 \in \mathcal I$, and therefore, since $I \cup \{y\}$ with $y \in I_1$ will belong to $I_1$, by the second axiom of independent sets, $I \cup \{y\} \subset \mathcal I$, and therefore at the next step $I := I \cup \{y\} \subset I_1$. The same will happen while $I \subsetneq I_1$, each $y$ with maximum weight will be from $I_1$ and $I \cup \{y\}$ will be contained in $I_1 \in \mathcal I$ and therefore will also be contained in $\mathcal I$.
+
+We want to see that the algorithm also chooses some $e \in I_2 \setminus I_1$. We can see that $\omega(I_2) = \sum_{x \in I_2} \omega(x) = (k+1) \frac{k}{k+1} = k$. If no element of $I_2 \setminus I_1$ was chosen, the algorithm would end up with an independent set of weight at most $\sum_{x \notin I_2 \setminus I_1} \omega(x) = \sum_{x \in I_1} \omega(x) + \sum_{x \notin I_1 \cup I_2} \omega(x) < \frac{k(k+1)}{k+2} + \sum_{e \notin I_1 \cup I_2} a(e) <  \frac{k(k+1)}{k+2} + k - \frac{k(k+1)}{k+2} = k$, contradicting that the algorithm finds a maximum weight independent set. Also, the first element after choosing all of $I_1$ will be of $I_2$ since the sequence of sets of "available" elements at each step is decreasing, and therefore, at the next step after having $I = I_1$, an element of maximum weight will have to be chosen, and therefore the chosen element will be part of $I_2 \setminus I_1$.
+
+As we have seen before, when the algorithm ends the remaining set is a basis. Therefore it cannot stop at $I_1$, since a basis cannot be a subset of a different independent set, in this case $I_2$.

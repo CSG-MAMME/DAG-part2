@@ -1,0 +1,28 @@
+\textbf{\textit{(4) Using a famous result by Jack Edmonds, prove the following:}}
+
+\hspace{5pt}\textbf{\textit{(a) Let $G=(V,E)$ be a bipartite graph with color classes $V_1,V_2$. For $i=1,2$, let $M_i$~be the matroid where $I\subseteq E$ is independent if and only if each vertex in~$V_i$ is covered by at most one edge in~$I$. Use the Matroid Intersection Theorem to prove:}}
+    \begin{theoremstar}[K\H onig's Matching Theorem]
+      The maximum size of a matching in a bipartite graph equals the minimum size of a vertex cover.
+    \end{theoremstar}
+
+\vspace{3pt}
+
+Let $M_1=(E,\I_1), M_2=(E,\I_2)$ be the matroids defined in the exercise and consider a set $S\subseteq E$. Observe that by definition of $M_1$ and $M_2$, $S\in \I_1\cap \I_2$ iff $S$ is a matching in $G$.
+
+On the other hand, observe that for any $S\subseteq E$, $r_i(S)$ counts the number of vertices in $V_i$ incident to some edge in $S$. Note that such vertices covers $S$ since $V_1$ and $V_2$ are independent sets. Thus, $r_1(S)+r_2(E \backslash S)$ is the size of a vertex cover of $G$. Moreover, given a vertex cover $U$ of $G$, let $U_1=U\cap V_1$ and consider $S$ to be the set of edges incident to the vertices in $U_1$, then $r_1(S)+r_2(E \backslash S)\leq |U|$. It follows that $\min\{r_1(S)+r_2(S) \ | \ S\subseteq E\}$ is equal to the size of the minimum vertex cover of $G$.
+
+The matroid intersection theorem states that the maximum size of a common independent set in $\I_1\cap \I_2$ is equal to $\min\{r_1(S)+r_2(E \backslash S) \ | \ S\subseteq E\}$. Hence, the maximum size of a matching in $G$ is equal to the minimum size of a vertex cover.
+
+\vspace{3pt}
+
+\hspace{5pt}\textbf{\textit{(b) Let $G=(V,E)$ be a graph whose edges are partitioned into $k$~colors, $E=E_1\cup E_2\cup\cdots\cup E_k$. Use the Matroid Intersection Theorem to prove that there exists a rainbow spanning tree (a spanning tree all of whose edges are colored differently) if and only if $G-F$ has at most $t+1$ connected components, for any union~$F$ of $t$~colors, for any $t\ge0$.}}
+
+\vspace{3pt}
+
+Consider a graph $G=(V,E)$ whose edges are partitioned into $k$ colors. Let $M_1=(E,\I_1)$ be the partition matroid induced by the partition of $G$ and let $M_2=(E,\I_2)$ be the cycle matroid of $G$. By definition, $\I_1$ are sets of edges with different color and $\I_2$ are forest subgraphs of $G$. Thus, a set $S\subseteq E$ is a common independent set in $\I_1\cap \I_2$ iff it is a rainbow forest subgraph of $G$. It follows that there exists a rainbow spanning tree in $G$ iff $\max\{|I| \ | \ I\in\I_1\cap\I_2\}=n-1$, where $n=|V|$.
+
+Observe that given a set $S\subseteq E$, $r_1(S)$ counts the number of different colors of the edges of $S$ and $r_2(S)$ is the size of the maximum forest subgraph induced by $S$. Note that if $S\subseteq S'$ then $r_2(S)\leq r_2(S')$.
+
+Consider a set $S\subseteq E$ and let $t=r_1(S)\geq 0$. Let $F\subseteq E$ be the union of the $t$ colors presents in $S$. Then, $r_1(S)=r_1(F)=t$ and $r_2(E-S)\geq r_2(E-F)$ since $S\subseteq F$. Recall from basics results on graph theory that the maximum size of a forest subgraph of $G$ is equal to $n-d$ iff $G$ has $d$ connected components. Thus, $E-F$ has at most $t+1$ connected components iff $r_2(E-F)\geq n-(t+1)$. We conclude that $r_1(S)+r_2(E \backslash S)\geq n-1$ for any set $S\subseteq E$ iff $G-F$ has at most $(t+1)$ connected components for any union $F$ of $t$ colors.
+
+Finally, the matroid intersection theorem implies that there exists a rainbow spanning tree in $G$ iff $G-F$ has at most $(t+1)$ connected components for any union $F$ of $t$ colors, for any $t\geq 0$.

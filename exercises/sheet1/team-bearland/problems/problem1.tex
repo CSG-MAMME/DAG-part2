@@ -1,0 +1,168 @@
+\textbf{\textit{(1) Let $M$ be a matroid on the ground set $[n] = \lbrace 1, 2, \dots, n \rbrace$ with family of independent sets $\lbrace I : I \in \mathcal{I}\rbrace$:}}
+
+\vspace{3pt}
+
+\hspace{5pt} \textbf{\textit{(a) Contraction in $M$ as defined in class agrees with the notion of contraction in graphs.}}
+
+\vspace{3pt}
+
+Let $G = (V, E)$ be a simple graph (no loops, no multiedges). Let $M = (E, \mathcal I)$ be a matroid, where $\mathcal I \subset \mathcal P(E)$, the family of independent sets of the matroid, is the set of acyclic subgraphs of $G$ (considering only their edges).
+
+Let $e \in E$, and consider $I \in \mathcal I$ such that $I = \{e_0, e_1, \ldots e_r\}$, and $e \in I$ (let us assume WLOG $e = e_0$). Now, $I/e = \{e_1, \ldots, e_r\}$ is an acyclic subgraph of $G/e$, meaning $I'$ is an independent set of $M/e$.
+
+Similarly, if $I' = \{e_1, \ldots, e_r\} \in \mathcal I(M/e)$ is an acyclic subgraph of $G/e$, $I = I' \cup \{e\}$ is an acyclic subgraph of $G$, meaning $I$ is an independent set of $M$.
+
+
+\hspace{5pt} \textbf{\textit{(b) Contraction in $M$ as defined in class agrees with $M / S \coloneqq (M^\star \backslash S)^\star$ for a subset $S \subset [n]$.}}
+
+\vspace{3pt}
+
+Let $M=(E,\I)$ be a matroid. Given a set $S\subseteq E$, the contraction $M/S$ is defined as the matroid induced by the independent sets $\{I \backslash S \ | \ S\subseteq I \in \I\}$.
+
+The deletion $M \backslash S$ is defined as the matroid on the ground set $E\backslash S$ whose independent sets are $\{I\subseteq E\backslash S \ | \ I\in\I\} = \{I \ | \ I\cap S = \varnothing, I\in\I\}$.
+
+The dual matroid $M^\star=(E,\I^\star)$ is defined on the same ground set and has $\I^\star=\{E \backslash I \ | \ I\in\I\}$ as independent sets.
+
+Then, $M^\star \backslash S$ has $E\backslash S$ as ground set and $\{(E\backslash I) \ | \ (E \backslash I)\cap S=\varnothing, I\in\I\}$ as independent sets. And finally, $(M^\star \backslash S)^\star$ is induced by $\{(E\backslash S)\backslash (E\backslash I) \ | \ (E \backslash I)\cap S=\varnothing, I\in\I\}$. Observe that $\{E\backslash(E\backslash I) \ | \ E\backslash I \cap S = \varnothing,I\in\I\}=\{I \ | \ S\subseteq I\in \I\}$ and note that $(E\backslash S)\backslash (E\backslash I) = E\backslash(E\backslash I)\backslash S$. Hence, $(M^\star \backslash S)^\star$ is induced by $\{I \backslash S \ | \ S\subseteq I \in \I\}$ and $M/S=(M^\star \backslash S)^\star$.
+
+\vspace{3pt}
+
+\hspace{5pt} \textbf{\textit{(c) $M_{G^\star} = \left(M_G\right)^\star$, if G is a planar graph and $G^\star$ its dual planar graph.}}
+
+\vspace{3pt}
+
+Let $M_G = (E, \mathcal B)$ be the graphical matroid of the graph $G$, in terms of its basis (which will be the set of spanning trees of the graph). Consider a spanning tree $B \in \mathcal B$ of $G$.
+
+Observe that any edge $e \notin \cap_{B \in \mathcal B} B$ (namely, that is not a coloop), is an edge that separates two different faces, or namely, its corresponding edge of the dual $e^\star$, connects two vertices of $G^\star$. 
+
+Consider now the set of edges $E(G) \setminus B =: B^\star \subset E(G^\star)$. If $B^\star$ contains a cycle, this means that $B$ is not connected, since the cycle would imply that the vertices of $G$ that are inside of the cycle (when the graph is drawn in the plane), are disconnected from the ones outside, since no edge of $B$ crosses the two regions.
+
+Now, assume that there is some vertex of $G^\star$ which is not covered by any edge of $B^\star$. This will mean that there exists a face of $G$ with all its edges in $B$, meaning that $B$ has a cycle, and contradicting that it is a spanning tree.
+
+Therefore, $B^\star$ is a spanning tree of $G^\star$. Finally, by the same argument, we will have $(B^\star)^\star = B$ is a spanning tree of $(G^\star)^\star = G$, completing the proof.
+\vspace{3pt}
+
+\hspace{5pt} \textbf{\textit{(d) Consider the matroid M realized by the columns of the matrix}}
+$$
+A = \left[
+    \begin{array}{ccccc}
+        0 & 1 & 1 & 0 & 1 \\
+        1 & 0 & 1 & 0 & 1 \\
+        0 & 1 & 1 & 1 & 0
+    \end{array}
+\right]
+$$
+\textbf{\textit{Compute a realization of $M^\star$, and some contractions of M of your choosing. Compute the set of circuits and cocircuits of $M$ and of $M^\star$.}}
+
+\vspace{5pt}
+
+We will first compute a realization of matrix A.
+To do so, we will swap columns two and four and perform a change of basis to basis $\mathcal{B} = \left\lbrace \left( \begin{array}{c} 0 \\ 1 \\ 0 \end{array} \right), \left( \begin{array}{c} 1 \\ 0 \\ 1 \end{array} \right), \left( \begin{array}{c} 1 \\ 1 \\ 1 \end{array} \right) \right\rbrace$. We then have,
+\begin{equation*}
+    \begin{split}
+        A & = \left[
+            \begin{array}{ccccc}
+                0 & 1 & 1 & 0 & 1 \\
+                1 & 0 & 1 & 0 & 1 \\
+                0 & 1 & 1 & 1 & 0
+            \end{array}
+        \right]
+        \longrightarrow
+        \left[
+            \begin{array}{ccccc}
+                0 & 0 & 1 & 1 & 1 \\
+                1 & 0 & 1 & 0 & 1 \\
+                0 & 1 & 1 & 1 & 0
+            \end{array}
+        \right]
+        \overset{\mathcal{B}}{\longrightarrow}
+        \bar{A} = \left[
+            \begin{array}{ccccc}
+                1 & 0 & 0 & -1 & 0 \\
+                0 & 1 & 0 & 0 & -1 \\
+                0 & 0 & 1 & 1 & 1
+            \end{array}
+        \right]
+        \hspace{10pt} \text{ which also represents $M$.} \\[10pt]
+        \bar{A}B^T & = 0 \Longrightarrow 
+        B^T = \left[
+            \begin{array}{cc}
+                -1 & 0  \\
+                0  & -1 \\
+                1  & 1 \\
+                -1 & 0 \\
+                0 & -1
+            \end{array}
+        \right] \hspace{5pt} \text{ (for example) } \Longrightarrow
+        B = \left[
+            \begin{array}{ccccc}
+                -1 & 0 & 1 & -1 & 0 \\
+                0 & -1 & 1 & 0 & -1
+            \end{array} 
+        \right] \hspace{5pt} \text{ which is $M^*$.}
+    \end{split}
+\end{equation*}
+
+Now we will compute a contraction of $M$, $M / 1$, using a deletion in its dual matroid, $M^*$, $(M^* \backslash 1)^*$.
+\begin{equation*}
+    \begin{split}
+        B \backslash 1 & = \left[
+            \begin{array}{cccc}
+                0 & 1 & -1 & 0 \\
+                -1 & 1 & 0 & -1 
+            \end{array} 
+        \right] \text{ ;} \hspace{5pt}
+        (B  \backslash 1)\cdot c^T = 0 \Rightarrow 
+        c^T = \left[
+                \begin{array}{cc}
+                    0 & 1 \\
+                    1 & 1 \\
+                    1 & 1 \\
+                    1 & 0
+                \end{array} 
+            \right] \Rightarrow
+        c = \left[
+                \begin{array}{cccc}
+                    0 & 1 & 1 & 1 \\
+                    1 & 1 & 1 & 0
+                \end{array} 
+            \right] \hspace{3pt} \text{which is $M / 1$.}
+    \end{split}
+\end{equation*}
+
+An alternative method for computing $ M / 1$ is doing the projection in the corresponding direction. In particular, to find $ M / 1$ it suffices to project $A$ in direction $\left( \begin{array}{ccc} 0 & 1 & 0 \end{array} \right)^T$ and get rid of loops. In particular,
+\begin{equation*}
+    \begin{split}
+        A & = \left[
+            \begin{array}{ccccc}
+                0 & 0 & 1 & 1 & 1 \\
+                1 & 0 & 1 & 0 & 1 \\
+                0 & 1 & 1 & 1 & 0
+            \end{array}
+        \right]
+        \overset{\text{\footnotesize{Project}}}{\longrightarrow}
+        \left[
+            \begin{array}{ccccc}
+                0 & 0 & 1 & 1 & 1 \\
+                0 & 1 & 1 & 1 & 0
+            \end{array}
+        \right]
+        \overset{\text{\footnotesize{No Loops}}}{\longrightarrow}
+        \left[
+            \begin{array}{ccccc}
+                0 & 1 & 1 & 1 \\
+                1 & 1 & 1 & 0
+            \end{array}
+        \right] \hspace{5pt} \text{ which again is $ M / 1$.}
+    \end{split}
+\end{equation*}
+
+Lastly, circuits are minimal linear combinations, and co-circuits are their dual counterparts.
+Hence, computing both the circuits of $M$ and $M^*$ we will also have the co-circuits of $M^*$ and $M$ respectively.
+In particular, by inspection we have:
+\begin{equation*}
+    \text{Circuits of $M$ } = (-1, 0, 1, -1, 0), (0, -1, 1, 0, -1) = \text{ Cocircuits of $M^*$}
+\end{equation*}
+\begin{equation*}
+    \text{Circuits of $M^*$ } = (1, 1, 1, 0, 0), (0, 0, 1, 1, 1), (1, 0, 0, -1, 0), (0, 1, 0, 0, -1) = \text{ Cocircuits of $M$}
+\end{equation*}
