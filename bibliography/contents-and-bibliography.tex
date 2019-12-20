@@ -5,6 +5,7 @@
 \usepackage{xcolor}
 \usepackage{bbm}
 \usepackage{hyperref}
+\usepackage{paralist}
 
 \newcommand{\RR}{\mathbbm{R}}
 
@@ -22,82 +23,83 @@ A big thanks to Moritz Otth for pushing me do compile this list!
 \bigskip
 The overarching theme are realizations of oriented matroids.
 
-\section{Examples and axiom systems}
+\section{Matroids}
 
 This material is directly copied from \cite[Lecture 1]{Reiner05}.
 
-\subsection{Matroids}
+\renewcommand*{\descriptionlabel}[1]{\hspace\labelsep\normalfont\emph{#1}:}
+\begin{description}
+\item[Examples]
+Vector and point configurations;
+algebraic matroids;
+transversal matroids;
+graphical matroids
 
-Examples:
+\item[Axiom systems]
+Independent sets;
+bases;
+circuits;
+cocircuits;
+rank function;
+flats;
+hereditarily pure simplicial complexes;
+universally shellable simplicial
+complexes;
+greedily optimizable independent set systems
 
-\begin{itemize}
-\item
-  Vector and point configurations
-\item
-  algebraic matroids
-\item
-  transversal matroids
-\item
-  graphical matroids
-\end{itemize}
+\item[Operations]
+  Direct sum; deletion; contraction
 
-Axiom systems:
 
-\begin{itemize}
-\item
-  Independent sets
-\item
-  bases
-\item
-  circuits
-\item
-  cocircuits
-\item
-  rank function
-\item
-  flats
-\item
-  hereditarily pure simplicial complexes
-\item
-  universally shellable simplicial
-  complexes
-\item
-  greedily optimizable independent set systems
-\end{itemize}
+\item[Oriented Matroids]
+ Axiom systems: Circuits, cocircuits  
 
-I didn't end up introducing Coxeter matroids, or talk much about matroid base polytopes.
-
-\subsection{Oriented Matroids}
-
-%\nocite{Ziegler95,Matousek02,deloera-rambau-santos10,bjorner-etal99,Schrijver03,
+\end{description}
+% \nocite{Ziegler95,Matousek02,deloera-rambau-santos10,bjorner-etal99,Schrijver03,
 %  Thomas06,Beck-Robins15,Bokowski06,Reiner05,RichterGebert11,CLOS15,Segers04,MillerSturmfels05}
 
-Axiom systems:
+I didn't end up introducing Coxeter matroids, or talk much about matroid base polytopes.
+Also, Chirotopes weren't introduced until later.
 
-\begin{itemize}
-\item
-  Circuits
-\item
-  Cocircuits
-\end{itemize}
-
-Chirotopes weren't introduced until later.
+For the direct sum, deletion and contraction I followed \cite[Lecture 2]{Reiner05}.
 I did not use~\cite{Bjorner-Etal99} except for its Theorem~7.4.2, even though it's great as a reference.
 
 The exercises in this section were taken from~\cite{Reiner05}, \cite{Schrijver03}, \cite{Bokowski06}, \cite{Ardila-Billey07}, \cite{Ziegler95}.
 
-\section{Constructions}
-
-After covering the direct sum, deletion and contraction following \cite[Lecture 2]{Reiner05}, we switch sources.
 
 \section{Oriented matroid / Gale duality}
 
-The oriented matroid / Gale duality construction follows \cite[Chapter~6]{Ziegler95},
-as does the discussion of Radon partitions and affine Gale diagrams.
-The example of a non-rational polytope is~\cite[Example~6.21]{Ziegler95}.
-The presentation of the Milnor-Thom-Oleinik-Petrovski theorem is from~\cite{Matousek02}.
+LinVal($A$);
+LinDep($A$);
+AffVal($A$);
+AffDep($A$).
+Radon's Lemma.
+Dictionary of linear/affine Gale transform:
+Faces of convex hull;
+convex position.
+Chirotopes.
+Cyclic polytopes and neighborliness.
+Asymptotic Upper Bound Theorem for simplicial polytopes.
+Arrangements of real algebraic varieties and 
+the Milnor-Thom-Oleinik-Petrovski theorem.
 
-\subsection{Regular triangulations and the secondary polytope}
+The oriented matroid / Gale duality construction follows \cite[Chapter~6]{Ziegler95},
+as does the discussion of Radon partitions, (affine) Gale diagrams, cyclic polytopes and neighborliness.
+The example of a non-rational polytope is~\cite[Example~6.21]{Ziegler95}.
+The Asymptotic Upper Bound Theorem and the
+presentation of the Milnor-Thom-Oleinik-Petrovski theorem are from~\cite[Chapter~5]{Matousek02},
+which also has a good introduction to polytopes and Gale duality.
+
+\section{Regular triangulations and the secondary polytope}
+
+Regular polyhedral subdivisions from projections of lower faces.
+The Union and Intersection properties.
+The refinement partial order.
+Examples.
+The GKZ vector of a triangulation.
+The secondary polytope and its vertices and affine hull.
+
+
 
 I initially tried to follow \cite[Chapter~5]{deloera-rambau-santos10}, but found it to be too verbose for presentation in class.
 For a leisurely introduction it works great, though.
@@ -106,19 +108,47 @@ An additional source is~\cite[Chapter~9]{Ziegler95}.
 
 The exercises were taken from~\cite{deloera-rambau-santos10} and~\cite{Ziegler95}.
 
-\section{Gröbner bases and the Grassmannian}
+\section{Gröbner bases}
 
-The primary sources here are~\cite[Chapter~2]{CLOS15} and~\cite[Chapters~10--12]{thomas06}.
+Motivation: the Apollonius Circle Theorem.
+Monomial/term/polynomial/support/ideal/variety.
+Hilbert basis theorem.
+Radical of an ideal.
+Hilbert's Nullstellensatz.
+Example: Algebraic attack on a small block cipher.
+Monomial orders.
+Division algorithm.
+Elimination Theorem.
+
+The primary sources here are~\cite[Chapter~2,~\S\S1--8 and Chapter~3,~\S1]{CLOS15} and~\cite[Chapters~10--12]{thomas06}.
 A secondary source is~\cite{RichterGebert11}.
 The example on the key sniffing attack is~\cite[Section~3.1]{Segers04}.
-The Gröbner basis of the Plücker ideal is from~\cite[Chapter~14]{MillerSturmfels05}.
 
-\section{Realizations of oriented matroids}
+\section{The Grassmannian and flags}
+
+Plücker coordinates of a point configuration.
+The Grassmannian and Flag variety.
+The matroid associated to a generic line arrangement via a scaffolding flag.
+The initial monomials of the Plücker ideal as the incomparable pairs in the straightening poset.
+
+The material on Plücker coordinates and the flag variety is from~\cite[Sections~14.1~and~14.2]{MillerSturmfels05}.
+The matroid associated to a generic line arrangement (which also makes an appearance in the exercises) is due to~\cite{Ardila-Billey07}.
+
+
+\section{Slack realization space of polytopes and oriented matroids}
+
+Slack matrix, symbolic slack matrix, generalized slack matrix, and slack ideal of a polytope or matroid.
+Ideal quotient and saturation with respect to a principal ideal.
+Realization spaces of polytopes;
+Mn\"ev's Universality Theorem.
+Relationship between slack variety and generalized slack matrices.
+Simplification of slack ideal via row and column rescaling.
+Examples.
 
 The relevant papers are \cite{Gouveia-etal19} and \cite{Brandt-wiebe19}.
 
 
-\bibliographystyle{plain}
-\bibliography{bibliography}
+\bibliographystyle{alpha}
+\bibliography{bibliography} 
 
 \end{document}
