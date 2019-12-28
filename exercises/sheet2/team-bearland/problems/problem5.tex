@@ -42,17 +42,18 @@
 
 \begin{enumerate}
   \item
-    For a vector $\omega\in\RR^n$, lift the points in $\cA$ to heights~$\omega$, so that
-    $\cA^\omega=\big(\binom{\aaa_1}{\omega_1},\dots,\binom{\aaa_n}{\omega_n}\big)$.
-    For each interior ridge $\rho=\sigma_i\cap\sigma_j\in R^{\text{int}}$,
-    formulate the folding condition that expresses that $\rho$ indexes a face of the lower convex hull of~$\cA^\omega$,
-    in terms of the coordinates of the~$\aaa_i$ and~$\omega$.
-    Your folding condition should be an inequality that is linear in each height~$\omega_i$.
+      \textbf{\textit{For a vector $\omega\in\RR^n$, lift the points in $\cA$ to heights~$\omega$, so that $\cA^\omega=\big(\binom{\aaa_1}{\omega_1},\dots,\binom{\aaa_n}{\omega_n}\big)$. For each interior ridge $\rho=\sigma_i\cap\sigma_j\in R^{\text{int}}$, formulate the folding condition that expresses that $\rho$ indexes a face of the lower convex hull of~$\cA^\omega$, in terms of the coordinates of the~$\aaa_i$ and~$\omega$. Your folding condition should be an inequality that is linear in each height~$\omega_i$.}}
 
 To formulate the folding condition, we make use of Definition 7.4 in Rheka R. Thomas~\footnote{Rekha R. Thomas. Lectures in geometric combinatorics., volume 33 of Student Mathematical Library. Providence, RI: American Mathematical Society (AMS); Princeton, NJ: Institute for Advanced Studies, 2006.}:
         \begin{equation*}
-            bla
+            \begin{split}
+                \rho \text{ indexes a face of the lower convex hull of } \cA^\omega & \Leftrightarrow \rho \text{ indexes a folded face of the regular subdivision } \\
+                & \Leftrightarrow \exists \pmb{y} \in \mathbb{R}^{d} \text{ s.t. } \left\lbrace \begin{array}{l} (\pmb{y}, -1) \cdot (\pmb{a_j}, \omega_j)^t = 0 \forall j \in \rho \\ (\pmb{y}, -1) \cdot (\pmb{a_j}, \omega_j)^t < 0 \forall j \not\in \rho \end{array} \right.
+            \end{split}
         \end{equation*}
+    geometrically, this means that $(\pmb{y}, -1)$ is normal to the face $\rho$ is indexing (in the lifted configuration) and all other points lie \textit{above} it.
+    Note that, in contrast to the example in Rheka Thomas, $\rho$ does not index a face of the regular subdivision since it's affine span has dimension $d-1$. 
+    In this case, the face in the lifted configuration \textit{folds} to a ridge in the original point configuration.
 
   \item
     Write code that takes the coordinates of the $\aaa_i$ and the facets $\sigma_i$ of a triangulation as input,
@@ -68,7 +69,7 @@ To formulate the folding condition, we make use of Definition 7.4 in Rheka R. Th
 
   \item
     Using this code,
-    check that the triangulation of the $4$-dimensional cube from~\cite{deLoera96}
+    check that the triangulation of the $4$-dimensional cube 
     given by the files \texttt{4-cube.vertices} and \texttt{4-cube.triangulation}
     is non-regular, i.e., it does not come from a lifting to~$\RR^5$.
     If you like, download and play with TOPCOM.
