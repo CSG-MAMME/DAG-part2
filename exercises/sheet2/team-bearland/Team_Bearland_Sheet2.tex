@@ -41,6 +41,30 @@
 \newcommand{\RR}{\mathbbm{R}}
 \newcommand{\aaa}{\mathbf{a}}
 
+% Listings for Problem 5
+\usepackage{listings,lstautogobble}
+\definecolor{background}{rgb}{0.95,0.95,0.92}
+\lstset{
+    basicstyle=\footnotesize\ttfamily,
+    xleftmargin=1pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame = tblr,
+    autogobble = true,
+    backgroundcolor=\color{background},
+    commentstyle=\color{gray},
+}
+\lstdefinestyle{python}{
+    language = Python,
+    numbers = left,
+    numbersep=5pt,
+    keywordstyle=\color{purple},
+    morekeywords={rand,timer,define},
+    numberstyle=\tiny\color{gray!80},
+    emphstyle=\color{red!50!blue},
+    emph={addConstr, Model, addVars, GRB, gp}
+}
+
 \begin{document}
 \onehalfspacing
 \tikzstyle{vertice}=[circle, draw, fill=black!50, inner sep = 0pt, minimum width=4pt]

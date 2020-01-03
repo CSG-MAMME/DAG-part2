@@ -45,7 +45,6 @@ def generate_lp(point_config, triangulation):
     print(point_config)
     print(triangulation)
     model = gp.Model('folding')
-    # TODO: Objective Function?
     # Add Variables: GRB.CONTINUOUS vars are by default [0, \inf)
     y = model.addVars(range(int(point_config.dim)), vtype=GRB.CONTINUOUS,
             name='y')
