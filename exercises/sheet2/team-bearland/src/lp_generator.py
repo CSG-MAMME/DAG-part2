@@ -3,6 +3,7 @@ import gurobipy as gp
 import numpy as np
 import sys
 from gurobipy import GRB
+ZERO = -1e-9
 
 class PointConfig:
     def __init__(self, file_path):
@@ -35,24 +36,25 @@ class Triangulation:
         _str += " - Facet Indexes:\n{}\n".format(self.facets)
         return _str
 
-
 def usage():
     print("LP File Generator:")
     print("USAGE: ./lp_generator.py <file.vertices> <file.triangulation>")
 
-
 def generate_lp(point_config, triangulation):
+    model = gp.Model('folding')
     print(point_config)
     print(triangulation)
-    model = gp.Model('folding')
-    # Add Variables: GRB.CONTINUOUS vars are by default [0, \inf)
-    y = model.addVars(range(int(point_config.dim)), vtype=GRB.CONTINUOUS,
-            name='y')
+    # Add Weight Vector: GRB.CONTINUOUS vars are by default [0, \inf)
     w = model.addVars(range(int(point_config.num_points)), vtype=GRB.CONTINUOUS,
             name='w')
     # Add Constrains
     for num, c in enumerate(triangulation.facets):
         facet_ind = set([int(i) for i in c])
+        # For each facet, there must exist y
+        y = model.addVars(range(int(point_config.dim)), 
+                lb=-GRB.INFINITY, ub=GRB.INFINITY,
+                vtype=GRB.CONTINUOUS,
+                name='y{}'.format(num))
         non_facet_ind = set(range(int(point_config.num_points))) - facet_ind 
         print(" -- Constrain for Facet {} -- ".format(num))
         print("Facet: {}\nNon-Facet: {}".format(facet_ind, non_facet_ind))
@@ -65,8 +67,9 @@ def generate_lp(point_config, triangulation):
         for num2, vert in enumerate(non_facet_ind):
             model.addConstr(gp.quicksum([y[i]*point_config.points[vert][i] 
                                         for i in range(int(point_config.dim))])
-                            - w[vert], GRB.LESS_EQUAL, 0, "nf{}_{}".format(num, num2))
+                            - w[vert], GRB.LESS_EQUAL, -0.00001, "nf{}_{}".format(num, num2))
     model.write('folding.lp')
+    return model
 
 if __name__=="__main__":
     if (len(sys.argv) != 3 or sys.argv[1].split('.')[-1] != "vertices"
@@ -75,17 +78,15 @@ if __name__=="__main__":
     else:
         point_config = PointConfig(sys.argv[1])
         triangulation = Triangulation(sys.argv[2])
-        generate_lp(point_config, triangulation)
+        model = generate_lp(point_config, triangulation)
         # Optimize
-#m.optimize()
-#status = m.status
-#if status == GRB.UNBOUNDED:
-#    print('The model cannot be solved because it is unbounded')
-#    exit(0)
-#if status == GRB.OPTIMAL:
-#    print('The optimal objective is %g' % m.objVal)
-#    exit(0)
-#if status != GRB.INF_OR_UNBD and status != GRB.INFEASIBLE:
-#    print('Optimization was stopped with status %d' % status)
-#    exit(0)
-
+        model.optimize()
+        status = model.status
+        if status == GRB.INFEASIBLE:
+            print('The model is infeasible.')
+            exit(0)
+        if status == GRB.OPTIMAL:
+            print(model.getVars())
+            #print('The optimal objective is %g' % model.getAttr('X', model.getVars()))
+            print(model.getAttr('X', model.getVars()))
+            exit(0)
