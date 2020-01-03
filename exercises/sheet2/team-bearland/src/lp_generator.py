@@ -25,13 +25,14 @@ class Triangulation:
     def __init__(self, file_path):
         # TODO: should we subtract one so that we can index points directly?
         self.facets = np.genfromtxt(file_path, delimiter=' ')
+        self.facets -= 1
 
     def __repr__(self):
         return "Triangulation()"
 
     def __str__(self):
-        _str = "Point Configuration:\n"
-        _str += " - Raw points:\n{}\n".format(self.facets)
+        _str = "Facets Configuration:\n"
+        _str += " - Facet Indexes:\n{}\n".format(self.facets)
         return _str
 
 
@@ -45,11 +46,27 @@ def generate_lp(point_config, triangulation):
     print(triangulation)
     model = gp.Model('folding')
     # TODO: Objective Function?
-    # Add Variables
-    var = model.addVars(point_config.dim, vtype=GRB.INT, name='y')
-    var = model.addVars(point_config.num_points, vtype=GRB.INT, name='w')
-    # Add Constraints
-    #model.addConstrs(
+    # Add Variables: GRB.CONTINUOUS vars are by default [0, \inf)
+    y = model.addVars(range(int(point_config.dim)), vtype=GRB.CONTINUOUS,
+            name='y')
+    w = model.addVars(range(int(point_config.num_points)), vtype=GRB.CONTINUOUS,
+            name='w')
+    # Add Constrains
+    for num, c in enumerate(triangulation.facets):
+        facet_ind = set([int(i) for i in c])
+        non_facet_ind = set(range(int(point_config.num_points))) - facet_ind 
+        print(" -- Constrain for Facet {} -- ".format(num))
+        print("Facet: {}\nNon-Facet: {}".format(facet_ind, non_facet_ind))
+        # Adding one constrain per vertex in the facet
+        for num2, vert in enumerate(facet_ind):
+            model.addConstr(gp.quicksum([y[i]*point_config.points[vert][i] 
+                                        for i in range(int(point_config.dim))])
+                            - w[vert], GRB.EQUAL, 0, "f{}_{}".format(num, num2))
+        # Adding one constrain per non-vertex in the facet
+        for num2, vert in enumerate(non_facet_ind):
+            model.addConstr(gp.quicksum([y[i]*point_config.points[vert][i] 
+                                        for i in range(int(point_config.dim))])
+                            - w[vert], GRB.LESS_EQUAL, 0, "nf{}_{}".format(num, num2))
     model.write('folding.lp')
 
 if __name__=="__main__":
@@ -60,3 +77,16 @@ if __name__=="__main__":
         point_config = PointConfig(sys.argv[1])
         triangulation = Triangulation(sys.argv[2])
         generate_lp(point_config, triangulation)
+        # Optimize
+#m.optimize()
+#status = m.status
+#if status == GRB.UNBOUNDED:
+#    print('The model cannot be solved because it is unbounded')
+#    exit(0)
+#if status == GRB.OPTIMAL:
+#    print('The optimal objective is %g' % m.objVal)
+#    exit(0)
+#if status != GRB.INF_OR_UNBD and status != GRB.INFEASIBLE:
+#    print('Optimization was stopped with status %d' % status)
+#    exit(0)
+
